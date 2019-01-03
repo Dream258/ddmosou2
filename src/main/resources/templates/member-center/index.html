@@ -15,6 +15,7 @@
     <link th:href="@{/static/ddms/css/bootstrap/swiper-3.4.2.min.css}" rel="stylesheet">
     <link th:href="@{/static/ddms/css/user.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/static/ddms/jquery/jquery-1.4.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/ddms/js/include.js}"></script>
     <style type='text/css'>
         #code {
             font-family: Arial, 宋体;
@@ -362,55 +363,7 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-    function share() {
-        $.ajax({
-            url:'subordinate',
-            data:"pn=1",
-            type:'POST',
-            success:function(param){
-                if(param == 1){
-                    window.location.href = "share_list";
-                }else{
-                    alertError(param.msg)
-                }
-            },
-            error:function(){
-                alertError('系统错误')
-            }
-        });
-    }
-    function exit() {
-        $.ajax({
-            url:'exituser',
-            type:'POST',
-            success:function(param){
-                if(param == 1){
-                    window.location.href = "/api/";
-                }else{
-                    alertError(param.msg)
-                }
-            },
-            error:function(){
-                alertError('系统错误')
-            }
-        });
-    }
-    function buy() {
-        $.ajax({
-            url:'selectOrders',
-            type:'POST',
-            success:function(param){
-                if(param == 1){
-                    window.location.href = "buylist";
-                }else{
-                    alertError(param.msg)
-                }
-            },
-            error:function(){
-                alertError('系统错误')
-            }
-        });
-    }
+
 </script>
 <div class="tool">
     <div class="backTop">
