@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,8 +20,8 @@ public interface DdKeyDAO extends BaseMapper<DdKey> {
     @Select("SELECT COUNT(0) FROM dd_key WHERE 1=1 AND user_id = #{userId}")
     int getListSize(@Param("userId") int userId);
 
-    @Select("SELECT * FROM dd_key WHERE 1=1 AND user_id = #{userId}")
-    Map<String,Object> getList(@Param("userId") int userId);
+    @Select("SELECT * FROM dd_key WHERE 1=1 AND user_id = #{userId} AND type = #{type}")
+    List<Map<String,Object>> getList(@Param("userId") int userId, @Param("type") String type);
 
 }
 @Component

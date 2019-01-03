@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxx.model.base.dao.AutoDdMallDAO">
+    <!-- 返回值映射map -->
+    <resultMap id="ddMallMapper" type="com.xxx.model.base.entity.DdMall">
+        <result property="id" column="id" />
+        <result property="mallId" column="mall_id" />
+        <result property="mallName" column="mall_name" />
+        <result property="mallLogo" column="mall_logo" />
+        <result property="goodsNum" column="goods_num" />
+        <result property="mallSold" column="mall_sold" />
+        <result property="createtime" column="createtime" />
+    </resultMap>
+
+    <!-- 分页查询数据集合 -->
+    <select id="selectListByPage" resultMap="ddMallMapper" >
+        <include refid="selectAllColumns"/>
+        <include refid="where_fragement" />
+        <if test="pager!=null">
+            <include refid="pagination_tail" />
+        </if>
+    </select>
+
+    <!-- 查询总数量 -->
+    <select id="selectCount" resultType="long">
+        <include refid="count_Tail"/>
+        <include refid="where_fragement"/>
+    </select>
+
+    <!-- 单条查询 -->
+    <select id="selectOne" resultMap="ddMallMapper" >
+        <include refid="selectAllColumns"/>
+        <include refid="where_fragement" />
+    </select>
+
+    <!-- 单条查询 -->
+    <select id="selectById" resultMap="ddMallMapper" >
+        <include refid="selectAllColumns"/>
+        WHERE record.id = #{id}
+    </select>
+
+    <!-- 新增新增 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.xxx.model.base.entity.DdMall">
+        INSERT INTO dd_mall(
+            mall_id,
+            mall_name,
+            mall_logo,
+            goods_num,
+            mall_sold,
+            createtime
+        ) values (
+            #{mallId},
+            #{mallName},
+            #{mallLogo},
+            #{goodsNum},
+            #{mallSold},
+            #{createtime}
+        )
+    </insert>
+
+    <!-- 修改(通过ID只对不为空的内容进行修改) -->
+    <update id="updateNotNull" parameterType="com.xxx.model.base.entity.DdMall">
+        UPDATE dd_mall record
+        <include refid="update_fragement"/>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 修改(通过ID更新所有属性值) -->
+    <update id="updateParams" parameterType="com.xxx.model.base.entity.DdMall">
+        UPDATE dd_mall record
+        <set>
+            record.mall_id = #{mallId},
+            record.mall_name = #{mallName},
+            record.mall_logo = #{mallLogo},
+            record.goods_num = #{goodsNum},
+            record.mall_sold = #{mallSold},
+            record.createtime = #{createtime}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 通过ID删除信息 -->
+    <delete id="deleteById">
+        DELETE FROM dd_mall
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 通过IDS批量删除 -->
+    <delete id="deleteByIds">
+        DELETE FROM dd_mall
+        WHERE id IN
+        <foreach collection="ids" open="(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- /////////////////// PUBLIC SQL STR ////////////////// -->
+
+    <!-- 查询数量公共sql -->
+    <sql id="count_Tail">
+        SELECT count(1) FROM dd_mall record
+    </sql>
+
+    <!-- 分页公共sql -->
+    <sql id="pagination_tail">
+        <if test="pager.orderBy != null and pager.orderBy != ''">
+            ORDER  BY  ${pager.orderBy}
+        </if>
+        limit #{pager.index} , #{pager.pageSize}
+    </sql>
+
+    <!-- 查询字段公共sql -->
+    <sql id="selectAllColumns">
+        <![CDATA[
+			SELECT
+				id,
+				mall_id,
+				mall_name,
+				mall_logo,
+				goods_num,
+				mall_sold,
+				createtime
+			FROM dd_mall record
+		]]>
+    </sql>
+
+    <sql id="where_fragement">
+        WHERE 1=1
+        <if test="entity!=null">
+            <if test = "entity.id != null">
+                <![CDATA[ AND record.id = #{entity.id} ]]>
+            </if>
+            <if test = "entity.mallId != null and entity.mallId != ''">
+                <![CDATA[ AND record.mall_id = #{entity.mallId} ]]>
+            </if>
+            <if test = "entity.mallName != null and entity.mallName != ''">
+                <![CDATA[ AND record.mall_name = #{entity.mallName} ]]>
+            </if>
+            <if test = "entity.mallLogo != null and entity.mallLogo != ''">
+                <![CDATA[ AND record.mall_logo = #{entity.mallLogo} ]]>
+            </if>
+            <if test = "entity.goodsNum != null and entity.goodsNum != ''">
+                <![CDATA[ AND record.goods_num = #{entity.goodsNum} ]]>
+            </if>
+            <if test = "entity.mallSold != null and entity.mallSold != ''">
+                <![CDATA[ AND record.mall_sold = #{entity.mallSold} ]]>
+            </if>
+            <if test = "entity.createtime != null">
+                <![CDATA[ AND record.createtime = #{entity.createtime} ]]>
+            </if>
+        </if>
+    </sql>
+
+    <!-- 公共修改sql-->
+    <sql id="update_fragement">
+        <set>
+            <if test = "mallId != null and mallId != ''">
+                record.mall_id = #{mallId},
+            </if>
+            <if test = "mallName != null and mallName != ''">
+                record.mall_name = #{mallName},
+            </if>
+            <if test = "mallLogo != null and mallLogo != ''">
+                record.mall_logo = #{mallLogo},
+            </if>
+            <if test = "goodsNum != null and goodsNum != ''">
+                record.goods_num = #{goodsNum},
+            </if>
+            <if test = "mallSold != null and mallSold != ''">
+                record.mall_sold = #{mallSold},
+            </if>
+            <if test = "createtime != null ">
+                record.createtime = #{createtime}
+            </if>
+        </set>
+    </sql>
+    <!-- /////////////////// PUBLIC SQL END ////////////////// -->
+</mapper>

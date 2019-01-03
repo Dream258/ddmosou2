@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,8 +33,8 @@ public class DdKeyService extends BaseService<DdKey> {
         return ddKeyDAO.getListSize(userId);
     }
 
-    public Map<String,Object> getList(int userId){
-        return ddKeyDAO.getList(userId);
+    public List<Map<String,Object>> getList(int userId, String type){
+        return ddKeyDAO.getList(userId,type);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.xxx.model.base.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.xxx.common.interfaces.NotLogin;
 import com.xxx.common.util.DateUtils;
@@ -361,9 +362,14 @@ public class InterfaceController {
         try {
             List<Map> l = PDDUtils.getMallList(mallId);
             for (Map p:l) {
-                //System.out.println("类别ID："+p.get("cat_id")+"~~~类别名称："+p.get("cat_name"));
+                Map<String,Object> m = new HashMap<>();
+                m.put("logo",p.get("img_url"));
+                m.put("name",p.get("mall_name"));
+                m.put("size",JSONObject.parseArray(p.get("goods_detail_vo_list").toString()).size());
+                m.put("sold",p.get("sold_quantity"));
+                map.put("mall",m);
+                System.out.println("店铺名称："+p.get("mall_name")+"~~~总销量："+p.get("sold_quantity"));
             }
-            //map.put("cats",str);
             map.put("success","000");
         } catch (Exception e) {
             e.printStackTrace();
@@ -413,11 +419,11 @@ public class InterfaceController {
      */
     @ResponseBody
     @RequestMapping(value = "getKeyVip",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map getKeyVip(@RequestParam int userId){
+    public Map getKeyVip(@RequestParam int userId,@RequestParam String type){
         Map<String, Object> map = new HashMap<>();
         try {
-            Map<String,Object> m = ddKeyService.getList(userId);
-            map.put("goods",m);
+            List<Map<String,Object>> list = ddKeyService.getList(userId,type);
+            map.put("goods",list);
             map.put("success","000");
         } catch (Exception e) {
             e.printStackTrace();
@@ -435,7 +441,7 @@ public class InterfaceController {
      */
     @ResponseBody
     @RequestMapping(value = "addKey",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map addKey(@RequestParam int userId,@RequestParam String keyword,@RequestParam String goodsId,@RequestParam String sort){
+    public Map addKey(@RequestParam int userId,@RequestParam String keyword,@RequestParam String goodsId,@RequestParam String sort,@RequestParam String type){
         Map<String, Object> map = new HashMap<>();
         try {
             int num = ddKeyService.getListSize(userId);
@@ -455,6 +461,7 @@ public class InterfaceController {
                         ddKey.setGroupPrice(p.get("min_group_price").toString());
                         ddKey.setNormalPrice(p.get("min_normal_price").toString());
                         ddKey.setGoodsTop(String.valueOf(i));
+                        ddKey.setType(type);
                         ddKey.setGoodsTime(new Date());
                         ddKeyService.save(ddKey);
                         System.out.println("商品信息："+p.get("goods_name")+"~~~团购价："+p.get("min_group_price")+"~~~单价："+p.get("min_normal_price")+"~~~销量："+p.get("sold_quantity")+"~~~排名："+i);

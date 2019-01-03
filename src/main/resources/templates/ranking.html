@@ -22,104 +22,6 @@
 	</head>
 	<body>
     <header th:include="include :: header"></header>
-
-    <!-- Modal -->
-    <div class="ranking-wrapper login-wrapper">
-        <div class="row loginBox">
-            <div class="jd-form-wrapper">
-                <div class="jd_form_loading">
-                    <b style="margin:auto">努力加载中...</b>
-                </div>
-                <i class="login-close iconfont icon-17cuowu"></i>
-                <div class="row login-form-title">
-                    <div class="col-md-6 col-sm-6 col-xs-6" style="text-align: right">
-                        <span class="active jd-login-btn">登录</span>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <span class="jd-register-btn">注册</span>
-                    </div>
-                </div>
-                <!--登录-->
-                <div class="login-form">
-                    <div class="login-input-wrapper">
-                        <input type="text" id="login-user" class="form-control login-form-input input" placeholder="请输入用户名">
-                    </div>
-                    <div class="login-input-wrapper">
-                        <input type="password" id="login-password" class="form-control login-form-input input" placeholder="请输入密码">
-                    </div>
-                    <div class="login-input-wrapper">
-                        <button class="btn login-submit">确定</button>
-                        <br>
-                        <a href="javascript:;" class="forget-btn">忘记密码?</a>
-                    </div>
-                </div>
-                <div class="register-form">
-                    <div class="login-input-wrapper">
-                        <input type="text" id="register-user" class="form-control login-form-input input" placeholder="请输入手机号">
-                    </div>
-                    <div class="login-input-wrapper before-input">
-                        <input type="text" id="register-tp" class="form-control login-form-input input input1" placeholder="请输入图片验证码" style="width:50%;display: inline-block">
-                        <img id="code-img" src="/images/error03.png" alt="" style="width: 28%;height:34px;">
-                        <a id="code-btn" href="javascript:;" style="width: 18%;display:inline-block">换一张</a>
-                    </div>
-                    <div class="login-input-wrapper before-input">
-                        <input type="text" id="register-info" class="form-control login-form-input input input1" placeholder="请输入短信验证码" style="width:50%;display: inline-block">
-                        <button class="btn register-phone-btn" style="width: 48%;border: 1px solid #556CED;background: #fff;color: #556CED;height: 34px;">
-                            获取验证码
-                        </button>
-                    </div>
-                    <div class="login-input-wrapper next-input">
-                        <input type="password" id="register-password" class="form-control login-form-input input" placeholder="请输入密码">
-                    </div>
-                    <div class="login-input-wrapper next-input">
-                        <input type="password" id="register-password1" class="form-control login-form-input input" placeholder="请再次输入密码">
-                    </div>
-                    <div class="login-input-wrapper before-input">
-                        <button class="btn register-next">下一步</button>
-                    </div>
-                    <div class="login-input-wrapper next-input">
-                        <button class="btn register-submit">立即注册</button>
-                        <div>
-                            <a href="javascript:;" class="before-btn">上一步</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="jd-form-wrapper form-forget">
-                <div class="jd_form_loading">
-                    <b style="margin:auto">努力加载中...</b>
-                </div>
-                <div class="login-form">
-                    <div class="row">
-                        <div class="col-md-12" style="position: relative;">
-                        <span class="forget-back">
-                             <i class="iconfont icon-fanhui"></i>
-                        </span>
-                            <h3 style="color:#556CED">忘记密码</h3>
-                        </div>
-                    </div>
-                    <div class="login-input-wrapper">
-                        <input type="text" id="forget-user" class="form-control login-form-input input" placeholder="请输入用户名">
-                    </div>
-                    <div class="login-input-wrapper">
-                        <input type="text" id="forget-code" class="form-control login-form-input input input1" placeholder="请输入验证码" style="width:50%;display: inline-block">
-                        <button class="btn" id="forget-code-btn" style="width: 48%;border: 1px solid #556CED;background: #fff;color: #556CED;height: 34px;">
-                            获取验证码
-                        </button>
-                    </div>
-                    <div class="login-input-wrapper">
-                        <input type="password" id="forget-password" class="form-control login-form-input input" placeholder="请输入密码">
-                    </div>
-                    <div class="login-input-wrapper">
-                        <input type="password" id="forget-password1" class="form-control login-form-input input" placeholder="请再次输入密码">
-                    </div>
-                    <div class="login-input-wrapper">
-                        <button class="btn forget-submit">确定</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="dd_content_wrap dd_container dd_other">
         <div class="row ran_header">
             <div class="col-md-10 dd_ranking">
@@ -136,59 +38,26 @@
         <div class='contents'>
             <!--关键词排名监控-->
             <div class='mytable'>
-                <div class='top'>
-                    <dl class='left'>
-                        <dt><img src='img/character.jpg'></dt>
-                        <dd>你个傻子哈哈哈哈111</dd>
-                        <dd class='gray'>商品id:0498548957408</dd>
-                    </dl>
-                    <div class='right'>
-                        <a href='#' class='add' data-toggle="modal" data-target="#myModal">+添加关键词</a>
-                        <a href='#' class='del'>删除</a>
-                    </div>
-                </div>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <h3>添加关键词</h3>
-                            <form>
-                                关键词：<input type='text' />
-                                <button type="button" class="btn btn-primary btn1">确定</button>
-                                <button type="button" class="btn btn-default btn2" data-dismiss="modal">取消</button>
-                            </form>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal -->
-                </div>
-                <table>
+                <table id="ranking_1">
                     <tr>
+                        <th>商品名称</th>
                         <th>关键词</th>
-                        <th>最后更新时间</th>
-                        <th>单价</th>
-                        <th>团购价</th>
-                        <th>销量</th>
-                        <th>排名</th>
+                        <th>商品销量</th>
+                        <th>商品排名</th>
                         <th>操作</th>
                     </tr>
                     <tr>
                         <td>你个傻子</td>
-                        <td>2019-09-09 09:09:09</td>
+                        <td>2019-09-09</td>
                         <td>0.00</td>
                         <td>0.00</td>
-                        <td>23</td>
-                        <td>2</td>
                         <td><a href='#' data-toggle="modal" data-target="#myModal1">走势</a></td>
                     </tr>
                 </table>
                 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content big">
-                            <dl>
-                                <dt><img src='img/character.jpg'></dt>
-                                <dd>你个傻子哈哈哈哈111</dd>
-                                <dd class='gray'>商品id:0498548957408</dd>
-                            </dl>
                             <h5>商品排名走势折线图</h5>
-                            <div class='tab'><a href='#'>近7天</a><a href='#'>近15天</a><a href='#'>近30天</a></div>
                             <div class='tabs'>
                                 <div id="main1" style="width: 600px;height:300px"></div>
                                 <div id="main2" style="width: 600px;height:300px"></div>
@@ -434,54 +303,8 @@
                                     <button class="btn choose_btn">筛选 <i class="iconfont icon-jiantouxiangshang"></i></button>
                                 </div>
                             </div>
-                            <div class="choose_box ran_hide">
-                                <div class="row item_wrap">
-                                    <lable class="item_name">
-                                        价格区间：
-                                    </lable>
-                                    <div class="item_option price_wrap">
-                                        <button class="btn keyword_btn1 disabled" key="1" autocomplete="off" disabled="disabled">loading...</button>
-                                        <button class="btn keyword_btn1 disabled" key="2" autocomplete="off" disabled="disabled">loading...</button>
-                                        <button class="btn keyword_btn1 disabled" key="3" autocomplete="off" disabled="disabled">loading...</button>
-                                        <button class="btn keyword_btn1 disabled" key="4" autocomplete="off" disabled="disabled">loading...</button>
-                                    </div>
-                                </div>
-
-                                <div class="row item_wrap">
-                                    <lable class="item_name">
-                                        拼单状态：
-                                    </lable>
-                                    <div class="item_option">
-                                        <button class="btn keyword_btn1 only_btn"><i class="glyphicon glyphicon-ok"></i> 仅看有人正在拼单的商品</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div> <!--/form2-->
                         <div class="form3">
-                            <div class="row item_wrap">
-                                <lable class="item_name">
-                                    活动类型：
-                                </lable>
-                                <div class="item_option activity_home">
-                                    <button class="btn keyword_btn activity_btn active activity1" data-key="4">首页活动</button>
-                                    <button class="btn keyword_btn activity_btn activity2 hidden" data-key="3">新品活动</button>
-                                </div>
-                            </div>
-                            <div class="row item_wrap activity_box">
-                                <lable class="item_name">
-                                    活动入口：
-                                </lable>
-                                <div class="item_option">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                        <select name="activity1" class="form-control activity_sel" id="activity1">
-                                            <option value="9块9特卖">9块9特卖</option><option value="爱逛街">爱逛街</option><option value="食品超市">食品超市</option><option value="时尚穿搭">时尚穿搭</option></select>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                        <select name="activity2" class="form-control activity_sel keyword" id="activity2">
-                                            <option value="18">精选</option><option value="31">每日抢新</option><option value="90">热销榜</option><option value="20">女装</option><option value="19">百货</option><option value="23">美妆</option><option value="21">食品</option><option value="22">母婴</option><option value="121">鞋包</option><option value="147">男装</option><option value="24">数码电器</option><option value="93">配饰</option><option value="92">内衣</option><option value="138">办公文具</option><option value="131">家纺家具</option><option value="132">车品</option></select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row item_wrap">
                                 <lable class="item_name">
                                     商品链接或ID：
@@ -502,7 +325,19 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade bs-example-modal-lg" id="queryModal" tabindex="-1" role="dialog" aria-labelledby="queryModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="clearfix query_details">
+                    <div class="row content_canvas">
+                        <div id="ranking_canvas" class="canvas_div" _echarts_instance_="ec_1542097514978" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative; background: transparent;"><div style="position: relative; overflow: hidden; width: 850px; height: 350px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="850" height="350" style="position: absolute; left: 0px; top: 0px; width: 850px; height: 350px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+                        <div id="ranking_canvas1" class="canvas_div" _echarts_instance_="ec_1542097514979" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative; background: transparent;"><div style="position: relative; overflow: hidden; width: 850px; height: 350px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="850" height="350" style="position: absolute; left: 0px; top: 0px; width: 850px; height: 350px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+                        <div id="ranking_canvas2" class="canvas_div" _echarts_instance_="ec_1542097514980" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative; background: transparent;"><div style="position: relative; overflow: hidden; width: 850px; height: 350px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="850" height="350" style="position: absolute; left: 0px; top: 0px; width: 850px; height: 350px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script th:src="@{/static/ddms/js/main.js?t=0914}"></script>
     <script th:src="@{/static/ddms/js/login.js?t=?t=0727}"></script>
     <script th:src="@{/static/ddms/js/cite/echarts.common.min.js}"></script>
@@ -510,28 +345,31 @@
     <script th:src="@{/static/ddms/js/bootstrap/bootstrap-table-zh-cn.min.js}"></script>
     <script th:src="@{/static/ddms/js/cite/jquery.pagination.js}"></script>
     <script th:src="@{/static/ddms/js/cite/moment.js}"></script>
-    <script th:src="@{/static/ddms/js/ran1.js?t=0920}"></script>
-    <script th:src="@{/static/ddms/js/ran2.js?t=0920}"></script>
-    <script th:src="@{/static/ddms/js/ran3.js?t=0920}"></script>
-    <script th:src="@{/static/ddms/js/ranking.js?t=0921}"></script>
     <script th:src="@{/static/ddms/js/cite/bootstrap-tagsinput.min.js}"></script>
     <script>
-        function exit() {
-            $.ajax({
-                url:'api/exituser',
-                type:'POST',
-                success:function(param){
-                    if(param == 1){
-                        window.location.href = "api/homepage";
-                    }else{
-                        alertError(param.msg)
-                    }
-                },
-                error:function(){
-                    alertError('系统错误')
-                }
+
+        $(function(){
+            /*$.get('/api/getCats?parentId=0', function(res) {
+                $("#category1").append(res.cats);
+                var id = $("#category1 option:selected").val();
+                $.get('/api/getCats?parentId='+id, function(res) {
+                    $("#category2").append(res.cats);
+                    var id = $("#category2 option:selected").val();
+                    $.get('/api/getCats?parentId='+id, function(res) {
+                        $("#category3").append(res.cats);
+                    });
+                });
+            });*/
+            var a = 1;//$("#userId").val();
+            $.get('/api/getKeyVip?userId='+a+'&type=1', function(res) {
+                $.each(res.goods, function (index, data) {
+                    $("#ranking_1").append("<tr><td><img src='"+data.goodsThumbnail+"'>"+data.goodsName+"</td><td>"
+                        +data.goodsKey+"</td><td>"+data.goodsSold+"</td><td>"+data.goodsTop+"</td><td>" +
+                        "<a href='#' data-toggle='modal' data-target='myModal1'>走势</a></td></tr>");
+                });
             });
-        }
+
+        })
 
         $('.clearfix li').click(function() {
             var index = $(this).index();
