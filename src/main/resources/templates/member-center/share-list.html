@@ -16,6 +16,7 @@
     <link th:href="@{/static/ddms/css/user.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/static/ddms/jquery/jquery-1.4.4.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/ddms/jquery/jquery-form.js}"></script>
+    <script type="text/javascript" th:src="@{/static/ddms/js/include.js}"></script>
     <style type='text/css'>
         #code {
             font-family: Arial, 宋体;
@@ -24,6 +25,7 @@
             border: 0;
             font-weight: bolder;
         }
+        .buy_share_pages{ padding:4px 15px; border:1px solid #ccc; text-decoration:none; color: white; background-color: #556CED}
     </style>
     <script data-cfhash='f9e31' type="text/javascript">
         function jsCopy(){
@@ -236,25 +238,6 @@
                         <tbody>
                         <a th:if="${session.subordinate.size()-1>=0 }">
                             <a th:each="info,infoStat:${session.subordinate}">
-                                <!--<tr>-->
-                                    <!--<td><div class="th-inner" style="width: 119px;" th:text="${session.no+infoStat.count }"></div></td>-->
-                                    <!--<td><div class="th-inner" style="width: 123px;" th:text="${info.get(infoStat.count).userTelephone }"></div></td>-->
-                                    <!--<td><div class="th-inner" style="width: 130px;" th:text="${#dates.format(info.get(i).userCreatetime, 'yyyy-MM-dd HH:mm')}"></div>-->
-                                    <!--</td>-->
-                                    <!--<td>-->
-                                        <!--<div class="th-inner" style="width: 116px;" th:if="${info.get(infoStat.count).userType==1 }">-->
-                                            <!--普通会员-->
-                                        <!--</div>-->
-                                        <!--<div class="th-inner" style="width: 116px;" th:if="${info.get(infoStat.count).userType==2 }">-->
-                                            <!--VIP会员-->
-                                        <!--</div>-->
-                                    <!--</td>-->
-                                    <!--<td>-->
-                                        <!--<div class="th-inner" style="width: 108px;" th:if="${session.count.get(infoStat.count)!=null}">-->
-                                            <!--<a th:text=" ${session.count.get(infoStat.count)*10 }"></a>金币-->
-                                         <!--</div>-->
-                                    <!--</td>-->
-                                <!--</tr>-->
                                 <tr>
                                     <td><div class="th-inner" style="width: 119px;" th:text="${infoStat.count }"></div></td>
                                     <td><div class="th-inner" style="width: 123px;" th:text="${info.userTelephone }"></div></td>
@@ -284,7 +267,7 @@
                 <div class="M-box">
                         <a th:each="info:${session.subordinateTotal }">
                             <span class="active">
-                              <a th:href="@{'subordinate?pn='+${info}}" th:text="${info}"></a>
+                              <a th:href="@{'subordinate?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
                             </span>
                         </a>
                 </div>
@@ -301,58 +284,6 @@
 <script th:src="@{/static/ddms/js/bootstrap/bootstrap-table.js}"></script>
 <script th:src="@{/static/ddms/js/cite/jquery.pagination.js}"></script>
 <script th:src="@{/static/ddms/js/user.js}"></script>
-
 <!-- <script src="../js/share_list.js"></script> -->
-<script>
-    function exit() {
-        $.ajax({
-            url:'exituser',
-            type:'POST',
-            success:function(param){
-                if(param == 1){
-                    window.location.href = "/api/";
-                }else{
-                    alertError(param.msg)
-                }
-            },
-            error:function(){
-                alertError('系统错误')
-            }
-        });
-    }
-    function buy() {
-        $.ajax({
-            url:'selectOrders',
-            type:'POST',
-            success:function(param){
-                if(param == 1){
-                    window.location.href = "buylist";
-                }else{
-                    alertError(param.msg)
-                }
-            },
-            error:function(){
-                alertError('系统错误')
-            }
-        });
-    }
-    function share() {
-        $.ajax({
-            url:'subordinate',
-            data:"pn=1",
-            type:'POST',
-            success:function(param){
-                if(param == 1){
-                    window.location.href = "share_list";
-                }else{
-                    alertError(param.msg)
-                }
-            },
-            error:function(){
-                alertError('系统错误')
-            }
-        });
-    }
-</script>
 <div class="tool"><div class="backTop"><div class="iconRow"></div><i class="glyphicon glyphicon-arrow-up iconArrow"></i></div><div id="particles-js" style="position: absolute; top: 0px; left: 0px; z-index: -1;"><canvas class="particles-js-canvas-el" width="775" height="388" style="width: 100%; height: 100%;"></canvas></div><div class="alert-title success"><i class="glyphicon glyphicon-ok-circle" style="color: #5cb85c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div><div class="alert-title error"><i class="glyphicon glyphicon glyphicon-remove-circle" style="color: #c9302c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div><div class="alert-title info"><i class="glyphicon glyphicon-info-sign" style="color: #f0ad4e;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div></div></body>
 </html>

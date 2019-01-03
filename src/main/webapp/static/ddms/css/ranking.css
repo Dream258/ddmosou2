@@ -453,13 +453,15 @@ td .glyphicon-arrow-up {
 	color: #F51E1E
 }
 
+
 td .glyphicon-arrow-down {
 	color: #08A72D
 }
 
 .dd_other {
 	padding: 20px 20px 100px;
-	margin-bottom: 150px
+	margin-bottom: 150px;
+	margin-top: 125px;
 }
 
 *{ margin:0; padding:0}
