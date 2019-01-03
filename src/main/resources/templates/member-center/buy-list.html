@@ -27,6 +27,7 @@
 
             font-weight: bolder;
         }
+        .buy_share_pages{ padding:4px 15px; border:1px solid #ccc; text-decoration:none; color: white; background-color: #556CED}
     </style>
 </head>
 <body>
@@ -230,7 +231,7 @@
                     <!--<div class="M-box" th:if="${session.page.totalPage>0 }">-->
                         <a th:each="info:${session.totalPage }">
                             <span class="active">
-                              <a th:href="@{'subordinate?pn='+${info}}" th:text="${info}"></a>
+                              <a th:href="@{'subordinate?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
                             </span>
                         </a>
                     <!--</div>-->
