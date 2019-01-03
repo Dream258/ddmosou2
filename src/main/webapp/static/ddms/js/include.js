@@ -8,7 +8,6 @@ function checklogin() {
             if(data==1) {
                 window.location.href="/api/ranking";
             }else{
-                alert(data);
                 alertError('请登录');
             }
         },
