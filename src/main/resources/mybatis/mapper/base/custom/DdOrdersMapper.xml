@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxx.model.base.dao.DdOrdersDAO">
+    <!--根据手机号查询订单-->
+    <select id="getOrdersByTelephone" resultType="DdOrders">
+		select * from dd_orders where user_telephone=#{userTelephone}
+	</select>
+
+    <!-- 分页查询 -->
+    <select id="getOrdersByTelephoneForPage" resultType="DdOrders">
+		select * from dd_orders where user_telephone=#{telephone}
+
+	</select>
+
+    <!-- 查询用户订单的数量 -->
+    <select id="getOrdersCountByPhone" resultType="Integer">
+		select count(*) from dd_orders where user_telephone=#{telephone}
+	</select>
+
+	<!-- 添加订单信息 -->
+	<insert id="addOrder">
+		insert into
+		dd_orders(user_telephone,alipay_number,order_number,good_type,vip_time,order_money,order_current_date)
+		values
+		(#{userTelephone},#{alipayNumber},#{orderNumber},#{goodType},#{vipTime},#{orderMoney},#{orderCurrentDate})
+	</insert>
+	<!-- 查询是否有重复订单 -->
+	<select id="getOrdersByOrders" resultType="Integer">
+		select count(*) from
+		dd_orders where
+		user_telephone=#{userTelephone} and
+		alipay_number=#{alipayNumber} and order_number=#{orderNumber}
+		and
+		good_type=#{goodType} and vip_time=#{vipTime} and
+		order_money=#{orderMoney} and
+		order_current_date=#{orderCurrentDate}
+	</select>
+</mapper>

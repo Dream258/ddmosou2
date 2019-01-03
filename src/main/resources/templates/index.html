@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>拼多多查排名_拼多多排名查询_拼多多魔盒 拼多多直通车查询平台</title>
+    <meta name="keyword" content="拼多多排名查询 拼多多查排名 拼多多排名查询软件 拼多多排名查询工具 拼多多直通车查询 拼多多关键词排名查询">
+    <meta name="description" content="拼多多查排名平台是拼多多排名查询软件 拼多多排名查询工具,提供拼多多排名查询,拼多多直通车查询,拼多多关键词直通车查询,便于商家优化拼多多排名">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/static/ddms/img/logo.png}" type="image/x-icon" rel="shortcut icon">
+    <meta name="csrf-param" content="_csrf-frontend">
+    <meta name="csrf-token" content="pcneXCabB__lxm8d6hemTSVcs5NKIvAV-DDVVRCUIJWTmrQaUPRzj7DwKnajRMwSFwjG-hhkuySUXJpsW8Jw3w==">
+    <link th:href="@{/static/ddms/css/main1.css}" rel="stylesheet">
+    <link th:href="@{/static/ddms/css/login.css}" rel="stylesheet">
+    <link th:href="@{/static/ddms/css/search_gulp.css}" rel="stylesheet">
+    <link th:href="@{/static/ddms/css/bootstrap/bootstrap-table.min.css}" rel="stylesheet">
+    <link th:href="@{/static/ddms/css/index.css}" rel="stylesheet">
+    <link th:href="@{/static/ddms/css/index1.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/static/ddms/jquery/jquery-1.4.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/ddms/js/myForm.js}"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.mykind label').click(function(){
+                $(this).css({'color':'#fff','background-color':'#556CED','border-color':'#556CED'}).siblings().css({'color':'#666','background-color':'#fff','border-color':'#ccc'});
+            });
+        })
+    </script>
+</head>
+<body>
+<header th:include="include :: header"></header>
+
+<!-- Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog"
+     aria-labelledby="feedbackModalLabel">
+    <div class="modal-feedback" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="head_box">
+                    <div class="close feedClose" data-dismiss="modal"
+                         aria-label="Close">
+                        <span>×</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal_body_box row">
+                    <div class="row">
+                        <div class="feedback_name">
+                            <div class="name_block"></div>
+                            意见所属类别
+                        </div>
+                        <div class="feedback_option">
+                            <button class="btn btn-item active" data-status="1">我要新功能</button>
+                            <button class="btn btn-item" data-status="2">错误信息</button>
+                            <button class="btn btn-item" data-status="3">产品建议</button>
+                            <button class="btn btn-item" data-status="4">吐槽</button>
+                            <button class="btn btn-item" data-status="5">其他</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="feedback_name">
+                            <div class="name_block"></div>
+                            反馈内容
+                        </div>
+                        <div class="feedback_option">
+								<textarea type="text" class="form-control advise_form"
+                                          id="content"
+                                          placeholder="写下您希望增加的新功能，或者对魔盒的意见或建议。（一经采用将会给您予以积分奖励）"></textarea>
+                            <div class="block_error" for="content"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="feedback_name">
+                            <div class="name_block"></div>
+                            联系方式<b style="font-size: 12px">(非必填)</b>
+                        </div>
+                        <div class="feedback_option">
+                            <input class="form-control" type="phone" id="contact"
+                                   placeholder="留下电话或邮箱，方便我们联系您哦">
+                            <div class="block_error" for="content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal_body_box row">
+                    <div class="row">
+                        <button type="button" class="btn feedback_submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jd_menu_remove">
+    <div class="jd_remove_item">
+        <i class="iconfont icon-kefu icon"></i><br> 咨询
+    </div>
+    <div class="feedback tada " id="feedback" data-toggle="modal"
+         data-target="#feedbackModal">
+        <img src="http://jdmohe.ufile.ucloud.com.cn/web/feedback.png">
+        <img src="http://jdmohe.ufile.ucloud.com.cn/web/feedback1.png">
+    </div>
+</div>
+<div class="consult-wrapper" style="display: none;">
+    <div class="header-phone-close">
+        <i class="icon consult-phone-close iconfont icon-cuowu"></i>
+    </div>
+    <div class="consult-phone-wrapper">
+        <h3>联系我们</h3>
+        <div class="consult-phone-btn">
+            <button class="btn">
+                <img src="img/QQ.png">QQ咨询
+            </button>
+        </div>
+        <div class="qq-text"></div>
+        <div class="weixin-text">
+            扫一扫&nbsp;<img src="img/weixin.png">&nbsp;加微信
+        </div>
+        <div class="erweima-text">
+            <img class="wechartCode" src="img/we.jpg">
+        </div>
+        <div class="erweima-text1"></div>
+    </div>
+</div>
+<div class="ranking-wrapper login-wrapper">
+    <div class="row loginBox">
+        <div class="jd-form-wrapper">
+            <div class="jd_form_loading">
+                <b style="margin:auto">努力加载中...</b>
+            </div>
+            <i class="login-close iconfont icon-17cuowu"></i>
+            <div class="row login-form-title">
+                <div class="col-md-6 col-sm-6 col-xs-6" style="text-align: right">
+                    <span class="active jd-login-btn">登录</span>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <span class="jd-register-btn">注册</span>
+                </div>
+            </div>
+            <!--登录-->
+            <div class="login-form">
+                <div class="login-input-wrapper">
+                    <input type="text" id="login-user" class="form-control login-form-input input" placeholder="请输入用户名">
+                </div>
+                <div class="login-input-wrapper">
+                    <input type="password" id="login-password" class="form-control login-form-input input" placeholder="请输入密码">
+                </div>
+                <div class="login-input-wrapper">
+                    <button class="btn login-submit">确定</button>
+                    <br>
+                    <a href="javascript:;" class="forget-btn">忘记密码?</a>
+                </div>
+            </div>
+
+            <div class="register-form">
+                <div class="login-input-wrapper">
+                    <input type="text" id="register-user" class="form-control login-form-input input" placeholder="请输入手机号">
+                </div>
+                <div class="login-input-wrapper before-input">
+                    <input type="text" id="register-tp" class="form-control login-form-input input input1" placeholder="请输入图片验证码" style="width:50%;display: inline-block">
+                    <img id="code-img" src="/images/error03.png" alt="" style="width: 28%;height:34px;">
+                    <a id="code-btn" href="javascript:;" style="width: 18%;display:inline-block">换一张</a>
+                </div>
+                <div class="login-input-wrapper before-input">
+                    <input type="text" id="register-info" class="form-control login-form-input input input1" placeholder="请输入短信验证码" style="width:50%;display: inline-block">
+                    <button class="btn register-phone-btn" style="width: 48%;border: 1px solid #556CED;background: #fff;color: #556CED;height: 34px;">
+                        获取验证码
+                    </button>
+                </div>
+                <div class="login-input-wrapper next-input">
+                    <input type="password" id="register-password" class="form-control login-form-input input" placeholder="请输入密码">
+                </div>
+                <div class="login-input-wrapper next-input">
+                    <input type="password" id="register-password1" class="form-control login-form-input input" placeholder="请再次输入密码">
+                </div>
+
+                <div class="login-input-wrapper before-input">
+                    <button class="btn register-next">下一步</button>
+                </div>
+
+                <div class="login-input-wrapper next-input">
+                    <button class="btn register-submit">立即注册</button>
+                    <div>
+                        <a href="javascript:;" class="before-btn">上一步</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jd-form-wrapper form-forget">
+            <div class="jd_form_loading">
+                <b style="margin:auto">努力加载中...</b>
+            </div>
+            <div class="login-form">
+                <div class="row">
+                    <div class="col-md-12" style="position: relative;">
+		                        <span class="forget-back">
+		                             <i class="iconfont icon-fanhui"></i>
+		                        </span>
+                        <h3 style="color:#556CED">忘记密码</h3>
+                    </div>
+                </div>
+                <div class="login-input-wrapper">
+                    <input type="text" id="forget-user" class="form-control login-form-input input" placeholder="请输入用户名">
+                </div>
+                <div class="login-input-wrapper">
+                    <input type="text" id="forget-code" class="form-control login-form-input input input1" placeholder="请输入验证码" style="width:50%;display: inline-block">
+                    <button class="btn" id="forget-code-btn" style="width: 48%;border: 1px solid #556CED;background: #fff;color: #556CED;height: 34px;">
+                        获取验证码
+                    </button>
+                </div>
+                <div class="login-input-wrapper">
+                    <input type="password" id="forget-password" class="form-control login-form-input input" placeholder="请输入密码">
+                </div>
+                <div class="login-input-wrapper">
+                    <input type="password" id="forget-password1" class="form-control login-form-input input" placeholder="请再次输入密码">
+                </div>
+                <div class="login-input-wrapper">
+                    <button class="btn forget-submit">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="dd_content_wrap dd_container">
+    <div class="banner row">
+        <h1>牛八客助手</h1>
+    </div>
+    <div class="ranking_wrap">
+        <div class="row nav_header_wrap">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active queryRanking nav_li" data-index="1">
+                    <h2 title="拼多多查排名 拼多多关键词查排名">关键词查排名</h2>
+                </li>
+                <li role="presentation" class="queryCategory nav_li" data-index="2">
+                    <h2 title="拼多多查排名 拼多多类目查排名">类目查排名<!--<img class="icon-alone" src="/images/alone.png" alt=""/>--></h2>
+                </li>
+                <li role="presentation" class="queryActivity nav_li" data-index="3">
+                    <h2 title="拼多多查排名 拼多多活动查排名">活动查排名</h2>
+                </li>
+            </ul>
+        </div>
+        <!--关键词查排名-->
+        <div class="row form_wrap keyword_form" data-index="1">
+            <div class="form2">
+                <div class="row item_wrap">
+                    <lable class="item_name">
+                        关键词：
+                    </lable>
+                    <div class="item_option user-ul-box">
+                        <i class="glyphicon glyphicon-remove close_i"></i>
+                        <input type="text" class="form-control keyword" id="keyword_a" autocomplete="off" placeholder="输入关键词">
+                        <ul class="user-ul keyword-ul" style="display: none;"></ul>
+                    </div>
+                </div>
+                <div class="row item_wrap">
+                    <lable class="item_name">
+                        商品链接或ID：
+                    </lable>
+                    <div class="item_option user-ul-box">
+                        <i class="glyphicon glyphicon-remove close_i"></i>
+                        <input type="text" class="form-control keyword_sku" id="keyword_b" autocomplete="off" placeholder="输入商品链接或ID">
+                        <ul class="user-ul" style="display: none;"></ul>
+                    </div>
+                </div>
+                <div class="row item_wrap ran_hide">
+                    <lable class="item_name">
+                        排序类型：
+                    </lable>
+                    <div class='mykind'>
+                        <label>
+                            <input type="radio" value="0" name="sort" checked /> 综合排序
+                        </label>
+                        <label>
+                            <input type="radio" value="19" name="sort" /> 评分排序
+                        </label>
+                        <label>
+                            <input type="radio" value="6" name="sort" /> 销量
+                        </label>
+                        <label>
+                            <input type="radio" value="3" name="sort" /> 价格<i class="iconfont icon-jiantoushangsheng"></i>
+                        </label>
+                        <label>
+                            <input type="radio" value="4" name="sort" /> 价格<i class="iconfont icon-jiantouxiajiang"></i>
+                        </label>
+                    </div><!--/mykind-->
+                </div>
+            </div><!--/form2-->
+            <div class="row form_footer">
+                <button class="btn form_submit" onclick="getKey();">查询</button>
+            </div>
+            <div class="results only_one"></div>
+        </div>
+        <!--关键词查排名结束-->
+        <!--类目查排名-->
+        <div class="row form_wrap category_form" data-index="2">
+            <div class="form1">
+                <div class="row item_wrap">
+                    <lable class="item_name">
+                        选择类目：
+                    </lable>
+                    <div class="item_option">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <select name="category1" data-key="1" class="form-control category" id="category1" onchange="cats1();">
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <select name="category2" data-key="2" class="form-control category" id="category2" onchange="cats2();">
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <select name="category3" data-key="3" class="form-control category" id="category3">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row item_wrap">
+                    <lable class="item_name">
+                        商品链接或ID：
+                    </lable>
+                    <div class="item_option user-ul-box">
+                        <i class="glyphicon glyphicon-remove close_i"></i>
+                        <input type="text" class="form-control keyword_sku" id="category_b" name="" autocomplete="off" placeholder="输入商品链接或ID">
+                        <ul class="user-ul" style="display: none;"></ul>
+                    </div>
+                </div>
+            </div><!--/form1-->
+            <div class="row form_footer">
+                <button class="btn form_submit" onclick="getCats();">查询</button>
+            </div>
+            <div class="results only_two"></div>
+        </div>
+        <!--类目查排名结束-->
+        <!--活动查排名-->
+        <div class="row form_wrap activity_form" data-index="3">
+            <div class="form3">
+                <div class="row item_wrap">
+                    <lable class="item_name">
+                        活动类型：
+                    </lable>
+                    <div class="item_option activity_home">
+                        <button class="btn keyword_btn activity_btn active activity1" data-key="4">首页活动</button>
+                        <button class="btn keyword_btn activity_btn activity2 hidden" data-key="3">新品活动</button>
+                    </div>
+                </div>
+                <div class="row item_wrap activity_box">
+                    <lable class="item_name">
+                        活动入口：
+                    </lable>
+                    <div class="item_option">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <select name="activity1" class="form-control activity_sel" id="activity1">
+                                <option value="0">一级类目</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <select name="activity2" class="form-control activity_sel keyword" id="activity2">
+                                <option value="0">二级类目</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row item_wrap">
+                    <lable class="item_name">
+                        商品链接或ID：
+                    </lable>
+                    <div class="item_option user-ul-box">
+                        <i class="glyphicon glyphicon-remove close_i"></i>
+                        <input type="text" class="form-control keyword_sku" autocomplete="off" placeholder="输入商品链接或ID" id="actSku">
+                        <ul class="user-ul" style="display: none;"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row form_footer">
+                <button class="btn form_submit" id="form_submit">查询</button>
+            </div>
+        </div><!--活动查排名结束-->
+    </div>
+</div>
+<script th:src="@{/static/ddms/js/main.js?t=0914}"></script>
+<script th:src="@{/static/ddms/js/login.js?t=?t=0727}"></script>
+<script th:src="@{/static/ddms/js/bootstrap/bootstrap-table.js}"></script>
+<script th:src="@{/static/ddms/js/index.js}"></script>
+<script>
+    $(function(){
+
+        /*$.each(json, function (index, data) {});*/
+        $.get('/api/getCats?parentId=0', function(res) {
+            $("#category1").append(res.cats);
+            var id = $("#category1 option:selected").val();
+            $.get('/api/getCats?parentId='+id, function(res) {
+                $("#category2").append(res.cats);
+                var id = $("#category2 option:selected").val();
+                $.get('/api/getCats?parentId='+id, function(res) {
+                    $("#category3").append(res.cats);
+                });
+            });
+        });
+
+    })
+    
+    function cats1() {
+        var id = $("#category1 option:selected").val();
+        $.get('/api/getCats?parentId='+id, function(res) {
+            $("#category2").empty();
+            $("#category2").append(res.cats);
+            var id = $("#category2 option:selected").val();
+            $.get('/api/getCats?parentId='+id, function(res) {
+                $("#category3").empty();
+                $("#category3").append(res.cats);
+            });
+        });
+    }
+
+    function cats2() {
+        var id = $("#category2 option:selected").val();
+        $.get('/api/getCats?parentId='+id, function(res) {
+            $("#category3").empty();
+            $("#category3").append(res.cats);
+        });
+    }
+
+    function getCats() {
+        var a = $("#category3 option:selected").val();
+        var b = $("#category_b").val();
+        if(a!=null&&b!=null){
+            $.get('/api/getKey?parentId='+a+"&goodsId="+b, function(res) {
+                var a;
+                if(res.goods==null){
+                    a = '<h1>搜索结果</h1><div class="result_title1">查排名功能当前处于测试阶段，查询结果会有偏差，商家可作为参考，更多功能敬请期待</div>';
+                }else{
+                    a = '<table class="mytable"><tr><td>商品信息</td><td>单价</td><td>团购价</td><td>排名</td><td>销量</td></tr>' +
+                        '<tr><td><dl><dt><img src="'+res.goods.img+'"></dt><dd>'+res.goods.name+'</dd></dl></td><td>'+res.goods.normal+'</td><td>'
+                        +res.goods.group+'</td><td>'+res.goods.top+'</td><td>'+res.goods.sold+'</td></tr></table>';
+                }
+                $(".only_two").html(a);
+            });
+        }else{
+            alert("请填写关键词/商品ID！");
+        }
+    }
+
+    function getKey(){
+        var a = $("#keyword_a").val();
+        var b = $("#keyword_b").val();
+        var c = $("input[name='sort']:checked").val();
+        if(a!=null&&b!=null){
+            $.get('/api/getKey?keyword='+a+"&goodsId="+b+"&sort="+c, function(res) {
+                var a;
+                if(res.goods==null){
+                    a = '<h1>搜索结果</h1><div class="result_title1">查排名功能当前处于测试阶段，查询结果会有偏差，商家可作为参考，更多功能敬请期待</div>';
+                }else{
+                    a = '<table class="mytable"><tr><td>商品信息</td><td>单价</td><td>团购价</td><td>排名</td><td>销量</td></tr>' +
+                        '<tr><td><dl><dt><img src="'+res.goods.img+'"></dt><dd>'+res.goods.name+'</dd></dl></td><td>'+res.goods.normal+'</td><td>'
+                        +res.goods.group+'</td><td>'+res.goods.top+'</td><td>'+res.goods.sold+'</td></tr></table>';
+                }
+                $(".only_one").html(a);
+            });
+        }else{
+            alert("请填写关键词/商品ID！");
+        }
+    }
+
+    function exit() {
+        $.ajax({
+            url:'api/exituser',
+            type:'POST',
+            success:function(param){
+                if(param == 1){
+                    window.location.href = "/api/";
+                }else{
+                    alertError(param.msg)
+                }
+            },
+            error:function(){
+                alertError('系统错误')
+            }
+        });
+    }
+</script>
+<div class="tool">
+    <div class="backTop">
+        <div class="iconRow"></div>
+        <i class="glyphicon glyphicon-arrow-up iconArrow"></i>
+    </div>
+    <div id="particles-js"
+         style="position: absolute; top: 0px; left: 0px; z-index: -1;">
+        <canvas class="particles-js-canvas-el" width="775" height="388"
+                style="width: 100%; height: 100%;"></canvas>
+    </div>
+    <div class="alert-title success">
+        <i class="glyphicon glyphicon-ok-circle" style="color: #5cb85c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span>
+    </div>
+    <div class="alert-title error">
+        <i class="glyphicon glyphicon glyphicon-remove-circle"
+           style="color: #c9302c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span>
+    </div>
+    <div class="alert-title info">
+        <i class="glyphicon glyphicon-info-sign" style="color: #f0ad4e;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxx.model.base.dao.DdViptimeDAO">
+
+    <!-- 查询天数 -->
+    <select id="selectDays" resultType="Integer" >
+ 		SELECT DATEDIFF((select end_time from dd_viptime where user_telephone = #{telephone} and vip_type="排名监控"),NOW())
+ 	</select>
+	<!--添加-->
+	<insert id="addVIPtime">
+ 		insert into dd_viptime values
+ 		(null,#{userTelephone},#{vipType},#{startTime},#{endTime});
+ 	</insert>
+	<!-- 查询 -->
+	<select id="getVIPtimeByTelephone" resultType="DdViptime" >
+ 		select * from dd_viptime where user_telephone = #{telephone} and  end_time > NOW()
+ 	</select>
+	<!-- 按手机号和会员类型查询 -->
+	<select id="getVIPtimeByTelephoneAndType" resultType="DdViptime" >
+ 		select * from dd_viptime where user_telephone = #{telephone} and end_time > NOW() and vip_type=#{user_type}
+ 	</select>
+	<!-- 查询是否到期 -->
+	<select id="selectYN" resultType="DdViptime" >
+ 		select * from dd_viptime where user_telephone = #{telephone} and  end_time > NOW() and vip_type=#{user_type}
+ 	</select>
+	<!-- 续期 -->
+	<update id="updateEnd_time">
+ 		update dd_viptime set end_time=date_add(end_time, interval #{time} month)
+ 		where user_telephone=#{telephone} AND vip_type=#{user_type}
+ 	</update>
+	<!-- 开通 -->
+	<update id="updateStart_End_time">
+ 		update dd_viptime set start_time=#{time1},end_time=#{time2}
+ 		where user_telephone=#{telephone} AND vip_type=#{user_type}
+ 	</update>
+
+</mapper>
