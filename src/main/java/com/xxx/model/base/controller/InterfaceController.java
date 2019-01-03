@@ -1,11 +1,13 @@
 package com.xxx.model.base.controller;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.xxx.common.interfaces.NotLogin;
 import com.xxx.common.util.DateUtils;
 import com.xxx.common.util.PDDUtils;
 import com.xxx.model.base.entity.*;
 import com.xxx.model.base.service.*;
+import com.xxx.model.sys.utils.AliCloudSMS;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -322,6 +324,49 @@ public class InterfaceController {
             }
         } else {
             return "/";
+        }
+    }
+
+    /**
+     * 验证图片验证码后发短信
+     * @param picCode
+     * @param session
+     * @param phone
+     * @param code
+     * @return
+     */
+    @RequestMapping("checkPicCode")
+    @ResponseBody
+    public boolean checkPicCode(String picCode,HttpSession session,String phone, String code) {
+        //String yanzhengma = session.getAttribute("code").toString();//获取session中图片验证码
+        picCode = picCode.toUpperCase();
+        Boolean mesg = false;
+        if(picCode.equals(code)){
+            try {
+                //调用阿里短信sdk发送验证码
+                AliCloudSMS.sendSms(phone, AliCloudSMS.getMsgCode(),session);
+                mesg = true;
+            } catch (ClientException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("mesg="+mesg);
+        return mesg;
+    }
+
+    /**
+     * 检查登录
+     * @param session
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "checkLogin")
+    public Integer checkLogin(HttpSession session){
+        DdMember ddMember = (DdMember)session.getAttribute("user_login");
+        if(ddMember==null){
+            return 0;
+        }else {
+            return 1;
         }
     }
 
