@@ -14,7 +14,6 @@
     <link th:href="@{/static/ddms/css/search_gulp.css}" rel="stylesheet">
     <link th:href="@{/static/ddms/css/bootstrap/bootstrap-table.min.css}" rel="stylesheet">
     <link th:href="@{/static/ddms/css/index.css}" rel="stylesheet">
-    <link th:href="@{/static/ddms/css/index1.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/static/ddms/jquery/jquery-1.4.4.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/ddms/js/myForm.js}"></script>
     <script type="text/javascript">
@@ -237,7 +236,7 @@
                     <h2 title="拼多多查排名 拼多多类目查排名">类目查排名<!--<img class="icon-alone" src="/images/alone.png" alt=""/>--></h2>
                 </li>
                 <li role="presentation" class="queryActivity nav_li" data-index="3">
-                    <h2 title="拼多多查排名 拼多多活动查排名">活动查排名</h2>
+                    <h2 title="拼多多查排名 拼多多活动查排名">查询店铺</h2>
                 </li>
             </ul>
         </div>
@@ -256,11 +255,11 @@
                 </div>
                 <div class="row item_wrap">
                     <lable class="item_name">
-                        商品链接或ID：
+                        商品ID：
                     </lable>
                     <div class="item_option user-ul-box">
                         <i class="glyphicon glyphicon-remove close_i"></i>
-                        <input type="text" class="form-control keyword_sku" id="keyword_b" autocomplete="off" placeholder="输入商品链接或ID">
+                        <input type="text" class="form-control keyword_sku" id="keyword_b" autocomplete="off" placeholder="输入商品ID">
                         <ul class="user-ul" style="display: none;"></ul>
                     </div>
                 </div>
@@ -317,11 +316,11 @@
                 </div>
                 <div class="row item_wrap">
                     <lable class="item_name">
-                        商品链接或ID：
+                        商品ID：
                     </lable>
                     <div class="item_option user-ul-box">
                         <i class="glyphicon glyphicon-remove close_i"></i>
-                        <input type="text" class="form-control keyword_sku" id="category_b" name="" autocomplete="off" placeholder="输入商品链接或ID">
+                        <input type="text" class="form-control keyword_sku" id="category_b" autocomplete="off" placeholder="输入商品ID">
                         <ul class="user-ul" style="display: none;"></ul>
                     </div>
                 </div>
@@ -337,37 +336,11 @@
             <div class="form3">
                 <div class="row item_wrap">
                     <lable class="item_name">
-                        活动类型：
-                    </lable>
-                    <div class="item_option activity_home">
-                        <button class="btn keyword_btn activity_btn active activity1" data-key="4">首页活动</button>
-                        <button class="btn keyword_btn activity_btn activity2 hidden" data-key="3">新品活动</button>
-                    </div>
-                </div>
-                <div class="row item_wrap activity_box">
-                    <lable class="item_name">
-                        活动入口：
-                    </lable>
-                    <div class="item_option">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <select name="activity1" class="form-control activity_sel" id="activity1">
-                                <option value="0">一级类目</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <select name="activity2" class="form-control activity_sel keyword" id="activity2">
-                                <option value="0">二级类目</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row item_wrap">
-                    <lable class="item_name">
-                        商品链接或ID：
+                        店铺ID：
                     </lable>
                     <div class="item_option user-ul-box">
                         <i class="glyphicon glyphicon-remove close_i"></i>
-                        <input type="text" class="form-control keyword_sku" autocomplete="off" placeholder="输入商品链接或ID" id="actSku">
+                        <input type="text" class="form-control keyword_sku" id="mall_a" autocomplete="off" placeholder="输入店铺ID" id="actSku">
                         <ul class="user-ul" style="display: none;"></ul>
                     </div>
                 </div>
@@ -399,6 +372,8 @@
         });
 
     })
+
+
     
     function cats1() {
         var id = $("#category1 option:selected").val();
@@ -479,26 +454,5 @@
         });
     }
 </script>
-<div class="tool">
-    <div class="backTop">
-        <div class="iconRow"></div>
-        <i class="glyphicon glyphicon-arrow-up iconArrow"></i>
-    </div>
-    <div id="particles-js"
-         style="position: absolute; top: 0px; left: 0px; z-index: -1;">
-        <canvas class="particles-js-canvas-el" width="775" height="388"
-                style="width: 100%; height: 100%;"></canvas>
-    </div>
-    <div class="alert-title success">
-        <i class="glyphicon glyphicon-ok-circle" style="color: #5cb85c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span>
-    </div>
-    <div class="alert-title error">
-        <i class="glyphicon glyphicon glyphicon-remove-circle"
-           style="color: #c9302c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span>
-    </div>
-    <div class="alert-title info">
-        <i class="glyphicon glyphicon-info-sign" style="color: #f0ad4e;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span>
-    </div>
-</div>
 </body>
 </html>

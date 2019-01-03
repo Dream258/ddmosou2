@@ -461,3 +461,37 @@ td .glyphicon-arrow-down {
 	padding: 20px 20px 100px;
 	margin-bottom: 150px
 }
+
+*{ margin:0; padding:0}
+.mytable{ border:1px solid #f5f5f5; margin-top:25px; padding-bottom:50px; display:none}
+.mytable:first-child{ display:block}
+.mytable .top{ overflow:hidden; padding:10px 2%}
+.mytable .top .left{ width:30%; float:left;}
+.mytable .top .left dt{ width:20%; float:left; margin-right:2%}
+.mytable .top .left dt img{ width:100%}
+.mytable .top .left dd{ line-height:30px}
+.mytable .top .left dd.gray{ color:#989A9C}
+.mytable .top .right{ width:60%; float:right;}
+.mytable .top .right { text-align:right; padding-top:5px; padding-right:5px}
+.mytable .top .right a.add{ display:inline-block; width:100px; line-height:40px; text-align:center; background-color:#556CED; color:#fff; border-radius:5px}
+.mytable .top .right a.del{ display:inline-block; width:80px; line-height:40px; text-align:center; background-color:#fff; color:#556CED; border-radius:5px; border:1px solid #556CED}
+.mytable table{ width:96%; border-radius:5px; margin:10px auto 0}
+.mytable table th,td{ line-height:35px; text-align:center; border:1px solid #ccc}
+.mytable table th{ background-color:#f5f5f5}
+.mytable table td a{ color:#fff; background-color:#556CED; text-align:center; display:inline-block; width:60px; line-height:25px; font-size:14px; border-radius:6px}
+.modal-content{ padding-bottom:20px}
+.modal-content h3{ line-height:70px; text-align:center}
+.modal-content form{ width:70%; margin:0 auto}
+.modal-content form input{ line-height:35px; border-radius:5px; width:80%; border:none; border:1px solid #ccc}
+.modal-content form .btn1,.btn2{ width:90px; margin-top:40px}
+.modal-content form .btn1{ margin-left:30%}
+.modal-content dl{ overflow:hidden; padding:5px 2%; border-bottom:1px solid #ccc; width:100%}
+.modal-content dl dt{ width:16%; float:left; margin-right:2%}
+.modal-content dl dt img{ width:100%}
+.modal-content dl dd{ line-height:50px; font-size:16px}
+.modal-content dl dd.gray{ color:#989A9C}
+.modal-content h5{ color:#556CED; padding-left:2%; line-height:40px; font-weight:bold}
+.modal-content .tab{ padding-left:2%}
+.modal-content .tab a{ padding-right:2%; color:#666}
+.modal-content .tabs #main2,#main3,#main5,#main6,#main8,#main9{display:none}
+.modal-content .tabs #main1{ display:block}
