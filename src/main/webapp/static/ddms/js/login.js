@@ -267,28 +267,29 @@ $(function(){
             });
         }
     });*/
-    
+
 
 
     $('.register-phone-btn').on('click',function(){
         if(checkPhone($('#register-user').val())){
-        	$.ajax({
+            $.ajax({
                 type:'POST',
-                url:'${Path}/user/checkPicCode',
+                url:'/api/checkPicCode',
                 data:{
                     phone:$('#register-user').val(),
+                    code:$('#code').val(),
                     picCode:$('#register-tp').val(),
                 },
                 success:function(data){
-                	if(data){
+                    if(data){
                         $(this).attr("disabled",'true');
                         $(this).text("重新发送(" + 60 + ")");
                         var _this=this;
                         var t=setInterval(function(){settime($(_this),t)},1000);
                         codeInfoAjax(t,'1');
-                	}else{
-                		alertError('请输入正确验证码');
-                	}
+                    }else{
+                        alertError('请输入正确验证码');
+                    }
                 },
                 error:function(){
                     $('.jd_form_loading').hide();
