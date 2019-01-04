@@ -23,6 +23,7 @@
 	</head>
 	<body>
     <header th:include="include :: header"></header>
+    <input type="hidden" th:value="${session.user_login.id}" id="userId">
     <div class="dd_content_wrap dd_container dd_other">
         <div class="row ran_header">
             <div class="col-md-10 dd_ranking">
@@ -47,13 +48,13 @@
                         <th>商品排名</th>
                         <th>操作</th>
                     </tr>
-                    <tr>
-                        <td>你个傻子</td>
-                        <td>2019-09-09</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td><a href='#' data-toggle="modal" data-target="#myModal1">走势</a></td>
-                    </tr>
+                    <!--<tr>-->
+                        <!--<td>你个傻子</td>-->
+                        <!--<td>2019-09-09</td>-->
+                        <!--<td>0.00</td>-->
+                        <!--<td>0.00</td>-->
+                        <!--<td><a href='#' data-toggle="modal" data-target="#myModal1">走势</a></td>-->
+                    <!--</tr>-->
                 </table>
                 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -70,17 +71,7 @@
             </div><!--/mytable--><!--关键词排名监控结束-->
             <!--类目排名监控-->
             <div class='mytable'>
-                <div class='top'>
-                    <dl class='left'>
-                        <dt><img src='img/character.jpg'></dt>
-                        <dd>你个傻子哈哈哈哈222</dd>
-                        <dd class='gray'>商品id:0498548957408</dd>
-                    </dl>
-                    <div class='right'>
-                        <a href='#' class='add' data-toggle="modal" data-target="#myModa2">+添加关键词</a>
-                        <a href='#' class='del'>删除</a>
-                    </div>
-                </div>
+
                 <div class="modal fade" id="myModa2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -93,7 +84,7 @@
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal -->
                 </div>
-                <table>
+                <table id="ranking_2">
                     <tr>
                         <th>关键词</th>
                         <th>最后更新时间</th>
@@ -103,15 +94,15 @@
                         <th>排名</th>
                         <th>操作</th>
                     </tr>
-                    <tr>
-                        <td>你个傻子</td>
-                        <td>2019-09-09 09:09:09</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td>23</td>
-                        <td>2</td>
-                        <td><a href='#' data-toggle="modal" data-target="#myModal2">走势</a></td>
-                    </tr>
+                    <!--<tr>-->
+                        <!--<td>你个傻子</td>-->
+                        <!--<td>2019-09-09 09:09:09</td>-->
+                        <!--<td>0.00</td>-->
+                        <!--<td>0.00</td>-->
+                        <!--<td>23</td>-->
+                        <!--<td>2</td>-->
+                        <!--<td><a href='#' data-toggle="modal" data-target="#myModal2">走势</a></td>-->
+                    <!--</tr>-->
                 </table>
                 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -135,17 +126,7 @@
             <!--类目排名监控结束-->
             <!--活动排名监控-->
             <div class='mytable'>
-                <div class='top'>
-                    <dl class='left'>
-                        <dt><img src='img/character.jpg'></dt>
-                        <dd>你个傻子哈哈哈哈333</dd>
-                        <dd class='gray'>商品id:0498548957408</dd>
-                    </dl>
-                    <div class='right'>
-                        <a href='#' class='add' data-toggle="modal" data-target="#myModa3">+添加关键词</a>
-                        <a href='#' class='del'>删除</a>
-                    </div>
-                </div>
+
                 <div class="modal fade" id="myModa3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -158,25 +139,25 @@
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal -->
                 </div>
-                <table>
+                <table id="ranking_3">
                     <tr>
-                        <th>关键词</th>
-                        <th>最后更新时间</th>
-                        <th>单价</th>
-                        <th>团购价</th>
-                        <th>销量</th>
-                        <th>排名</th>
+                        <th>店铺ID</th>
+                        <th>店铺名称</th>
+                        <th>店铺LOGO</th>
+                        <th>商品数量</th>
+                        <th>店铺销量</th>
+                        <th>创建时间</th>
                         <th>操作</th>
                     </tr>
-                    <tr>
-                        <td>你个傻子</td>
-                        <td>2019-09-09 09:09:09</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td>23</td>
-                        <td>2</td>
-                        <td><a href='#' data-toggle="modal" data-target="#myModal3">走势</a></td>
-                    </tr>
+                    <!--<tr>-->
+                        <!--<td>你个傻子</td>-->
+                        <!--<td>2019-09-09 09:09:09</td>-->
+                        <!--<td>0.00</td>-->
+                        <!--<td>0.00</td>-->
+                        <!--<td>23</td>-->
+                        <!--<td>2</td>-->
+                        <!--<td><a href='#' data-toggle="modal" data-target="#myModal3">走势</a></td>-->
+                    <!--</tr>-->
                 </table>
                 <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -320,7 +301,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary add_keywords_sure">确定</button>
+                    <button type="button" class="btn btn-primary add_keywords_sure" onclick="addGood()">确定</button>
                     <button type="button" class="btn btn-default add_keywords_close" data-dismiss="modal">取消</button>
                 </div>
             </div>
@@ -361,12 +342,29 @@
                     });
                 });
             });*/
-            var a = 1;//$("#userId").val();
+            //var a = 1;//
+            var a = $("#userId").val();
             $.get('/api/getKeyVip?userId='+a+'&type=1', function(res) {
                 $.each(res.goods, function (index, data) {
                     $("#ranking_1").append("<tr><td><img src='"+data.goodsThumbnail+"'>"+data.goodsName+"</td><td>"
                         +data.goodsKey+"</td><td>"+data.goodsSold+"</td><td>"+data.goodsTop+"</td><td>" +
-                        "<a href='#' data-toggle='modal' data-target='myModal1'>走势</a></td></tr>");
+                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
+                });
+            });
+            $.get('/api/getCatsVip?userId='+a+'&type=2', function(res) {
+                $.each(res.goods, function (index, data) {
+                    $("#ranking_2").append("<tr><td>"+data.goodsKey+"</td><td>"
+                        +data.goodsTime+"</td><td>"+data.normalPrice+"</td><td>"+data.groupPrice+
+                        "</td><td>" + data.goodsSold +"</td><td>"+data.goodsTop+"</td><td>"+
+                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
+                });
+            });
+            $.get('/api/getMallVip?userId='+a, function(res) {
+                $.each(res.malls, function (index, data) {
+                    $("#ranking_3").append("<tr><td>"+data.mallId+"</td><td>"
+                        +data.mallName+"</td><td>"+data.mallLogo+"</td><td>"+data.goodsNum+
+                        "</td><td>" + data.mallSold +"</td><td>"+data.createtime+"</td><td>"+
+                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
                 });
             });
 
@@ -427,6 +425,34 @@
         myChart8.setOption(option);
         myChart9.setOption(option);
 
+        function addGood() {
+            //var keyword = $("#keyword_form").val();
+            var goodsId = $("#keyword_sku").val();
+            var userId = $("#userId").val();
+            $.ajax({
+                url: "/api/addKey",
+                data: {
+                    "userId" : userId,
+                    "keyword" : "关键词",
+                    "goodsId" : "5386807971",
+                    "sort" : "0",
+                    "type" : "1"
+                },
+                type: "GET",
+                dataType : "json",
+                success:function(data){
+                    if(data["success"]=="000") {
+                        alertSuccess("添加成功");
+                        window.location.href="/api/ranking";
+                    }else{
+                        alertError("监控数已满10个");
+                    }
+                },
+                error:function(){
+                    alertError('系统错误');
+                }
+            });
+        }
     </script>
     </body>
 </html>
