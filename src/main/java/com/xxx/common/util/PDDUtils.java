@@ -74,6 +74,7 @@ public class PDDUtils {
                 }
                 params.append("sign="+getSign(m,DictionaryUtils.duoduo_client_secret));
                 String result = HttpClientUtils.post(url, params.toString(), "application/x-www-form-urlencoded","UTF-8", 10000, 10000);
+                System.out.println(result);
                 JSONObject jsonObject = JSONObject.parseObject(result);
                 jsonObject = JSONObject.parseObject(jsonObject.get("goods_search_response").toString());
                 result = jsonObject.get("goods_list").toString();

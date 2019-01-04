@@ -396,7 +396,7 @@ public class InterfaceController {
                     Map p = list.get(i);
                     if(m.get("goodsId").toString().equals(p.get("goods_id").toString())){
                         mp.put("time",DateUtils.format());
-                        mp.put("top",i);
+                        mp.put("top",i+1);
                         break;
                     }
                 }
@@ -406,7 +406,7 @@ public class InterfaceController {
                     Map p = list.get(i);
                     if(m.get("goodsId").toString().equals(p.get("goods_id").toString())){
                         mp.put("time",p.get("goods_time"));
-                        mp.put("top",i);
+                        mp.put("top",i+1);
                         break;
                     }
                 }
@@ -493,7 +493,7 @@ public class InterfaceController {
                     m.put("normal",p.get("min_normal_price"));
                     m.put("sold",p.get("sold_quantity"));
                     m.put("img",p.get("goods_thumbnail_url"));
-                    m.put("top",i);
+                    m.put("top",i+1);
                     map.put("goods",m);
                     System.out.println("商品信息："+p.get("goods_name")+"~~~团购价："+p.get("min_group_price")+"~~~单价："+p.get("min_normal_price")+"~~~销量："+p.get("sold_quantity")+"~~~排名："+i);
                     break;
@@ -595,7 +595,7 @@ public class InterfaceController {
                         ddKey.setGoodsThumbnail(p.get("goods_thumbnail_url").toString());
                         ddKey.setGroupPrice(p.get("min_group_price").toString());
                         ddKey.setNormalPrice(p.get("min_normal_price").toString());
-                        ddKey.setGoodsTop(String.valueOf(i));
+                        ddKey.setGoodsTop(String.valueOf(i+1));
                         ddKey.setType(type);
                         ddKey.setGoodsTime(new Date());
                         ddKeyService.save(ddKey);
