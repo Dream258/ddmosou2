@@ -22,9 +22,9 @@ spring:
   settings:
    number_format: 0.##
  datasource:
-  url: jdbc:mysql://47.105.168.142:3306/crm?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+  url: jdbc:mysql://localhost:3306/crm?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
   username: root
-  password: 123456
+  password: root
   driverClassName: com.mysql.jdbc.Driver
   max-active: 20
   max-idle: 8
@@ -67,6 +67,6 @@ mybatis-plus:
 #配置路径
 path:
  basepackage: com.xxx.model
- outRoot: H:\workspace\crm
- baseUrl: H:\workspace\crm\src\main\webapp\
+ outRoot: H:\workspace\ddmosou
+ baseUrl: H:\workspace\crm\ddmosou\main\webapp\
  #baseUrl: /usr/local/tomcat/webapps/crm/

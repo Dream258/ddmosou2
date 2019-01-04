@@ -339,13 +339,12 @@
                     });
                 });
             });*/
-            //var a = 1;//
             var a = $("#userId").val();
             $.get('/api/getKeyVip?userId='+a+'&type=1', function(res) {
                 $.each(res.goods, function (index, data) {
                     $("#ranking_1").append("<tr><td style='max-width:150px'><dl><dt><img src='"+data.goodsThumbnail+"'></dt><dd>"+data.goodsName+"</dd></dl></td><td>"
                         +data.goodsKey+"</td><td>"+data.goodsSold+"</td><td>"+data.goodsTop+"</td><td>" +
-                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
+                        "<a href='#' data-toggle='modal' data-target='#myModal1' onclick='key_walk("+data.id+");'>走势</a></td></tr>");
                 });
             });
             $.get('/api/getCatsVip?userId='+a+'&type=2', function(res) {
@@ -353,7 +352,7 @@
                     $("#ranking_2").append("<tr><td>"+data.goodsKey+"</td><td>"
                         +data.goodsTime+"</td><td>"+data.normalPrice+"</td><td>"+data.groupPrice+
                         "</td><td>" + data.goodsSold +"</td><td>"+data.goodsTop+"</td><td>"+
-                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
+                        "<a href='#' data-toggle='modal' data-target='#myModal1' onclick='key_walk("+data.id+");'>走势</a></td></tr>");
                 });
             });
             $.get('/api/getMallVip?userId='+a, function(res) {
@@ -361,7 +360,7 @@
                     $("#ranking_3").append("<tr><td>"+data.mallId+"</td><td>"
                         +data.mallName+"</td><td>"+data.mallLogo+"</td><td>"+data.goodsNum+
                         "</td><td>" + data.mallSold +"</td><td>"+data.createtime+"</td><td>"+
-                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
+                        "<a href='#' data-toggle='modal' data-target='#myModal1' onclick='key_walk("+data.id+");'>走势</a></td></tr>");
                 });
             });
 
