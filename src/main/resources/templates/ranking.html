@@ -332,20 +332,9 @@
     <script>
 
         $(function(){
-            /*$.get('/api/getCats?parentId=0', function(res) {
-                $("#category1").append(res.cats);
-                var id = $("#category1 option:selected").val();
-                $.get('/api/getCats?parentId='+id, function(res) {
-                    $("#category2").append(res.cats);
-                    var id = $("#category2 option:selected").val();
-                    $.get('/api/getCats?parentId='+id, function(res) {
-                        $("#category3").append(res.cats);
-                    });
-                });
-            });*/
-            //var a = 1;//
             var a = $("#userId").val();
-            $.get('/api/getKeyVip?userId='+a+'&type=1', function(res) {
+            $.get('/api/getKeyVip?userId='+a+'&type=1',
+                function(res) {
                 $.each(res.goods, function (index, data) {
                     $("#ranking_1").append("<tr><td style='max-width:150px'><dl><dt><img src='"+data.goodsThumbnail+"'></dt><dd>"+data.goodsName+"</dd></dl></td><td>"
                         +data.goodsKey+"</td><td>"+data.goodsSold+"</td><td>"+data.goodsTop+"</td><td>" +
@@ -409,7 +398,7 @@
                         title: {
                             text: '排名'
                         },
-                        tickPositions: [100, 50, 20, 10, 0]
+                        reversed: true //逆向
                     },
                     plotOptions: {
                         line: {
