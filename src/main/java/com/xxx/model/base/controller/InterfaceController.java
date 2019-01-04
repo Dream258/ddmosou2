@@ -124,6 +124,13 @@ public class InterfaceController {
         return "redirect:/api/";
     }
 
+    /**
+     * 查询下级
+     * @param session
+     * @param page
+     * @param pn
+     * @return
+     */
     @RequestMapping(value = { "/subordinate" })
     public String subordinate(HttpSession session, Page<DdMember> page, @RequestParam(value="pn",required=false,defaultValue="1") int pn) {
         page.setCurrent(pn);
