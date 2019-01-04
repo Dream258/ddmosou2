@@ -229,11 +229,11 @@
                 </div>
                 <div class="pagination-box clearfix">
                     <!--<div class="M-box" th:if="${session.page.totalPage>0 }">-->
-                        <a th:each="info:${session.totalPage }">
-                            <span class="active">
-                              <a th:href="@{'subordinate?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
+                        <!--<a th:each="info:${session.totalPage }">-->
+                            <span class="active" th:each="info:${session.totalPage }">
+                              <a th:href="@{'selectOrders?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
                             </span>
-                        </a>
+                        <!--</a>-->
                     <!--</div>-->
                 </div>
             </div>

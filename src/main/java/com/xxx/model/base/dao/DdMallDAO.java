@@ -17,7 +17,7 @@ import java.util.Map;
 @Component
 public interface DdMallDAO extends BaseMapper<DdMall> {
     @Select("SELECT COUNT(0) FROM dd_mall WHERE 1=1 AND user_id = #{userId}")
-    int getListSize(@Param("userId") int userId);
+    int getListSize(@Param("userId") String userId);
 
     @Select("SELECT * FROM dd_mall WHERE 1=1 AND user_id = #{userId}")
     List<Map<String,Object>> getList(@Param("userId") int userId);

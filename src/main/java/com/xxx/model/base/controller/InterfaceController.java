@@ -117,17 +117,22 @@ public class InterfaceController {
     /**
      * 退出登录
      */
-    @ResponseBody
     @RequestMapping(value = { "/exituser" })
-    public Integer exitSystem(HttpSession session) {
+    public String exitSystem(HttpSession session) {
         session.removeAttribute("user_login");
         session.removeAttribute("days");
-        return 1;
+        return "redirect:/api/";
     }
 
-    @ResponseBody
+    /**
+     * 查询下级
+     * @param session
+     * @param page
+     * @param pn
+     * @return
+     */
     @RequestMapping(value = { "/subordinate" })
-    public int subordinate(HttpSession session, Page<DdMember> page, @RequestParam(value="pn",required=false,defaultValue="1") int pn) {
+    public String subordinate(HttpSession session, Page<DdMember> page, @RequestParam(value="pn",required=false,defaultValue="1") int pn) {
         page.setCurrent(pn);
         page.setSize(10);
         DdMember user = (DdMember)session.getAttribute("user_login");//获取登录用户信息
@@ -166,10 +171,9 @@ public class InterfaceController {
             session.setAttribute("spnc", spnc);
             session.setAttribute("spn", spn);
             session.setAttribute("sum", sum);
-            session.setAttribute("subordinateTotal", page.getTotal());
-            System.out.println("total="+page.getTotal());
+            session.setAttribute("subordinateTotal", page.getPages());
         }
-        return 1;
+        return "redirect:/api/share_list";
     }
 
 
@@ -177,8 +181,7 @@ public class InterfaceController {
      * 前台查询个人订单
      */
     @RequestMapping(value = { "/selectOrders" })
-    @ResponseBody
-    public int selectOrders(HttpSession session, Page<DdOrders> page, @RequestParam(value = "pn",defaultValue = "1") int pageNum) {
+    public String selectOrders(HttpSession session, Page<DdOrders> page, @RequestParam(value = "pn",defaultValue = "1") int pageNum) {
         page.setCurrent(pageNum);
         page.setSize(10);
         DdMember user = (DdMember) session.getAttribute("user_login");
@@ -189,8 +192,8 @@ public class InterfaceController {
         session.setAttribute("orderno", pageNum);
         session.setAttribute("listOrders", page.getRecords());
         session.setAttribute("orderpage", page);
-        session.setAttribute("totalPage",page.getTotal());
-        return 1;
+        session.setAttribute("totalPage",page.getPages());
+        return "redirect:/api/buylist";
     }
 
     //修改密码
@@ -495,7 +498,7 @@ public class InterfaceController {
                     m.put("img",p.get("goods_thumbnail_url"));
                     m.put("top",i+1);
                     map.put("goods",m);
-                    System.out.println("商品信息："+p.get("goods_name")+"~~~团购价："+p.get("min_group_price")+"~~~单价："+p.get("min_normal_price")+"~~~销量："+p.get("sold_quantity")+"~~~排名："+i);
+                    //System.out.println("商品信息："+p.get("goods_name")+"~~~团购价："+p.get("min_group_price")+"~~~单价："+p.get("min_normal_price")+"~~~销量："+p.get("sold_quantity")+"~~~排名："+i);
                     break;
                 }
             }
@@ -577,6 +580,7 @@ public class InterfaceController {
                       @RequestParam(defaultValue = "0") String sort,@RequestParam String type){
         Map<String, Object> map = new HashMap<>();
         try {
+            map.put("success","002");
             int num = ddKeyService.getListSize(userId);
             if(num>10){
                 map.put("success","001");
@@ -599,12 +603,108 @@ public class InterfaceController {
                         ddKey.setType(type);
                         ddKey.setGoodsTime(new Date());
                         ddKeyService.save(ddKey);
-                        System.out.println("商品信息："+p.get("goods_name")+"~~~团购价："+p.get("min_group_price")+"~~~单价："+p.get("min_normal_price")+"~~~销量："+p.get("sold_quantity")+"~~~排名："+i);
+                        //System.out.println("商品信息："+p.get("goods_name")+"~~~团购价："+p.get("min_group_price")+"~~~单价："+p.get("min_normal_price")+"~~~销量："+p.get("sold_quantity")+"~~~排名："+i);
+                        map.put("success","000");
                         break;
                     }
                 }
             }
-            map.put("success","000");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    /**
+     * 添加分类
+     * @param userId
+     * @param parentId
+     * @param goodsId
+     * @param sort
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "addCat",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map addCat(@RequestParam int userId,@RequestParam String parentId,@RequestParam String goodsId,
+                      @RequestParam(defaultValue = "0") String sort,@RequestParam String type){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            map.put("success","002");
+            int num = ddKeyService.getListSize(userId);
+            System.out.println("parentID="+parentId);
+            if(num>10){
+                map.put("success","001");
+            }else{
+                List<Map> list = PDDUtils.getGoodsList("",sort,parentId);
+                System.out.println(list.size());
+                for (int i = 0; i < list.size(); i++) {
+                    Map p = list.get(i);
+                    //System.out.println(p.get("goods_id").toString());
+                    if(p.get("goods_id").toString().equals(goodsId)){
+                        DdKey ddKey = new DdKey();
+                        ddKey.setUserId(userId);
+                        ddKey.setGoodsKey(parentId);
+                        //ddKey.setGoodsId(p.get("goods_name").toString());
+                        ddKey.setGoodsId(p.get("goods_id").toString());
+                        ddKey.setGoodsName(p.get("goods_name").toString());
+                        ddKey.setGoodsSold(p.get("sold_quantity").toString());
+                        ddKey.setGoodsThumbnail(p.get("goods_thumbnail_url").toString());
+                        ddKey.setGroupPrice(p.get("min_group_price").toString());
+                        ddKey.setNormalPrice(p.get("min_normal_price").toString());
+                        ddKey.setGoodsTop(String.valueOf(i));
+                        ddKey.setType(type);
+                        ddKey.setGoodsTime(new Date());
+                        ddKeyService.save(ddKey);
+                        //System.out.println("商品信息："+p.get("goods_name")+"~~~团购价："+p.get("min_group_price")+"~~~单价："+p.get("min_normal_price")+"~~~销量："+p.get("sold_quantity")+"~~~排名："+i);
+                        map.put("success","000");
+                        break;
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    /**
+     * 添加店铺
+     * @param mallID
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "addMall",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map addMall(@RequestParam String mallID,@RequestParam String userId){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            map.put("success","002");
+            int num = ddMallService.getListSize(userId);
+            if(num>10){
+                map.put("success","001");
+            }else{
+                //System.out.println("mallID="+mallID);
+                List<Map> list = PDDUtils.getMallList(mallID);
+                //System.out.println("list="+list);
+                for (int i = 0; i < list.size(); i++) {
+                    Map p = list.get(i);
+                    //if(p.get("mallID").toString().equals(mallID)){
+                        DdMall ddMall = new DdMall();
+                        ddMall.setUserId(userId);
+                        ddMall.setMallId(mallID);
+                        ddMall.setMallName(p.get("mall_name").toString());
+                        ddMall.setMallLogo(p.get("img_url").toString());
+                        ddMall.setGoodsNum(JSONObject.parseArray(p.get("goods_detail_vo_list").toString()).size()+"");
+                        ddMall.setMallSold(p.get("sold_quantity").toString());
+                        ddMall.setCreatetime(new Date());
+                        ddMallService.save(ddMall);
+                        map.put("success","000");
+                        break;
+                    //}
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

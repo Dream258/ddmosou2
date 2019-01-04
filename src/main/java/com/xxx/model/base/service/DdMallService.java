@@ -29,7 +29,7 @@ public class DdMallService extends BaseService<DdMall> {
         }
     }
 
-    public int getListSize(int userId){
+    public int getListSize(String userId){
         return ddMallDAO.getListSize(userId);
     }
 

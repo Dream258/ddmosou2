@@ -135,7 +135,7 @@ $(function(){
                         //window.location.href = "/templates/index.html";
                         window.location.reload();
                     }else{
-                        alertError(param.msg)
+                        alertError("账号或密码错误");
                     }
                 },
                 error:function(){
@@ -462,7 +462,7 @@ $(function(){
     		$("#pwdfont").val("");
     		$.ajax({
 	            type:'POST',
-	            url:'sysRegister',
+	            url:'/api/sysRegister',
 	            data:{
 	            	user_telephone:user_telephone,
 	            	user_password:user_password,
@@ -473,7 +473,7 @@ $(function(){
 	            success:function(data){
 	            	if(data==0){
 	            		alert("注册成功");
-                        window.location.href = "homepage";
+                        window.location.href = "/api/";
 	            	}else if(data==1){
 	            		alert("该手机号已注册");
 	            	}else{
