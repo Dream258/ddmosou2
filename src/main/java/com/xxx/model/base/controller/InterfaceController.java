@@ -117,15 +117,13 @@ public class InterfaceController {
     /**
      * 退出登录
      */
-    @ResponseBody
     @RequestMapping(value = { "/exituser" })
-    public Integer exitSystem(HttpSession session) {
+    public String exitSystem(HttpSession session) {
         session.removeAttribute("user_login");
         session.removeAttribute("days");
-        return 1;
+        return "redirect:/api/";
     }
 
-    //@ResponseBody
     @RequestMapping(value = { "/subordinate" })
     public String subordinate(HttpSession session, Page<DdMember> page, @RequestParam(value="pn",required=false,defaultValue="1") int pn) {
         page.setCurrent(pn);
@@ -168,7 +166,6 @@ public class InterfaceController {
             session.setAttribute("sum", sum);
             session.setAttribute("subordinateTotal", page.getPages());
         }
-        //return 1;
         return "redirect:/api/share_list";
     }
 
@@ -177,7 +174,6 @@ public class InterfaceController {
      * 前台查询个人订单
      */
     @RequestMapping(value = { "/selectOrders" })
-    //@ResponseBody
     public String selectOrders(HttpSession session, Page<DdOrders> page, @RequestParam(value = "pn",defaultValue = "1") int pageNum) {
         page.setCurrent(pageNum);
         page.setSize(10);

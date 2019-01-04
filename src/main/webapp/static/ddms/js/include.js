@@ -18,7 +18,8 @@ function checklogin() {
 }
 //退出登录
 function exit() {
-    $.ajax({
+    window.location.href = "/api/exituser";
+    /*$.ajax({
         url:'api/exituser',
         type:'POST',
         success:function(param){
@@ -31,7 +32,7 @@ function exit() {
         error:function(){
             alertError('系统错误')
         }
-    });
+    });*/
 }
 
 //跳转购买记录页面
