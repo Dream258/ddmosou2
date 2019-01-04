@@ -150,7 +150,7 @@ public class InterfaceController {
             //查询下级
             page = ddMemberService.selectSubordinate(page,map);
             //如果有下级再执行
-            if(page.getSize()>0) {
+            if(page.getTotal()>0) {
                 //查询已邀请人充值的人数
                 spnc = ddMemberService.selectPeopleNumOrders(page.getRecords());
                 count = new ArrayList<Integer>();
@@ -226,7 +226,7 @@ public class InterfaceController {
             ddMemberService.addRegister(user_telephone, user_password,user_id);
             DdMember user2 = ddMemberService.sysrLogin(user_telephone, user_password);
             System.out.println("user2="+user2);
-            String usercode = "ddms"+user2.getId();
+            String usercode = "ddms" + UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
             ddMemberService.updateCode(user_telephone, user_password, usercode);
             DdMember user3 = ddMemberService.sysrLogin(user_telephone, user_password);
             System.out.println("user3="+user3);

@@ -30,7 +30,7 @@ public class DdMemberService extends BaseService<DdMember> {
             /**
              * 生成以ddms+开头的推广码
              */
-            String code = "ddms+" + UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
+            String code = "ddms" + UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
             ddMember.setUserCode(code);
             this.insert(ddMember);
         } else {

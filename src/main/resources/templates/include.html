@@ -5,11 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-<div class="spinners">
+<!--<div class="spinners">
     <div class="bounce1"></div>
     <div class="bounce2"></div>
     <div class="bounce3"></div>
-</div>
+</div>-->
     <header th:fragment="header">
         <!--公共头部-->
         <div class="dd_header_wrap row">
@@ -19,24 +19,26 @@
                     <a href="/api/"><div class="pull-left logo_box" title="多多魔搜 ">
                         <img th:src="@{/static/ddms/img/logo.png}" alt="">
                     </div></a>
-                    <ul class="nav_header clearfix">
-                        <li class="nav_item active" id="home"><a href="/api/">查排名</a></li>
-                        <li class="nav_item" id="ranking"><a href="javascript:checklogin();">排名监控</a></li>
-                        <li class="nav_item" id="remark_cj"><a href="">评价监控</a>
-                            <div class="flow flow1">
-                                <span class="only_tips">批量备注</span>
-                            </div></li>
-                        <li class="nav_item next" id="shop"><a href="javascript:;">店铺监控<span>（开发中）</span></a>
-                            <div class="flow hidden">
-                                <span class="only_tips">开发中</span>
-                            </div></li>
-                        <li class="nav_item next" id="sales"><a href="javascript:;">销量监控<span>（开发中）</span></a></li>
-                        <li class="nav_item next" id="group"><a href="javascript:;">热词分析<span>（开发中）</span></a></li>
-                        <li class="nav_item next" id="group1"><a href="javascript:;">黑科技<span>（开发中）</span></a></li>
-                        <!--li class="nav_item" id="shop"><a href="/monitor/shop">店铺监控</a></li>
-                            <li class="nav_item" id="sales"><a href="/monitor/sales">销量监控</a></li>
-                            <li class="nav_item" id="group"><a href="/monitor/group">热词分析</a></li>
-                            <li class="nav_item hidden"><a href="javascript:;">综合分析</a></li-->
+                    <ul class="nav_header clearfix navs">
+                        <!--<li class="items active" id="home"><a href="/api/">查排名</a></li>-->
+                        <!--<li class=" items" id="ranking"><a href="javascript:checklogin();">排名监控</a></li>-->
+                        <!--<li class=" items" id="remark_cj"><a href="">评价监控</a>-->
+                            <!--<div class="flow flow1">-->
+                                <!--<span class="only_tips">批量备注</span>-->
+                            <!--</div></li>-->
+                        <!--<li class=" items next" id="shop"><a href="javascript:;">店铺监控<span>（开发中）</span></a>-->
+                            <!--<div class="flow hidden">-->
+                                <!--<span class="only_tips">开发中</span>-->
+                            <!--</div></li>-->
+                        <!--<li class=" items next" id="sales"><a href="javascript:;">销量监控<span>（开发中）</span></a></li>-->
+                        <!--<li class=" items next" id="group"><a href="javascript:;">热词分析<span>（开发中）</span></a></li>-->
+                        <!--<li class="items  next" id="group1"><a href="javascript:;">黑科技<span>（开发中）</span></a></li>-->
+                        <li><a href='/api/'>查排名</a></li>
+                        <li><a href='javascript:checklogin();'>排名监控</a></li>
+                        <li><a href='#'>评价监控</a></li>
+                        <li><a href='#'>销量监控</a></li>
+                        <li><a href='#'>热词分析</a></li>
+
 
                     </ul>
                 </div>

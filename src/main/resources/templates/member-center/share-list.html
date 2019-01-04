@@ -201,7 +201,7 @@
     <div class="share_inner_wrap">
         <div class="share_url_box"><b>我的分享链接：</b></div>
         <div class="share_code_wrap clearfix">
-            <textarea class="text_copy_class" id="text_copy" >排名莫名其妙下降？如何避免系统个性化推荐影响查询宝贝的真实排名？监控宝贝排名趋势变化？推荐使用“多多魔搜”，快人一步洞悉市场行情！http://www.ddmosou.com/?user_code=<i th:text="${session.user_login.userCode }"></i></textarea>
+            <textarea class="text_copy_class" id="text_copy" >排名莫名其妙下降？如何避免系统个性化推荐影响查询宝贝的真实排名？监控宝贝排名趋势变化？推荐使用“多多魔搜”，快人一步洞悉市场行情！http://www.ddmosou.com/?user_code=<span th:text="${session.user_login.userCode }"></span></textarea>
             <button class="btn copy_btn" onclick="jsCopy()">复制邀请</button>
         </div>
         <div>友情提示：</div>
@@ -266,9 +266,12 @@
             <div class="pagination-box clearfix">
                 <div class="M-box">
                         <a th:each="info:${session.subordinateTotal }">
-                            <span class="active">
-                              <a th:href="@{'subordinate?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
-                            </span>
+                            <a th:if="${info>0}">
+                                <a th:href="@{'subordinate?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
+                            </a>
+                            <a th:if="${info==0}">
+                                <a href="#" class="buy_share_pages">1</a>
+                            </a>
                         </a>
                 </div>
             </div>
