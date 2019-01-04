@@ -381,15 +381,35 @@ public class InterfaceController {
     public Map keyWalk(@RequestParam int keyId){
         Map<String, Object> map = new HashMap<>();
         try {
-            StringBuffer str = new StringBuffer();
+            Map<String,Object> mp = new HashMap<>();
             Map<String,Object> m = ddKeyService.getKey(keyId);
-
-            /*List<Map> l = PDDUtils.getGoodsCats(parentId);
-            for (Map p:l) {
-                str.append("<option value='"+p.get("opt_id")+"'>"+p.get("opt_name")+"</option>");
-                //System.out.println("类别ID："+p.get("cat_id")+"~~~类别名称："+p.get("cat_name"));
-            }*/
-            map.put("cats",str);
+            mp.put("goodsName",m.get("goodsName"));
+            mp.put("oldKey",m.get("goodsKey"));
+            mp.put("oldTop",Integer.parseInt(m.get("goodsTop").toString()));
+            mp.put("oldTime",m.get("goodsTime"));
+            String type = m.get("type").toString();
+            if("1".equals(type)){
+                List<Map> list = PDDUtils.getGoodsList(m.get("goodsKey").toString(),"0","");
+                for (int i = 1; i < list.size(); i++) {
+                    Map p = list.get(i);
+                    if(m.get("goodsId").equals(p.get("goods_id").toString())){
+                        mp.put("time",DateUtils.format());
+                        mp.put("top",i);
+                        break;
+                    }
+                }
+            }else{
+                List<Map> list = PDDUtils.getGoodsList("","",m.get("goodsKey").toString());
+                for (int i = 1; i < list.size(); i++) {
+                    Map p = list.get(i);
+                    if(m.get("goodsId").equals(p.get("goods_id").toString())){
+                        mp.put("time",p.get("goods_time"));
+                        mp.put("top",i);
+                        break;
+                    }
+                }
+            }
+            map.put("walk",mp);
             map.put("success","000");
         } catch (Exception e) {
             e.printStackTrace();
