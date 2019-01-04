@@ -20,6 +20,12 @@
                 <input type="hidden" value="${(ddMall.id)!}" name="id" />
 
                         <div class="layui-form-item">
+                            <label class="layui-form-label">用户ID</label>
+                            <div class="layui-input-block">
+                                    <input type="text" name="userId" value="${(ddMall.userId)!}" placeholder="请输入用户ID" class="layui-input" maxlength="11">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
                             <label class="layui-form-label">店铺ID</label>
                             <div class="layui-input-block">
                                     <input type="text" name="mallId" value="${(ddMall.mallId)!}" placeholder="请输入店铺ID" class="layui-input" maxlength="11">

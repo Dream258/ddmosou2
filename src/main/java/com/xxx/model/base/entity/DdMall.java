@@ -19,8 +19,8 @@ public class DdMall extends Model<DdMall> {
 
     /**  店铺 */
     private Integer id;
-    /**  店铺 */
-    private Integer user_id;
+    /**  用户ID */
+    private String userId;
     /**  店铺ID */
     private String mallId;
     /**  店铺名称 */
@@ -48,12 +48,12 @@ public class DdMall extends Model<DdMall> {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public String getUserId(){
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId){
+        this.userId = userId;
     }
 
     public String getMallId(){

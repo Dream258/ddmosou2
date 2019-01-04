@@ -23,6 +23,9 @@ public interface DdKeyDAO extends BaseMapper<DdKey> {
     @Select("SELECT * FROM dd_key WHERE 1=1 AND user_id = #{userId} AND type = #{type}")
     List<Map<String,Object>> getList(@Param("userId") int userId, @Param("type") String type);
 
+    @Select("SELECT * FROM dd_key WHERE id = #{id}")
+    Map<String,Object> getKey(@Param("id") int keyId);
+
 }
 @Component
 interface AutoDdKeyDAO extends BaseDAO<DdKey>{
