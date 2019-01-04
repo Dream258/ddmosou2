@@ -390,9 +390,9 @@ public class InterfaceController {
             String type = m.get("type").toString();
             if("1".equals(type)){
                 List<Map> list = PDDUtils.getGoodsList(m.get("goodsKey").toString(),"0","");
-                for (int i = 1; i < list.size(); i++) {
+                for (int i = 0; i < list.size(); i++) {
                     Map p = list.get(i);
-                    if(m.get("goodsId").equals(p.get("goods_id").toString())){
+                    if(m.get("goodsId").toString().equals(p.get("goods_id").toString())){
                         mp.put("time",DateUtils.format());
                         mp.put("top",i);
                         break;
@@ -400,9 +400,9 @@ public class InterfaceController {
                 }
             }else{
                 List<Map> list = PDDUtils.getGoodsList("","",m.get("goodsKey").toString());
-                for (int i = 1; i < list.size(); i++) {
+                for (int i = 0; i < list.size(); i++) {
                     Map p = list.get(i);
-                    if(m.get("goodsId").equals(p.get("goods_id").toString())){
+                    if(m.get("goodsId").toString().equals(p.get("goods_id").toString())){
                         mp.put("time",p.get("goods_time"));
                         mp.put("top",i);
                         break;
@@ -482,9 +482,9 @@ public class InterfaceController {
         Map<String, Object> map = new HashMap<>();
         try {
             List<Map> list = PDDUtils.getGoodsList(keyword,sort,parentId);
-            for (int i = 1; i < list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 Map p = list.get(i);
-                if(goodsId.equals(String.valueOf(p.get("goods_id")))){
+                if(goodsId.equals(p.get("goods_id").toString())){
                     Map<String,Object> m = new HashMap<>();
                     m.put("name",p.get("goods_name"));
                     m.put("group",p.get("min_group_price"));
@@ -541,9 +541,9 @@ public class InterfaceController {
                 map.put("success","001");
             }else{
                 List<Map> list = PDDUtils.getGoodsList(keyword,sort,"");
-                for (int i = 1; i < list.size(); i++) {
+                for (int i = 0; i < list.size(); i++) {
                     Map p = list.get(i);
-                    if(p.get("goods_id").toString().equals(goodsId)){
+                    if(goodsId.equals(p.get("goods_id").toString())){
                         DdKey ddKey = new DdKey();
                         ddKey.setGoodsKey(keyword);
                         ddKey.setGoodsId(p.get("goods_name").toString());
