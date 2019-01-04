@@ -6,6 +6,7 @@
     <!-- 返回值映射map -->
     <resultMap id="ddMallMapper" type="com.xxx.model.base.entity.DdMall">
         <result property="id" column="id" />
+        <result property="userId" column="user_id" />
         <result property="mallId" column="mall_id" />
         <result property="mallName" column="mall_name" />
         <result property="mallLogo" column="mall_logo" />
@@ -44,6 +45,7 @@
     <!-- 新增新增 -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.xxx.model.base.entity.DdMall">
         INSERT INTO dd_mall(
+            user_id,
             mall_id,
             mall_name,
             mall_logo,
@@ -51,6 +53,7 @@
             mall_sold,
             createtime
         ) values (
+            #{userId},
             #{mallId},
             #{mallName},
             #{mallLogo},
@@ -71,6 +74,7 @@
     <update id="updateParams" parameterType="com.xxx.model.base.entity.DdMall">
         UPDATE dd_mall record
         <set>
+            record.user_id = #{userId},
             record.mall_id = #{mallId},
             record.mall_name = #{mallName},
             record.mall_logo = #{mallLogo},
@@ -116,6 +120,7 @@
         <![CDATA[
 			SELECT
 				id,
+				user_id,
 				mall_id,
 				mall_name,
 				mall_logo,
@@ -131,6 +136,9 @@
         <if test="entity!=null">
             <if test = "entity.id != null">
                 <![CDATA[ AND record.id = #{entity.id} ]]>
+            </if>
+            <if test = "entity.userId != null and entity.userId != ''">
+                <![CDATA[ AND record.user_id = #{entity.userId} ]]>
             </if>
             <if test = "entity.mallId != null and entity.mallId != ''">
                 <![CDATA[ AND record.mall_id = #{entity.mallId} ]]>
@@ -156,6 +164,9 @@
     <!-- 公共修改sql-->
     <sql id="update_fragement">
         <set>
+            <if test = "userId != null and userId != ''">
+                record.user_id = #{userId},
+            </if>
             <if test = "mallId != null and mallId != ''">
                 record.mall_id = #{mallId},
             </if>

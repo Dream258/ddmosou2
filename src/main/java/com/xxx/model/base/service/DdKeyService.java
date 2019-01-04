@@ -37,4 +37,8 @@ public class DdKeyService extends BaseService<DdKey> {
         return ddKeyDAO.getList(userId,type);
     }
 
+    public Map<String,Object> getKey(int keyId){
+        return ddKeyDAO.getKey(keyId);
+    }
+
 }

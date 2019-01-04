@@ -48,6 +48,7 @@
                     <tr>
                             <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
                         <th>序号</th>
+                                <th>用户ID</th>
                                 <th>店铺ID</th>
                                 <th>店铺名称</th>
                                 <th>店铺LOGO</th>
@@ -64,7 +65,8 @@
                     <tr>
                             <td><input type="checkbox" name="" lay-skin="primary"></td>
                         <td>${(entity_index+1)!}</td>
-                                <td><a href="javascript:layui.showInfo('${(entity.id)!}')">${(entity.mallId)!}</a></td>
+                                <td><a href="javascript:layui.showInfo('${(entity.id)!}')">${(entity.userId)!}</a></td>
+                                <td>${(entity.mallId)!}</td>
                                 <td>${(entity.mallName)!}</td>
                                 <td>${(entity.mallLogo)!}</td>
                                 <td>${(entity.goodsNum)!}</td>

@@ -372,6 +372,32 @@ public class InterfaceController {
     }
 
     /**
+     * 关键词走势
+     * @param keyId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "keyWalk",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map keyWalk(@RequestParam int keyId){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            StringBuffer str = new StringBuffer();
+            Map<String,Object> m = ddKeyService.getKey(keyId);
+
+            /*List<Map> l = PDDUtils.getGoodsCats(parentId);
+            for (Map p:l) {
+                str.append("<option value='"+p.get("opt_id")+"'>"+p.get("opt_name")+"</option>");
+                //System.out.println("类别ID："+p.get("cat_id")+"~~~类别名称："+p.get("cat_name"));
+            }*/
+            map.put("cats",str);
+            map.put("success","000");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    /**
      * 获取类目
      * @param parentId
      * @return
