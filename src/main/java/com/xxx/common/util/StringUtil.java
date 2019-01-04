@@ -3,6 +3,11 @@ package com.xxx.common.util;
 import java.util.Map;
 
 /**
+ *
+ *
+ *
+ * 、
+ *
  * String工具类
  */
 public class StringUtil {
