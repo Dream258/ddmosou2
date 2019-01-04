@@ -383,15 +383,35 @@ public class InterfaceController {
     public Map keyWalk(@RequestParam int keyId){
         Map<String, Object> map = new HashMap<>();
         try {
-            StringBuffer str = new StringBuffer();
+            Map<String,Object> mp = new HashMap<>();
             Map<String,Object> m = ddKeyService.getKey(keyId);
-
-            /*List<Map> l = PDDUtils.getGoodsCats(parentId);
-            for (Map p:l) {
-                str.append("<option value='"+p.get("opt_id")+"'>"+p.get("opt_name")+"</option>");
-                //System.out.println("类别ID："+p.get("cat_id")+"~~~类别名称："+p.get("cat_name"));
-            }*/
-            map.put("cats",str);
+            mp.put("goodsName",m.get("goodsName"));
+            mp.put("oldKey",m.get("goodsKey"));
+            mp.put("oldTop",Integer.parseInt(m.get("goodsTop").toString()));
+            mp.put("oldTime",m.get("goodsTime"));
+            String type = m.get("type").toString();
+            if("1".equals(type)){
+                List<Map> list = PDDUtils.getGoodsList(m.get("goodsKey").toString(),"0","");
+                for (int i = 0; i < list.size(); i++) {
+                    Map p = list.get(i);
+                    if(m.get("goodsId").toString().equals(p.get("goods_id").toString())){
+                        mp.put("time",DateUtils.format());
+                        mp.put("top",i+1);
+                        break;
+                    }
+                }
+            }else{
+                List<Map> list = PDDUtils.getGoodsList("","",m.get("goodsKey").toString());
+                for (int i = 0; i < list.size(); i++) {
+                    Map p = list.get(i);
+                    if(m.get("goodsId").toString().equals(p.get("goods_id").toString())){
+                        mp.put("time",p.get("goods_time"));
+                        mp.put("top",i+1);
+                        break;
+                    }
+                }
+            }
+            map.put("walk",mp);
             map.put("success","000");
         } catch (Exception e) {
             e.printStackTrace();
@@ -466,14 +486,14 @@ public class InterfaceController {
             List<Map> list = PDDUtils.getGoodsList(keyword,sort,parentId);
             for (int i = 0; i < list.size(); i++) {
                 Map p = list.get(i);
-                if(goodsId.equals(String.valueOf(p.get("goods_id")))){
+                if(goodsId.equals(p.get("goods_id").toString())){
                     Map<String,Object> m = new HashMap<>();
                     m.put("name",p.get("goods_name"));
                     m.put("group",p.get("min_group_price"));
                     m.put("normal",p.get("min_normal_price"));
                     m.put("sold",p.get("sold_quantity"));
                     m.put("img",p.get("goods_thumbnail_url"));
-                    m.put("top",i);
+                    m.put("top",i+1);
                     map.put("goods",m);
                     //System.out.println("商品信息："+p.get("goods_name")+"~~~团购价："+p.get("min_group_price")+"~~~单价："+p.get("min_normal_price")+"~~~销量："+p.get("sold_quantity")+"~~~排名："+i);
                     break;
@@ -565,8 +585,7 @@ public class InterfaceController {
                 List<Map> list = PDDUtils.getGoodsList(keyword,sort,"");
                 for (int i = 0; i < list.size(); i++) {
                     Map p = list.get(i);
-                    //System.out.println(p.get("goods_id").toString());
-                    if(p.get("goods_id").toString().equals(goodsId)){
+                    if(goodsId.equals(p.get("goods_id").toString())){
                         DdKey ddKey = new DdKey();
                         ddKey.setUserId(userId);
                         ddKey.setGoodsKey(keyword);
@@ -577,7 +596,7 @@ public class InterfaceController {
                         ddKey.setGoodsThumbnail(p.get("goods_thumbnail_url").toString());
                         ddKey.setGroupPrice(p.get("min_group_price").toString());
                         ddKey.setNormalPrice(p.get("min_normal_price").toString());
-                        ddKey.setGoodsTop(String.valueOf(i));
+                        ddKey.setGoodsTop(String.valueOf(i+1));
                         ddKey.setType(type);
                         ddKey.setGoodsTime(new Date());
                         ddKeyService.save(ddKey);
@@ -688,6 +707,5 @@ public class InterfaceController {
         }
         return map;
     }
-
 
 }

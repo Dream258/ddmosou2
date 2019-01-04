@@ -497,3 +497,8 @@ td .glyphicon-arrow-down {
 .modal-content .tab a{ padding-right:2%; color:#666}
 .modal-content .tabs #main2,#main3,#main5,#main6,#main8,#main9{display:none}
 .modal-content .tabs #main1{ display:block}
+
+td dl{ width:70%; overflow:hidden;margin: 1% auto}
+td dl dt{ margin-right: 5%; width:15%; float:left}
+td dl dt img{ width:100%;}
+td dl dd{ float:left; width:60%; text-align:left}

@@ -77,7 +77,6 @@ public class PDDUtils {
                 JSONObject jsonObject = JSONObject.parseObject(result);
                 jsonObject = JSONObject.parseObject(jsonObject.get("goods_search_response").toString());
                 result = jsonObject.get("goods_list").toString();
-                //System.out.println(result);
                 List<Map> list = JSON.parseArray(result,Map.class);
                 for(Map l:list){
                     lists.add(l);
