@@ -408,7 +408,7 @@ public class InterfaceController {
                 for (int i = 0; i < list.size(); i++) {
                     Map p = list.get(i);
                     if(m.get("goodsId").toString().equals(p.get("goods_id").toString())){
-                        mp.put("time",p.get("goods_time"));
+                        mp.put("time",DateUtils.format());
                         mp.put("top",i+1);
                         break;
                     }
@@ -419,6 +419,7 @@ public class InterfaceController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("map:"+map);
         return map;
     }
 
@@ -652,7 +653,7 @@ public class InterfaceController {
                         ddKey.setGoodsThumbnail(p.get("goods_thumbnail_url").toString());
                         ddKey.setGroupPrice(p.get("min_group_price").toString());
                         ddKey.setNormalPrice(p.get("min_normal_price").toString());
-                        ddKey.setGoodsTop(String.valueOf(i));
+                        ddKey.setGoodsTop(String.valueOf(i+1));
                         ddKey.setType(type);
                         ddKey.setGoodsTime(new Date());
                         ddKeyService.save(ddKey);
@@ -709,6 +710,18 @@ public class InterfaceController {
             e.printStackTrace();
         }
         return map;
+    }
+
+    @RequestMapping("deleteGood")
+    public String deleteGood(@RequestParam int id){
+        ddKeyService.deleteKey(id);
+        return "redirect:/api/ranking";
+    }
+
+    @RequestMapping("deleteMall")
+    public String deleteMall(@RequestParam int id){
+        ddMallService.deleteMall(id);
+        return "redirect:/api/ranking";
     }
 
 }
