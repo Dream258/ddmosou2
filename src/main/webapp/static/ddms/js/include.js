@@ -1,7 +1,6 @@
 //检查登录
 function checklogin() {
-    window.location.href="/api/ranking";
-    /*$.ajax({
+    $.ajax({
         type:'POST',
         url:'/api/checkLogin',
         dataType:'json',
@@ -15,7 +14,7 @@ function checklogin() {
         error:function(){
             alertError('系统错误');
         }
-    });*/
+    });
 }
 //退出登录
 function exit() {

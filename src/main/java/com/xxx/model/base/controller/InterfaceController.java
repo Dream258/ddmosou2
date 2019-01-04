@@ -39,6 +39,8 @@ public class InterfaceController {
     private DdrankingmonitorService ddrankingmonitorService;
     @Resource
     private DdKeyService ddKeyService;
+    @Resource
+    private DdMallService ddMallService;
 
     //首页
     @RequestMapping("/")
@@ -524,6 +526,44 @@ public class InterfaceController {
     }
 
     /**
+     * 根据VIP获取类目
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "getCatsVip",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map getCatsVip(@RequestParam int userId,@RequestParam String type){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<Map<String,Object>> list = ddKeyService.getList(userId,type);
+            map.put("goods",list);
+            map.put("success","000");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    /**
+     * 根据VIP获取店铺
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "getMallVip",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map getMallVip(@RequestParam int userId){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<Map<String,Object>> list = ddMallService.getList(userId);
+            map.put("malls",list);
+            map.put("success","000");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    /**
      * 添加关键词
      * @param userId
      * @param keyword
@@ -533,7 +573,8 @@ public class InterfaceController {
      */
     @ResponseBody
     @RequestMapping(value = "addKey",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map addKey(@RequestParam int userId,@RequestParam String keyword,@RequestParam String goodsId,@RequestParam String sort,@RequestParam String type){
+    public Map addKey(@RequestParam int userId,@RequestParam String keyword,@RequestParam String goodsId,
+                      @RequestParam(defaultValue = "0") String sort,@RequestParam String type){
         Map<String, Object> map = new HashMap<>();
         try {
             int num = ddKeyService.getListSize(userId);
@@ -545,8 +586,10 @@ public class InterfaceController {
                     Map p = list.get(i);
                     if(goodsId.equals(p.get("goods_id").toString())){
                         DdKey ddKey = new DdKey();
+                        ddKey.setUserId(userId);
                         ddKey.setGoodsKey(keyword);
-                        ddKey.setGoodsId(p.get("goods_name").toString());
+                        //ddKey.setGoodsId(p.get("goods_name").toString());
+                        ddKey.setGoodsId(p.get("goods_id").toString());
                         ddKey.setGoodsName(p.get("goods_name").toString());
                         ddKey.setGoodsSold(p.get("sold_quantity").toString());
                         ddKey.setGoodsThumbnail(p.get("goods_thumbnail_url").toString());

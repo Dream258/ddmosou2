@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 店铺业务逻辑类
@@ -25,5 +27,13 @@ public class DdMallService extends BaseService<DdMall> {
         }else{
             this.updateParams(ddMall);
         }
+    }
+
+    public int getListSize(int userId){
+        return ddMallDAO.getListSize(userId);
+    }
+
+    public List<Map<String,Object>> getList(int userId){
+        return ddMallDAO.getList(userId);
     }
 }
