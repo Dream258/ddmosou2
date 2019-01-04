@@ -349,14 +349,16 @@
                 $.each(res.goods, function (index, data) {
                     $("#ranking_1").append("<tr><td style='max-width:150px'><dl><dt><img src='"+data.goodsThumbnail+"'></dt><dd>"+data.goodsName+"</dd></dl></td><td>"
                         +data.goodsKey+"</td><td>"+data.goodsSold+"</td><td>"+data.goodsTop+"</td><td>" +
-                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
+                        "<a href='#' data-toggle='modal' data-target='#myModal1' onclick='key_walk("+data.id+");'>走势</a>" +
+                        "<a href='javascript:deleteGoods()'>删除</a></td></tr>");
                 });
             });
             $.get('/api/getCatsVip?userId='+a+'&type=2', function(res) {
                 $.each(res.goods, function (index, data) {
                     $("#ranking_2").append("<tr><td style='max-width:150px'><dl><dt><img src='"+data.goodsThumbnail+"'></dt><dd>"+data.goodsName+"</dd></dl></td><td>"
                         +data.goodsKey+"</td><td>"+data.goodsSold+"</td><td>"+data.goodsTop+"</td><td>" +
-                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
+                        "<a href='#' data-toggle='modal' data-target='#myModal1' onclick='key_walk(\"+data.id+\");'>走势</a>" +
+                        "<a href='javascript:deleteGoods()'>删除</a></td></tr>");
                 });
             });
             $.get('/api/getMallVip?userId='+a, function(res) {
@@ -364,7 +366,7 @@
                     $("#ranking_3").append("<tr><td>"+data.mallId+"</td><td>"
                         +data.mallName+"</td><td style='width:15%'><img src='"+data.mallLogo+"' style='width:50%; margin:3% auto'></td><td>"+data.goodsNum+
                         "</td><td>" + data.mallSold +"</td><td>"+data.createtime+"</td><td>"+
-                        "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
+                        "<a href='javascript:deleteGoods()'>删除</a></td></tr>");
                 });
             });
 
@@ -552,8 +554,6 @@
             });
         }
         $(function(){
-
-            /*$.each(json, function (index, data) {});*/
             $.get('/api/getCats?parentId=0', function(res) {
                 $("#category1").append(res.cats);
                 var id = $("#category1 option:selected").val();
@@ -566,7 +566,8 @@
                 });
             });
 
-        })
+        });
+
     </script>
     </body>
 </html>
