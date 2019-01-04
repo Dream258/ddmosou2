@@ -135,7 +135,7 @@ $(function(){
                         //window.location.href = "/templates/index.html";
                         window.location.reload();
                     }else{
-                        alertError(param.msg)
+                        alertError("账号或密码错误");
                     }
                 },
                 error:function(){

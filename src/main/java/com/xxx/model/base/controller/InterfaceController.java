@@ -125,9 +125,9 @@ public class InterfaceController {
         return 1;
     }
 
-    @ResponseBody
+    //@ResponseBody
     @RequestMapping(value = { "/subordinate" })
-    public int subordinate(HttpSession session, Page<DdMember> page, @RequestParam(value="pn",required=false,defaultValue="1") int pn) {
+    public String subordinate(HttpSession session, Page<DdMember> page, @RequestParam(value="pn",required=false,defaultValue="1") int pn) {
         page.setCurrent(pn);
         page.setSize(10);
         DdMember user = (DdMember)session.getAttribute("user_login");//获取登录用户信息
@@ -166,10 +166,10 @@ public class InterfaceController {
             session.setAttribute("spnc", spnc);
             session.setAttribute("spn", spn);
             session.setAttribute("sum", sum);
-            session.setAttribute("subordinateTotal", page.getTotal());
-            System.out.println("total="+page.getTotal());
+            session.setAttribute("subordinateTotal", page.getPages());
         }
-        return 1;
+        //return 1;
+        return "redirect:/api/share_list";
     }
 
 
@@ -177,8 +177,8 @@ public class InterfaceController {
      * 前台查询个人订单
      */
     @RequestMapping(value = { "/selectOrders" })
-    @ResponseBody
-    public int selectOrders(HttpSession session, Page<DdOrders> page, @RequestParam(value = "pn",defaultValue = "1") int pageNum) {
+    //@ResponseBody
+    public String selectOrders(HttpSession session, Page<DdOrders> page, @RequestParam(value = "pn",defaultValue = "1") int pageNum) {
         page.setCurrent(pageNum);
         page.setSize(10);
         DdMember user = (DdMember) session.getAttribute("user_login");
@@ -189,8 +189,8 @@ public class InterfaceController {
         session.setAttribute("orderno", pageNum);
         session.setAttribute("listOrders", page.getRecords());
         session.setAttribute("orderpage", page);
-        session.setAttribute("totalPage",page.getTotal());
-        return 1;
+        session.setAttribute("totalPage",page.getPages());
+        return "redirect:/api/buylist";
     }
 
     //修改密码

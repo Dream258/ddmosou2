@@ -36,7 +36,8 @@ function exit() {
 
 //跳转购买记录页面
 function buy() {
-    $.ajax({
+    window.location.href = "/api/selectOrders";
+    /*$.ajax({
         url:'selectOrders',
         type:'POST',
         success:function(param){
@@ -49,12 +50,13 @@ function buy() {
         error:function(){
             alertError('系统错误')
         }
-    });
+    });*/
 }
 
 //跳转邀请返利页面
 function share() {
-    $.ajax({
+    window.location.href = "/api/subordinate";
+    /*$.ajax({
         url:'subordinate',
         data:"pn=1",
         type:'POST',
@@ -68,5 +70,5 @@ function share() {
         error:function(){
             alertError('系统错误')
         }
-    });
+    });*/
 }

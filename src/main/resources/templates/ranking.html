@@ -83,12 +83,10 @@
                 </div>
                 <table id="ranking_2">
                     <tr>
+                        <th>商品名称</th>
                         <th>关键词</th>
-                        <th>最后更新时间</th>
-                        <th>单价</th>
-                        <th>团购价</th>
-                        <th>销量</th>
-                        <th>排名</th>
+                        <th>商品销量</th>
+                        <th>商品排名</th>
                         <th>操作</th>
                     </tr>
                     <!--<tr>-->
@@ -356,16 +354,15 @@
             });
             $.get('/api/getCatsVip?userId='+a+'&type=2', function(res) {
                 $.each(res.goods, function (index, data) {
-                    $("#ranking_2").append("<tr><td>"+data.goodsKey+"</td><td>"
-                        +data.goodsTime+"</td><td>"+data.normalPrice+"</td><td>"+data.groupPrice+
-                        "</td><td>" + data.goodsSold +"</td><td>"+data.goodsTop+"</td><td>"+
+                    $("#ranking_2").append("<tr><td style='max-width:150px'><dl><dt><img src='"+data.goodsThumbnail+"'></dt><dd>"+data.goodsName+"</dd></dl></td><td>"
+                        +data.goodsKey+"</td><td>"+data.goodsSold+"</td><td>"+data.goodsTop+"</td><td>" +
                         "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
                 });
             });
             $.get('/api/getMallVip?userId='+a, function(res) {
                 $.each(res.malls, function (index, data) {
                     $("#ranking_3").append("<tr><td>"+data.mallId+"</td><td>"
-                        +data.mallName+"</td><td><img src='"+data.mallLogo+"'></td><td>"+data.goodsNum+
+                        +data.mallName+"</td><td style='width:15%'><img src='"+data.mallLogo+"' style='width:50%; margin:3% auto'></td><td>"+data.goodsNum+
                         "</td><td>" + data.mallSold +"</td><td>"+data.createtime+"</td><td>"+
                         "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
                 });
