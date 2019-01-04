@@ -6,6 +6,58 @@
 pre, textarea {
 	overflow: auto
 }
+body{ position:relative}
+.spinners{ position:absolute; top:5%; left:45%;z-index:9999}
+.spinners {
+	margin: 0 auto;
+	width: 150px;
+	text-align: center;
+}
+.spinners>div {
+	width: 25px;
+	height: 25px;
+	background-color: #ababab;
+	border-radius: 100%;
+	display: inline-block;
+	-webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+	animation: bouncedelay 1.4s infinite ease-in-out;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+.spinners .bounce1 {
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+}
+
+.spinners .bounce2 {
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+	0%,
+	80%,
+	100% {
+		-webkit-transform: scale(0.0)
+	}
+	40% {
+		-webkit-transform: scale(1.0)
+	}
+}
+
+@keyframes bouncedelay {
+	0%,
+	80%,
+	100% {
+		transform: scale(0.0);
+		-webkit-transform: scale(0.0);
+	}
+	40% {
+		transform: scale(1.0);
+		-webkit-transform: scale(1.0);
+	}
+}
 
 .text_copy_class{
 	-moz-border-radius:1px;/* Firefox */  
