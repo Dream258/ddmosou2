@@ -34,7 +34,7 @@
                 <ul class="dd_nav clearfix">
                     <li class="nav_li active nav_li2" data-key="2"><a href="javascript:;">关键词排名监控</a></li>
                     <li class="nav_li nav_li1" data-key="1"><a href="javascript:;">类目排名监控</a></li>
-                    <li class="nav_li nav_li3" data-key="3"><a href="javascript:;">活动排名监控</a></li>
+                    <li class="nav_li nav_li3" data-key="3"><a href="javascript:;">店铺监控</a></li>
                 </ul>
             </div>
             <div class="col-md-2 dd_add_box">
@@ -199,7 +199,7 @@
                                     <input type="radio" name="inlineRadioOptions" id="ranking1" value="1"> 类目排名
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="ranking3" value="3"> 活动排名
+                                    <input type="radio" name="inlineRadioOptions" id="ranking3" value="3"> 店铺监控
                                 </label>
                             </div>
                         </div>
@@ -210,18 +210,15 @@
                                 </lable>
                                 <div class="item_option">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select name="category1" data-key="1" class="form-control category" id="category1">
-                                            <option value="0">一级类目</option>
+                                        <select name="category1" data-key="1" class="form-control category" id="category1" onchange="cats1();">
                                         </select>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select name="category2" data-key="2" class="form-control category" id="category2">
-                                            <option value="0">二级类目</option>
+                                        <select name="category2" data-key="2" class="form-control category" id="category2" onchange="cats2();">
                                         </select>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <select name="category3" data-key="3" class="form-control category keyword" id="category3">
-                                            <option value="0">三级类目</option>
+                                        <select name="category3" data-key="3" class="form-control category" id="category3">
                                         </select>
                                     </div>
                                 </div>
@@ -235,6 +232,10 @@
                                     <input type="text" class="form-control keyword_sku" id="category_sku" autocomplete="off" placeholder="输入商品链接或ID">
                                     <ul class="user-ul"></ul>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary add_keywords_sure" onclick="addCat()">确定</button>
+                                <button type="button" class="btn btn-default add_keywords_close" data-dismiss="modal">取消</button>
                             </div>
                         </div><!--/form1-->
                         <div class="form2">
@@ -282,25 +283,30 @@
                                     <button class="btn choose_btn">筛选 <i class="iconfont icon-jiantouxiangshang"></i></button>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary add_keywords_sure" onclick="addGood()">确定</button>
+                                <button type="button" class="btn btn-default add_keywords_close" data-dismiss="modal">取消</button>
+                            </div>
                         </div> <!--/form2-->
                         <div class="form3">
                             <div class="row item_wrap">
                                 <lable class="item_name">
-                                    商品链接或ID：
+                                    店铺ID：
                                 </lable>
                                 <div class="item_option user-ul-box">
                                     <i class="glyphicon glyphicon-remove close_i"></i>
-                                    <input type="text" class="form-control keyword_sku" autocomplete="off" placeholder="输入商品链接或ID" id="actSku">
+                                    <input type="text" class="form-control keyword_sku" autocomplete="off" placeholder="输入店铺ID" id="actSku">
                                     <ul class="user-ul"></ul>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary add_keywords_sure" onclick="addMall()">确定</button>
+                                <button type="button" class="btn btn-default add_keywords_close" data-dismiss="modal">取消</button>
                             </div>
                         </div><!--/form3-->
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary add_keywords_sure" onclick="addGood()">确定</button>
-                    <button type="button" class="btn btn-default add_keywords_close" data-dismiss="modal">取消</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -359,7 +365,7 @@
             $.get('/api/getMallVip?userId='+a, function(res) {
                 $.each(res.malls, function (index, data) {
                     $("#ranking_3").append("<tr><td>"+data.mallId+"</td><td>"
-                        +data.mallName+"</td><td>"+data.mallLogo+"</td><td>"+data.goodsNum+
+                        +data.mallName+"</td><td><img src='"+data.mallLogo+"'></td><td>"+data.goodsNum+
                         "</td><td>" + data.mallSold +"</td><td>"+data.createtime+"</td><td>"+
                         "<a href='#' data-toggle='modal' data-target='#myModal1'>走势</a></td></tr>");
                 });
@@ -444,15 +450,15 @@
         })
 
         function addGood() {
-            //var keyword = $("#keyword_form").val();
+            var keyword = $("#keyword_form").val();
             var goodsId = $("#keyword_sku").val();
             var userId = $("#userId").val();
             $.ajax({
                 url: "/api/addKey",
                 data: {
                     "userId" : userId,
-                    "keyword" : "关键词",
-                    "goodsId" : "5386807971",
+                    "keyword" : keyword,
+                    "goodsId" : goodsId,
                     "sort" : "0",
                     "type" : "1"
                 },
@@ -460,8 +466,10 @@
                 dataType : "json",
                 success:function(data){
                     if(data["success"]=="000") {
-                        alertSuccess("添加成功");
+                        alert("添加成功");
                         window.location.href="/api/ranking";
+                    }else if(data["success"]=="002"){
+                        alert("您要监控的商品在一千名之外，或该商品名称里未包含关键字！");
                     }else{
                         alertError("监控数已满10个");
                     }
@@ -471,6 +479,98 @@
                 }
             });
         }
+        function addCat() {
+            var goodsId = $("#category_sku").val();
+            var parentId = $("#category3 option:selected").val();
+            var userId = $("#userId").val();
+            $.ajax({
+                url: "/api/addCat",
+                data: {
+                    "userId" : userId,
+                    "goodsId" : goodsId,
+                    "parentId" : parentId,
+                    "type" : "2"
+                },
+                type: "GET",
+                dataType : "json",
+                success:function(data){
+                    if(data["success"]=="000") {
+                        alert("添加成功");
+                        window.location.href="/api/ranking";
+                    }else if(data["success"]=="002"){
+                        alert("您要监控的商品在一千名之外，或该商品名称里未包含关键字！");
+                    }else{
+                        alertError("监控数已满10个");
+                    }
+                },
+                error:function(){
+                    alertError('系统错误');
+                }
+            });
+        }
+        function addMall() {
+            var userId = $("#userId").val();
+            var mallID = $("#actSku").val();
+            alert(mallID+"+"+userId)
+            $.ajax({
+                url: "/api/addMall",
+                data: {
+                    "userId" : userId,
+                    "mallID" : mallID
+                 },
+                type: "GET",
+                dataType : "json",
+                success:function(data){
+                    if(data["success"]=="000") {
+                        alert("添加成功");
+                        window.location.href="/api/ranking";
+                    }else if(data["success"]=="002"){
+                        alert("未找到该店铺信息！");
+                    }else{
+                        alertError("监控数已满10个");
+                    }
+                },
+                error:function(){
+                    alertError('系统错误');
+                }
+            });
+        }
+        function cats1() {
+            var id = $("#category1 option:selected").val();
+            $.get('/api/getCats?parentId='+id, function(res) {
+                $("#category2").empty();
+                $("#category2").append(res.cats);
+                var id = $("#category2 option:selected").val();
+                $.get('/api/getCats?parentId='+id, function(res) {
+                    $("#category3").empty();
+                    $("#category3").append(res.cats);
+                });
+            });
+        }
+
+        function cats2() {
+            var id = $("#category2 option:selected").val();
+            $.get('/api/getCats?parentId='+id, function(res) {
+                $("#category3").empty();
+                $("#category3").append(res.cats);
+            });
+        }
+        $(function(){
+
+            /*$.each(json, function (index, data) {});*/
+            $.get('/api/getCats?parentId=0', function(res) {
+                $("#category1").append(res.cats);
+                var id = $("#category1 option:selected").val();
+                $.get('/api/getCats?parentId='+id, function(res) {
+                    $("#category2").append(res.cats);
+                    var id = $("#category2 option:selected").val();
+                    $.get('/api/getCats?parentId='+id, function(res) {
+                        $("#category3").append(res.cats);
+                    });
+                });
+            });
+
+        })
     </script>
     </body>
 </html>
