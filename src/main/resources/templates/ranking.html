@@ -26,6 +26,11 @@
         <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 	</head>
 	<body>
+    <div class="spinners">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
     <header th:include="include :: header"></header>
     <input type="hidden" th:value="${session.user_login.id}" id="userId">
     <div class="dd_content_wrap dd_container dd_other">
@@ -319,20 +324,9 @@
     <script>
 
         $(function(){
-            /*$.get('/api/getCats?parentId=0', function(res) {
-                $("#category1").append(res.cats);
-                var id = $("#category1 option:selected").val();
-                $.get('/api/getCats?parentId='+id, function(res) {
-                    $("#category2").append(res.cats);
-                    var id = $("#category2 option:selected").val();
-                    $.get('/api/getCats?parentId='+id, function(res) {
-                        $("#category3").append(res.cats);
-                    });
-                });
-            });*/
-            //var a = 1;//
             var a = $("#userId").val();
-            $.get('/api/getKeyVip?userId='+a+'&type=1', function(res) {
+            $.get('/api/getKeyVip?userId='+a+'&type=1',
+                function(res) {
                 $.each(res.goods, function (index, data) {
                     $("#ranking_1").append("<tr><td style='max-width:150px'><dl><dt><img src='"+data.goodsThumbnail+"'></dt><dd>"+data.goodsName+"</dd></dl></td><td>"
                         +data.goodsKey+"</td><td>"+data.goodsSold+"</td><td>"+data.goodsTop+"</td><td>" +
