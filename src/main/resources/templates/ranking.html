@@ -26,6 +26,11 @@
         <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 	</head>
 	<body>
+    <div class="spinners">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
     <header th:include="include :: header"></header>
     <input type="hidden" th:value="${session.user_login.id}" id="userId">
     <div class="dd_content_wrap dd_container dd_other">
