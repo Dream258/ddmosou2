@@ -3,6 +3,7 @@ package com.xxx.model.base.dao;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.xxx.common.framework.base.BaseDAO;
 import com.xxx.model.base.entity.DdMall;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -21,6 +22,9 @@ public interface DdMallDAO extends BaseMapper<DdMall> {
 
     @Select("SELECT * FROM dd_mall WHERE 1=1 AND user_id = #{userId}")
     List<Map<String,Object>> getList(@Param("userId") int userId);
+
+    @Delete("delete from dd_mall where id = #{id}")
+    Integer deleteMall(@Param("id") int keyId);
 }
 @Component
 interface AutoDdMallDAO extends BaseDAO<DdMall>{

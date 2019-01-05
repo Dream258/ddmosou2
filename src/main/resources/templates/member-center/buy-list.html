@@ -31,11 +31,11 @@
     </style>
 </head>
 <body>
-<div class="spinners">
+<!--<div class="spinners">
     <div class="bounce1"></div>
     <div class="bounce2"></div>
     <div class="bounce3"></div>
-</div>
+</div>-->
 <header th:include="include :: header"></header>
 
 <!-- Modal -->
@@ -236,7 +236,12 @@
                     <!--<div class="M-box" th:if="${session.page.totalPage>0 }">-->
                         <!--<a th:each="info:${session.totalPage }">-->
                             <span class="active" th:each="info:${session.totalPage }">
-                              <a th:href="@{'selectOrders?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
+                                <a th:if="${info>0}">
+                                    <a th:href="@{'selectOrders?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
+                                </a>
+                                <a th:if="${info==0}">
+                                    <a href="#" class="buy_share_pages">1</a>
+                                </a>
                             </span>
                         <!--</a>-->
                     <!--</div>-->

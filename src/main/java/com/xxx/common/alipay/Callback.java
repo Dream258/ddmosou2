@@ -148,6 +148,7 @@ public class Callback {
 
     @RequestMapping("alipayReturn")
     public String alipayReturn(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException, IOException {
+        System.out.println("支付宝返回信息了");
         //获取支付宝GET过来反馈信息
         Map<String,String> params = new HashMap<String,String>();
         Map<String,String[]> requestParams = request.getParameterMap();

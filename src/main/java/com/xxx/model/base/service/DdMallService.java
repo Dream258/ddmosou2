@@ -36,4 +36,8 @@ public class DdMallService extends BaseService<DdMall> {
     public List<Map<String,Object>> getList(int userId){
         return ddMallDAO.getList(userId);
     }
+
+    public Integer deleteMall(int keyId){
+        return ddMallDAO.deleteMall(keyId);
+    }
 }

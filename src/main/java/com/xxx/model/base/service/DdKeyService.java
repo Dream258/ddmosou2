@@ -41,4 +41,8 @@ public class DdKeyService extends BaseService<DdKey> {
         return ddKeyDAO.getKey(keyId);
     }
 
+    public Integer deleteKey(int keyId){
+        return ddKeyDAO.deleteKey(keyId);
+    }
+
 }

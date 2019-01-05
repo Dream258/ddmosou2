@@ -3,6 +3,7 @@ package com.xxx.model.base.dao;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.xxx.common.framework.base.BaseDAO;
 import com.xxx.model.base.entity.DdKey;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -25,6 +26,9 @@ public interface DdKeyDAO extends BaseMapper<DdKey> {
 
     @Select("SELECT * FROM dd_key WHERE id = #{id}")
     Map<String,Object> getKey(@Param("id") int keyId);
+
+    @Delete("delete from dd_key where id = #{id}")
+    Integer deleteKey(@Param("id") int keyId);
 
 }
 @Component

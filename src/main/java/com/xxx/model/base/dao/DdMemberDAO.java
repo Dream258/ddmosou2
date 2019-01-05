@@ -40,7 +40,8 @@ public interface DdMemberDAO extends BaseMapper<DdMember> {
     public Integer selectIDByCode(@Param("user_code") String user_code);
 
     //注册
-    public int addRegister(@Param("user_telephone") String user_telephone, @Param("user_password") String user_password, @Param("user_id") Integer user_id);
+    public int addRegister(@Param("user_telephone") String user_telephone, @Param("user_password") String user_password,
+                           @Param("user_code") String user_code,@Param("user_id") Integer user_id);
 
     // 修改邀请码
     public Integer updateCode(@Param("user_telephone") String user_telephone,

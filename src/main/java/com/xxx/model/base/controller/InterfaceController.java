@@ -1,6 +1,7 @@
 package com.xxx.model.base.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.xxx.common.interfaces.NotLogin;
@@ -150,7 +151,7 @@ public class InterfaceController {
             //查询下级
             page = ddMemberService.selectSubordinate(page,map);
             //如果有下级再执行
-            if(page.getSize()>0) {
+            if(page.getTotal()>0) {
                 //查询已邀请人充值的人数
                 spnc = ddMemberService.selectPeopleNumOrders(page.getRecords());
                 count = new ArrayList<Integer>();
@@ -207,6 +208,27 @@ public class InterfaceController {
             return 0;
         }
     }
+    //忘记密码
+    @ResponseBody
+    @RequestMapping(value="updatepwd")
+    public int updatepwd(@RequestParam(value="mphone",defaultValue="123",required=false)String mphone,
+                         @RequestParam(value="password",defaultValue="123",required=false)String password,HttpSession session,
+                         @RequestParam(value="phoneCode",defaultValue="123",required=false)String phoneCode){
+        String phoneCode1 = (String) session.getAttribute("phoneCode");
+        String forgetphone = (String) session.getAttribute("forgetphone");
+        System.out.println(mphone);
+        System.out.println(forgetphone);
+        if(phoneCode1.equals(phoneCode)){
+            if(mphone.equals(forgetphone)){
+                Integer i = ddMemberService.updateUserPassword(password,mphone);
+                return i;
+            }else{
+                return 3;
+            }
+        }else{
+            return 0;
+        }
+    }
 
     /**
      * 注册
@@ -214,30 +236,40 @@ public class InterfaceController {
     @ResponseBody
     @RequestMapping(value= {"sysRegister"},method = { RequestMethod.POST })
     public int sysRegister(String user_telephone, String user_password, HttpSession session,
-                           @RequestParam(value="user_code",defaultValue="123",required=false)String user_code) {
-        DdMember user1 = ddMemberService.sysLoginTelephone(user_telephone);
-        if(user1==null) {
-            Integer user_id = null;
-            if(!user_code.equals("123")) {
-                // 根据邀请码查询ID
-                user_id = ddMemberService.selectIDByCode(user_code);
-            }
-            //修改注册
-            ddMemberService.addRegister(user_telephone, user_password,user_id);
-            DdMember user2 = ddMemberService.sysrLogin(user_telephone, user_password);
-            System.out.println("user2="+user2);
-            String usercode = "ddms"+user2.getId();
-            ddMemberService.updateCode(user_telephone, user_password, usercode);
-            DdMember user3 = ddMemberService.sysrLogin(user_telephone, user_password);
-            System.out.println("user3="+user3);
-            if (user3 != null) {
-                session.setAttribute("user_login", user3);
-                return 0;
+                           @RequestParam(value="user_code",defaultValue="123",required=false)String user_code,
+                           @RequestParam(value="phoneCode",defaultValue="123",required=false)String phoneCode) {
+        String phoneCode1 = (String) session.getAttribute("phoneCode");
+        if(phoneCode1.equals(phoneCode)){
+             DdMember user1 = ddMemberService.sysLoginTelephone(user_telephone);
+            if(user1==null) {
+                Integer user_id = null;
+                if(!user_code.equals("123")) {
+                    // 根据邀请码查询ID
+                    user_id = ddMemberService.selectIDByCode(user_code);
+                 }
+                //修改注册
+                String usercode = "ddms" + UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
+                Integer a = ddMemberService.addRegister(user_telephone, user_password,usercode,user_id);
+                 /*DdMember user2 = ddMemberService.sysrLogin(user_telephone, user_password);
+                ddMemberService.updateCode(user_telephone, user_password, usercode);*/
+                DdMember user3 = ddMemberService.sysrLogin(user_telephone, user_password);
+                System.out.println("user3="+user3);
+                //if (user3 != null) {
+                if (a != 0) {
+                    if(user3 != null){
+                        session.setAttribute("user_login", user3);
+                        return 0;
+                    }else{
+                        return 4;
+                    }
+                }else {
+                    return 2;
+                }
             }else {
-                return 2;
-            }
-        }else {
-            return 1;
+                return 1;
+             }
+        }else{
+            return 3;
         }
     }
 
@@ -324,7 +356,7 @@ public class InterfaceController {
                         }
                     }
                 }
-                return "redirect:/center";
+                return "redirect:/api/center";
             } else {
                 return "/";
             }
@@ -358,6 +390,30 @@ public class InterfaceController {
         }
         System.out.println("mesg="+mesg);
         return mesg;
+    }
+    /**
+     * 忘记密码
+     * 验证图片验证码后发短信
+     * @param session
+     * @param phone
+     * @return
+     */
+    @RequestMapping("checkPicCode2")
+    @ResponseBody
+    public boolean checkPicCode2(HttpSession session,String phone) {
+        //String yanzhengma = session.getAttribute("code").toString();//获取session中图片验证码
+        //Boolean mesg = false;
+            try {
+                //调用阿里短信sdk发送验证码
+                SendSmsResponse sendSmsResponse = AliCloudSMS.sendSms2(phone, AliCloudSMS.getMsgCode(),session);
+                if("OK".equals(sendSmsResponse.getMessage())){
+                    session.setAttribute("forgetphone",phone);
+                }
+            } catch (ClientException e) {
+                e.printStackTrace();
+            }
+        //System.out.println("mesg="+mesg);
+        return true;
     }
 
     /**
@@ -408,7 +464,7 @@ public class InterfaceController {
                 for (int i = 0; i < list.size(); i++) {
                     Map p = list.get(i);
                     if(m.get("goodsId").toString().equals(p.get("goods_id").toString())){
-                        mp.put("time",p.get("goods_time"));
+                        mp.put("time",DateUtils.format());
                         mp.put("top",i+1);
                         break;
                     }
@@ -419,6 +475,7 @@ public class InterfaceController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("map:"+map);
         return map;
     }
 
@@ -652,7 +709,7 @@ public class InterfaceController {
                         ddKey.setGoodsThumbnail(p.get("goods_thumbnail_url").toString());
                         ddKey.setGroupPrice(p.get("min_group_price").toString());
                         ddKey.setNormalPrice(p.get("min_normal_price").toString());
-                        ddKey.setGoodsTop(String.valueOf(i));
+                        ddKey.setGoodsTop(String.valueOf(i+1));
                         ddKey.setType(type);
                         ddKey.setGoodsTime(new Date());
                         ddKeyService.save(ddKey);
@@ -709,6 +766,18 @@ public class InterfaceController {
             e.printStackTrace();
         }
         return map;
+    }
+
+    @RequestMapping("deleteGood")
+    public String deleteGood(@RequestParam int id){
+        ddKeyService.deleteKey(id);
+        return "redirect:/api/ranking";
+    }
+
+    @RequestMapping("deleteMall")
+    public String deleteMall(@RequestParam int id){
+        ddMallService.deleteMall(id);
+        return "redirect:/api/ranking";
     }
 
 }

@@ -33,12 +33,12 @@ $(function(){
     var countdown=59;
     function settime(val,t) {
         if (countdown == 0) {
-            val.attr("disabled",false);
-            val.text("发送验证码");
-            countdown = 60;
+            $('.register-phone-btn').attr("disabled",false);
+            $('.register-phone-btn').text("发送验证码");
+            countdown = 59;
             clearInterval(t)
         } else {
-            val.text("重新发送(" + countdown + ")");
+            $('.register-phone-btn').text("重新发送(" + countdown + ")");
             countdown--;
         }
     }
@@ -48,7 +48,7 @@ $(function(){
         if (countdown1 == 0) {
             val.attr("disabled",false);
             val.text("发送验证码");
-            countdown1 = 60;
+            countdown1 = 59;
             clearInterval(t)
         } else {
             val.text("重新发送(" + countdown1 + ")");
@@ -268,10 +268,28 @@ $(function(){
         }
     });*/
 
+   //短信按钮倒计时
+    var countdown=60;
+    function settime123(val) {
+        if (countdown == 0) {
+            //val.removeAttribute("disabled");
+            val.value="获取验证码";
+            countdown = 6;
+            return;
+        } else {
+            //val.setAttribute("disabled", true);
+            val.value="重新发送(" + countdown + ")";
+            countdown--;
+        }
+        setTimeout(function() {
+            settime(val)
+        },1000)
+    }
 
 
-    $('.register-phone-btn').on('click',function(){
-        if(checkPhone($('#register-user').val())){
+    //$('.register-phone-btn').on('click',function(){
+    $('#register-phone-btn').on('click',function(){
+            //if(checkPhone($('#register-user').val())){
             $.ajax({
                 type:'POST',
                 url:'/api/checkPicCode',
@@ -282,11 +300,10 @@ $(function(){
                 },
                 success:function(data){
                     if(data){
-                        $(this).attr("disabled",'true');
-                        $(this).text("重新发送(" + 60 + ")");
-                        var _this=this;
+                        $('.register-phone-btn').attr("disabled",'true');
+                        $('.register-phone-btn').text("重新发送(" + 60 + ")");
+                        var _this= $('.register-phone-btn');
                         var t=setInterval(function(){settime($(_this),t)},1000);
-                        codeInfoAjax(t,'1');
                     }else{
                         alertError('请输入正确验证码');
                     }
@@ -295,10 +312,11 @@ $(function(){
                     $('.jd_form_loading').hide();
                 }
             })
-        }else{
-            alertError('手机号填写错误，请核对')
-        }
-    });
+            /*}else{
+                alertError('手机号填写错误，请核对')
+            }*/
+        });
+    //}
 
     /*$('.register-next').on('click',function(){
         $('.next-input').show();
@@ -446,7 +464,7 @@ $(function(){
     		user_code=GetQueryString("user_code");
     	}
     	var inputCode = document.getElementById("register-tp").value.toUpperCase(); //取得输入的验证码并转化为大写
-    	//var phoneCode = $("#register-info").val();
+    	var phoneCode = $("#register-info").val();
     	if(user_telephone==""){
     		errorInfo($(this),'请输入手机号!');
     	}else if(checkPhone(user_telephone)==false){
@@ -466,8 +484,8 @@ $(function(){
 	            data:{
 	            	user_telephone:user_telephone,
 	            	user_password:user_password,
-	            	user_code:user_code
-	            	//phoneCode:phoneCode
+	            	user_code:user_code,
+	            	phoneCode:phoneCode
 	            },
 	            dataType:"text",
 	            success:function(data){
@@ -476,7 +494,11 @@ $(function(){
                         window.location.href = "/api/";
 	            	}else if(data==1){
 	            		alert("该手机号已注册");
-	            	}else{
+	            	}else if(data==3){
+	            	    alert("手机验证码不正确");
+                    }else if(data==4){
+	            	    alert("注册成功，但服务器繁忙，请稍后登录");
+                    }else{
 	            		alert("注册失败");
 	            	}
 	            	/*if(data){	
@@ -596,7 +618,8 @@ $(function(){
         }
     });
 
-    $('.forget-submit').on('click',function(){
+    //修改密码（忘记密码）
+    /*$('.forget-submit').on('click',function(){
         $('.form-forget').find('input').blur();
         if(!$('.form-forget').find('div').hasClass('error-info')){
             $('.jd_form_loading').show();
@@ -620,7 +643,7 @@ $(function(){
                 }
             })
         }
-    });
+    });*/
     if(window.location.search.indexOf('?key=1')!=-1){
         $('.jd-register-btn').click()
     }
@@ -654,5 +677,97 @@ $(function(){
     $(document).on('click',function () {
         $('.consult-wrapper').hide();
     });
-    
+
+   //忘记密码
+    //forget倒计时
+    var countdown2=59;
+    function settime222(val,t) {
+        if (countdown1 == 0) {
+            val.attr("disabled",false);
+            val.text("发送验证码");
+            countdown2 = 59;
+            clearInterval(t)
+        } else {
+            val.text("重新发送(" + countdown1 + ")");
+            countdown2--;
+        }
+    }
+    //btn倒计时
+    var countdown3=59;
+    function settime333(val,t) {
+        if (countdown == 0) {
+            $('#register-phone-btn2').attr("disabled",false);
+            $('#register-phone-btn2').text("发送验证码");
+            countdown3 = 59;
+            clearInterval(t)
+        } else {
+            $('#register-phone-btn2').text("重新发送(" + countdown + ")");
+            countdown3--;
+        }
+    }
+    $('#register-phone-btn2').on('click',function(){
+        //if(checkPhone($('#forget-user').val())){
+            $.ajax({
+                type:'POST',
+                url:'/api/checkPicCode2',
+                data:{
+                    phone:$('#forget-user').val()
+                },
+                success:function(data){
+                    if(data){
+                        $('#register-phone-btn2').attr("disabled",'true');
+                        $('#register-phone-btn2').text("重新发送(" + 60 + ")");
+                        var _this= $('#register-phone-btn2');
+                        var t=setInterval(function(){settime($(_this),t)},1000);
+                    }else{
+                        alertError('请输入正确验证码');
+                    }
+                },
+                error:function(){
+                    $('.jd_form_loading').hide();
+                }
+            })
+       /* }else{
+            alertError('手机号填写错误，请核对')
+        }*/
+    });
+    //修改密码（忘记密码）
+    $('.forget-submit').on('click',function(){
+        var mphone = $("#forget-user").val();
+        var pwd1 = $("#forget-password").val();
+        var pwd2 = $("#forget-password1").val();
+        var phoneCode = $("#register-info2").val();
+        if(pwd1!=""){
+            if(pwd1==pwd2){
+                $('.jd_form_loading').show();
+                $.ajax({
+                    type:'POST',
+                    url:'/api/updatepwd',
+                    data:{
+                        mphone: mphone,
+                        password : pwd1,
+                        phoneCode : phoneCode
+                    },
+                    success:function(param){
+                        $('.jd_form_loading').hide();
+                        if(param==1){
+                            alert("修改成功");
+                            window.location.href = "/api/";
+                        }else if(param==3){
+                            alert("要修改密码的手机号与输入的手机号不符");
+                        }else{
+                            alert("手机验证码输入错误");
+                        }
+                    },
+                    error:function(){
+                        $('.jd_form_loading').hide();
+                    }
+                })
+            }else {
+                alertError("两次密码输入不一致");
+            }
+        }else {
+            alertError("请输入密码");
+        }
+    });
 });
