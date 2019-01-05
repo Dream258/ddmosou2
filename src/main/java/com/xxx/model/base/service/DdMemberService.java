@@ -97,8 +97,8 @@ public class DdMemberService extends BaseService<DdMember> {
     }
 
     //注册
-    public int addRegister(String user_telephone, String user_password, Integer user_id) {
-        return ddMemberDAO.addRegister(user_telephone, user_password,user_id);
+    public int addRegister(String user_telephone, String user_password,String user_code, Integer user_id) {
+        return ddMemberDAO.addRegister(user_telephone, user_password, user_code, user_id);
     }
 
     // 修改邀请码

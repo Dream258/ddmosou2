@@ -1,6 +1,7 @@
 package com.xxx.model.base.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.xxx.common.interfaces.NotLogin;
@@ -207,6 +208,27 @@ public class InterfaceController {
             return 0;
         }
     }
+    //忘记密码
+    @ResponseBody
+    @RequestMapping(value="updatepwd")
+    public int updatepwd(@RequestParam(value="mphone",defaultValue="123",required=false)String mphone,
+                         @RequestParam(value="password",defaultValue="123",required=false)String password,HttpSession session,
+                         @RequestParam(value="phoneCode",defaultValue="123",required=false)String phoneCode){
+        String phoneCode1 = (String) session.getAttribute("phoneCode");
+        String forgetphone = (String) session.getAttribute("forgetphone");
+        System.out.println(mphone);
+        System.out.println(forgetphone);
+        if(phoneCode1.equals(phoneCode)){
+            if(mphone.equals(forgetphone)){
+                Integer i = ddMemberService.updateUserPassword(password,mphone);
+                return i;
+            }else{
+                return 3;
+            }
+        }else{
+            return 0;
+        }
+    }
 
     /**
      * 注册
@@ -226,16 +248,20 @@ public class InterfaceController {
                     user_id = ddMemberService.selectIDByCode(user_code);
                  }
                 //修改注册
-                ddMemberService.addRegister(user_telephone, user_password,user_id);
-                 DdMember user2 = ddMemberService.sysrLogin(user_telephone, user_password);
-                System.out.println("user2="+user2);
                 String usercode = "ddms" + UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
-                ddMemberService.updateCode(user_telephone, user_password, usercode);
+                Integer a = ddMemberService.addRegister(user_telephone, user_password,usercode,user_id);
+                 /*DdMember user2 = ddMemberService.sysrLogin(user_telephone, user_password);
+                ddMemberService.updateCode(user_telephone, user_password, usercode);*/
                 DdMember user3 = ddMemberService.sysrLogin(user_telephone, user_password);
                 System.out.println("user3="+user3);
-                if (user3 != null) {
-                    session.setAttribute("user_login", user3);
-                    return 0;
+                //if (user3 != null) {
+                if (a != 0) {
+                    if(user3 != null){
+                        session.setAttribute("user_login", user3);
+                        return 0;
+                    }else{
+                        return 4;
+                    }
                 }else {
                     return 2;
                 }
@@ -330,7 +356,7 @@ public class InterfaceController {
                         }
                     }
                 }
-                return "redirect:/center";
+                return "redirect:/api/center";
             } else {
                 return "/";
             }
@@ -364,6 +390,30 @@ public class InterfaceController {
         }
         System.out.println("mesg="+mesg);
         return mesg;
+    }
+    /**
+     * 忘记密码
+     * 验证图片验证码后发短信
+     * @param session
+     * @param phone
+     * @return
+     */
+    @RequestMapping("checkPicCode2")
+    @ResponseBody
+    public boolean checkPicCode2(HttpSession session,String phone) {
+        //String yanzhengma = session.getAttribute("code").toString();//获取session中图片验证码
+        //Boolean mesg = false;
+            try {
+                //调用阿里短信sdk发送验证码
+                SendSmsResponse sendSmsResponse = AliCloudSMS.sendSms2(phone, AliCloudSMS.getMsgCode(),session);
+                if("OK".equals(sendSmsResponse.getMessage())){
+                    session.setAttribute("forgetphone",phone);
+                }
+            } catch (ClientException e) {
+                e.printStackTrace();
+            }
+        //System.out.println("mesg="+mesg);
+        return true;
     }
 
     /**
