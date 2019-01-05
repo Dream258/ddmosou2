@@ -33,12 +33,12 @@ $(function(){
     var countdown=59;
     function settime(val,t) {
         if (countdown == 0) {
-            val.attr("disabled",false);
-            val.text("发送验证码");
+            $('.register-phone-btn').attr("disabled",false);
+            $('.register-phone-btn').text("发送验证码");
             countdown = 60;
             clearInterval(t)
         } else {
-            val.text("重新发送(" + countdown + ")");
+            $('.register-phone-btn').text("重新发送(" + countdown + ")");
             countdown--;
         }
     }
@@ -268,6 +268,23 @@ $(function(){
         }
     });*/
 
+   //短信按钮倒计时
+    var countdown=60;
+    function settime123(val) {
+        if (countdown == 0) {
+            //val.removeAttribute("disabled");
+            val.value="获取验证码";
+            countdown = 6;
+            return;
+        } else {
+            //val.setAttribute("disabled", true);
+            val.value="重新发送(" + countdown + ")";
+            countdown--;
+        }
+        setTimeout(function() {
+            settime(val)
+        },1000)
+    }
 
 
     $('.register-phone-btn').on('click',function(){
@@ -282,11 +299,10 @@ $(function(){
                 },
                 success:function(data){
                     if(data){
-                        $(this).attr("disabled",'true');
-                        $(this).text("重新发送(" + 60 + ")");
-                        var _this=this;
+                        $('.register-phone-btn').attr("disabled",'true');
+                        $('.register-phone-btn').text("重新发送(" + 60 + ")");
+                        var _this= $('.register-phone-btn');
                         var t=setInterval(function(){settime($(_this),t)},1000);
-                        codeInfoAjax(t,'1');
                     }else{
                         alertError('请输入正确验证码');
                     }
@@ -446,7 +462,7 @@ $(function(){
     		user_code=GetQueryString("user_code");
     	}
     	var inputCode = document.getElementById("register-tp").value.toUpperCase(); //取得输入的验证码并转化为大写
-    	//var phoneCode = $("#register-info").val();
+    	var phoneCode = $("#register-info").val();
     	if(user_telephone==""){
     		errorInfo($(this),'请输入手机号!');
     	}else if(checkPhone(user_telephone)==false){
@@ -466,8 +482,8 @@ $(function(){
 	            data:{
 	            	user_telephone:user_telephone,
 	            	user_password:user_password,
-	            	user_code:user_code
-	            	//phoneCode:phoneCode
+	            	user_code:user_code,
+	            	phoneCode:phoneCode
 	            },
 	            dataType:"text",
 	            success:function(data){
@@ -476,7 +492,9 @@ $(function(){
                         window.location.href = "/api/";
 	            	}else if(data==1){
 	            		alert("该手机号已注册");
-	            	}else{
+	            	}else if(data==3){
+	            	    alert("手机验证码不正确");
+                    }else{
 	            		alert("注册失败");
 	            	}
 	            	/*if(data){	

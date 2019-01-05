@@ -6,7 +6,7 @@
 	<groupId>com.xxx</groupId>
 	<artifactId>ddmosou</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>ddmosou</name>
 	<description>project is ddmosou</description>
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<!--<scope>provided</scope>-->
+			<scope>provided</scope>
 		</dependency>
 		<!-- freemarker 引用 -->
 		<dependency>

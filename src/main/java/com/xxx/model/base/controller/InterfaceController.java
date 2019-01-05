@@ -214,30 +214,36 @@ public class InterfaceController {
     @ResponseBody
     @RequestMapping(value= {"sysRegister"},method = { RequestMethod.POST })
     public int sysRegister(String user_telephone, String user_password, HttpSession session,
-                           @RequestParam(value="user_code",defaultValue="123",required=false)String user_code) {
-        DdMember user1 = ddMemberService.sysLoginTelephone(user_telephone);
-        if(user1==null) {
-            Integer user_id = null;
-            if(!user_code.equals("123")) {
-                // 根据邀请码查询ID
-                user_id = ddMemberService.selectIDByCode(user_code);
-            }
-            //修改注册
-            ddMemberService.addRegister(user_telephone, user_password,user_id);
-            DdMember user2 = ddMemberService.sysrLogin(user_telephone, user_password);
-            System.out.println("user2="+user2);
-            String usercode = "ddms" + UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
-            ddMemberService.updateCode(user_telephone, user_password, usercode);
-            DdMember user3 = ddMemberService.sysrLogin(user_telephone, user_password);
-            System.out.println("user3="+user3);
-            if (user3 != null) {
-                session.setAttribute("user_login", user3);
-                return 0;
+                           @RequestParam(value="user_code",defaultValue="123",required=false)String user_code,
+                           @RequestParam(value="phoneCode",defaultValue="123",required=false)String phoneCode) {
+        String phoneCode1 = (String) session.getAttribute("phoneCode");
+        if(phoneCode1.equals(phoneCode)){
+             DdMember user1 = ddMemberService.sysLoginTelephone(user_telephone);
+            if(user1==null) {
+                Integer user_id = null;
+                if(!user_code.equals("123")) {
+                    // 根据邀请码查询ID
+                    user_id = ddMemberService.selectIDByCode(user_code);
+                 }
+                //修改注册
+                ddMemberService.addRegister(user_telephone, user_password,user_id);
+                 DdMember user2 = ddMemberService.sysrLogin(user_telephone, user_password);
+                System.out.println("user2="+user2);
+                String usercode = "ddms" + UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
+                ddMemberService.updateCode(user_telephone, user_password, usercode);
+                DdMember user3 = ddMemberService.sysrLogin(user_telephone, user_password);
+                System.out.println("user3="+user3);
+                if (user3 != null) {
+                    session.setAttribute("user_login", user3);
+                    return 0;
+                }else {
+                    return 2;
+                }
             }else {
-                return 2;
-            }
-        }else {
-            return 1;
+                return 1;
+             }
+        }else{
+            return 3;
         }
     }
 
