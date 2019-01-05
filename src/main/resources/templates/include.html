@@ -16,7 +16,7 @@
             <div class="nav_box_hea">
                 <!--pc端-->
                 <div class="nav_box">
-                    <a href="/api/"><div class="pull-left logo_box" title="多多魔搜 ">
+                    <a href="/api/"><div class="pull-left logo_box" title="多多魔搜">
                         <img th:src="@{/static/ddms/img/logo.png}" alt="">
                     </div></a>
                     <ul class="nav_header clearfix">
@@ -37,11 +37,10 @@
                             <li class="nav_item" id="sales"><a href="/monitor/sales">销量监控</a></li>
                             <li class="nav_item" id="group"><a href="/monitor/group">热词分析</a></li>
                             <li class="nav_item hidden"><a href="javascript:;">综合分析</a></li-->
-
                     </ul>
                 </div>
                 <!--<c:choose>-->
-                <div th:if="${session.user_login!=null }">
+                <div th:if="${session.user_login!=null}">
                     <!--<c:when test="${sessionScope.user_login!=null }">-->
                     <div class="user_header_box" style="display: block;">
                         <div class="user_item nav_item" id="user">
@@ -57,13 +56,13 @@
                         <div class="user_item nav_item" id="user_vip">
                             <a href="/member-center/index.html">
                                 <div class="label_box">
-                                <span class="label label-info user_level" th:if="${session.user_login.userType==1 }">
+                                <span class="label label-info user_level" th:if="${session.user_login.userType==1}">
                                        普通会员
                                 </span>
-                                    <span class="label label-info user_level" th:if="${session.user_login.userType==2 }">
+                                    <span class="label label-info user_level" th:if="${session.user_login.userType==2}">
                                         VIP会员
                                 </span>
-                                </div> <span class="user_name red_span" th:text="${session.user_login.userTelephone }" ></span>
+                                </div> <span class="user_name red_span" th:text="${session.user_login.userTelephone}" ></span>
                             </a>
                         </div>
                         <div class="user_item nav_item" id="user_off">
@@ -74,7 +73,7 @@
                     </div>
                     <!--</c:when>-->
                 </div>
-                <div th:if="${session.user_login==null }">
+                <div th:if="${session.user_login==null}">
                     <!--<c:otherwise>-->
                     <div class="user_header_box user_header_box_login"
                          style="display: block;">
