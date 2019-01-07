@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>多多魔搜 — 管理平台</title>
+<title>极光客 — 管理平台</title>
 
 <link href="${springMacroRequestContext.contextPath}/static/css/style.css" rel="stylesheet" type="text/css">
 
@@ -36,7 +36,7 @@
 <br />
 <br />
 
-<p align="center"> More Templates <a href="javascript:;" target="_blank">多多魔搜管理</a> - Collect from <a href="javascript:;" title="网页模板" target="_blank">www.qljr.com</a></p>
+<p align="center"> More Templates <a href="javascript:;" target="_blank">极光客管理</a> - Collect from <a href="javascript:;" title="网页模板" target="_blank">www.qljr.com</a></p>
 <script type="text/javascript" src="${springMacroRequestContext.contextPath}/static/layui/layui.js"></script>
 <script>
 	layui.use(['layer'],function(){

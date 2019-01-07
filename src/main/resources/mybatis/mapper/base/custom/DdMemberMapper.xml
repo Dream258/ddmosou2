@@ -52,7 +52,7 @@
     <!--注册-->
     <insert id="addRegister">
 		insert into dd_member(user_telephone,user_password,user_code,user_higher_id)
-		values(#{user_telephone},#{user_password},concat('ddms',id),#{user_id})
+		values(#{user_telephone},#{user_password},#{user_code},#{user_id})
 	</insert>
 
     <!-- 修改邀请码 -->
