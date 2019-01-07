@@ -28,15 +28,10 @@ public class DdSearchController {
 
 	@RequestMapping("search")
 	@ResponseBody
-	public List<DdSearch> Search(String keys) {
+	public List<DdSearch> Search(HttpServletRequest httpServletRequest, String keys) {
 
-		List<DdSearch> list = ddSearchService.search(keys);
-		List<String> goodIds = new ArrayList<>();
-		list.forEach(l -> {
-			goodIds.add(l.getGoods_id());
-		});
-
-		return ddSearchService.search(keys);
+		DdMember ddMember = (DdMember) httpServletRequest.getSession().getAttribute("user_login");
+		return ddSearchService.search(keys, ddMember.getId());
 	}
 
 	@RequestMapping("list")
@@ -68,17 +63,6 @@ public class DdSearchController {
 	public Boolean concern(HttpServletRequest httpServletRequest, DdConcern ddConcern) {
 		DdMember ddMember = (DdMember) httpServletRequest.getSession().getAttribute("user_login");
 		ddConcern.setUserId(ddMember.getId());
-		ddConcern.setStatus(1);
 		return ddSearchService.concern(ddConcern) > 0 ? true : false;
 	}
-
-	@RequestMapping("noConcern")
-	@ResponseBody
-	public Boolean noConcern(HttpServletRequest httpServletRequest, DdConcern ddConcern) {
-		DdMember ddMember = (DdMember) httpServletRequest.getSession().getAttribute("user_login");
-		ddConcern.setUserId(ddMember.getId());
-		ddConcern.setStatus(0);
-		return ddSearchService.noConcern(ddConcern) > 0 ? true : false;
-	}
-
 }
