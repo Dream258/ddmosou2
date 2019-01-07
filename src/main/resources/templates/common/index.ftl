@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>多多魔搜 — 管理平台</title>
+		<title>极光客 — 管理平台</title>
 		<link rel="stylesheet" href="${springMacroRequestContext.contextPath}/static/layui/css/layui.css" />
 		<link rel="stylesheet" href="${springMacroRequestContext.contextPath}/static/css/global.css" />
 		<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
@@ -19,7 +19,7 @@
 				<div class="layui-main">
 					<div class="admin-login-box">
 						<a class="logo" href="#">
-							<span>· 多多魔搜 ·</span>
+							<span>· 极光客 ·</span>
 						</a>
 					</div>
 					<ul class="layui-nav" lay-filter="top" style="left: 260px;">
