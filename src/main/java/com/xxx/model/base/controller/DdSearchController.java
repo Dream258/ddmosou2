@@ -1,0 +1,75 @@
+package com.xxx.model.base.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.graphbuilder.struc.LinkedList;
+import com.xxx.common.interfaces.NotLogin;
+import com.xxx.common.util.PDDUtils;
+import com.xxx.model.base.entity.DdConcern;
+import com.xxx.model.base.entity.DdSearch;
+import com.xxx.model.base.service.DdSearchService;
+
+@NotLogin
+@Controller
+@RequestMapping("ddSearch")
+public class DdSearchController {
+
+	@Autowired
+	private DdSearchService ddSearchService;
+
+	@RequestMapping("search")
+	@ResponseBody
+	public List<DdSearch> Search(String keys) {
+
+		List<DdSearch> list = ddSearchService.search(keys);
+		List<String> goodIds = new ArrayList<>();
+		list.forEach(l -> {
+			goodIds.add(l.getGoods_id());
+		});
+
+		return ddSearchService.search(keys);
+	}
+
+	@RequestMapping("list")
+	@ResponseBody
+	public List<DdSearch> list(Integer user_id) {
+		List<DdConcern> list = ddSearchService.list(user_id);
+		List<DdSearch> ddSearchs = new ArrayList<>();
+		list.forEach(l -> {
+			JSONObject jsonObject = PDDUtils.getGoodsInfo(l.getGoodsId().toString());
+			DdSearch ddSearch = new DdSearch();
+			ddSearch.setIsConcern(1);
+			ddSearch.setGoods_id(jsonObject.get("goods_id").toString());
+			ddSearch.setGoods_name(jsonObject.get("goods_name").toString());
+			ddSearch.setGoods_image_url(jsonObject.get("goods_image_url").toString());
+			ddSearch.setSold_quantity((int) jsonObject.get("sold_quantity"));
+			ddSearch.setMin_group_price((int) jsonObject.get("min_group_price"));
+			ddSearch.setMin_normal_price((int) jsonObject.get("min_normal_price"));
+			ddSearch.setMall_name(jsonObject.get("mall_name").toString());
+			ddSearch.setRank(1000);
+			ddSearchs.add(ddSearch);
+		});
+		return ddSearchs;
+	}
+
+	@RequestMapping("concern")
+	@ResponseBody
+	public Boolean concern(DdConcern ddConcern) {
+		return ddSearchService.concern(ddConcern) > 0 ? true : false;
+	}
+
+	@RequestMapping("noConcern")
+	@ResponseBody
+	public Boolean noConcern(DdConcern ddConcern) {
+
+		return ddSearchService.noConcern(ddConcern) > 0 ? true : false;
+	}
+
+}
