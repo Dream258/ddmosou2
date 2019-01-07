@@ -19,20 +19,19 @@ public class DdSearchService extends BaseService<DdConcern> {
 	@Autowired
 	private DdConcernDao ddConcernDao;
 
-	public List<DdSearch> search(String keys) {
+	public List<DdSearch> search(String keys, Integer userId) {
 
 		List<Map> list = PDDUtils.getGoodsListByPage(keys, null, null);
 		List<DdSearch> ddSearchs = new ArrayList<>();
-		List<String> goodIds = new ArrayList<>();
 		DdConcern ddConcern = new DdConcern();
 		ddConcern.setUserId(123);
 
 		list.forEach(m -> {
 			DdSearch ddSearch = new DdSearch();
-			goodIds.add(m.get("goods_id").toString());
 			String goods_id = m.get("goods_id").toString();
 			ddSearch.setGoods_id(goods_id);
 			ddConcern.setGoodsId(goods_id);
+			ddConcern.setUserId(userId);
 			Integer isConcern = ddConcernDao.getStatus(ddConcern);
 			ddSearch.setIsConcern(ddConcernDao.getStatus(ddConcern) == null ? 0 : isConcern);
 			ddSearch.setGoods_name(m.get("goods_name").toString());
@@ -55,11 +54,17 @@ public class DdSearchService extends BaseService<DdConcern> {
 	}
 
 	public Integer concern(DdConcern ddConcern) {
-		return ddConcernDao.insert(ddConcern);
-	}
-
-	public Integer noConcern(DdConcern ddConcern) {
-		return ddConcernDao.updateById(ddConcern);
+		Integer flag;
+		if (ddConcernDao.getItem(ddConcern) == null) {
+			ddConcern.setDelFlag(0);
+			flag = ddConcernDao.insert(ddConcern);
+		} else {
+			if (ddConcern.getStatus() == 0) {
+				ddConcern.setDelFlag(1);
+			}
+			flag = ddConcernDao.updateItem(ddConcern);
+		}
+		return flag;
 	}
 
 }
