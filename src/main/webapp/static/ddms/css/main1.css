@@ -6937,7 +6937,7 @@ a:focus, a:hover {
 	height: 5px;
 	margin: 0 auto;
 	border: none;
-	background: #556CED;
+	background: #D8271C;
 	color: inherit;
 	font-size: 0;
 	-webkit-transition: .35s;
@@ -6952,7 +6952,7 @@ a:focus, a:hover {
 	display: block;
 	width: 70%;
 	height: 5px;
-	background: #556CED;
+	background: #D8271C;
 	content: "";
 	-webkit-transition: all .35s;
 	transition: all .35s
@@ -7079,7 +7079,7 @@ body {
 }
 
 /*.nav_header .nav_item.active>a {*/
-	/*color: #556CED;*/
+	/*color: #D8271C;*/
 	/*letter-spacing: 0*/
 /*}*/
 
@@ -7093,7 +7093,7 @@ body {
 .flow .only_tips {
 	width: 64px;
 	height: 21px;
-	background: #556CED;
+	background: #D8271C;
 	text-align: center;
 	line-height: 21px;
 	font-size: 12px;
@@ -7109,7 +7109,7 @@ body {
 	height: 0;
 	border-top: 10px solid transparent;
 	border-right: 7px solid #fd4040;
-	border-right: 7px solid #556CED;
+	border-right: 7px solid #D8271C;
 	border-bottom: 0 solid transparent;
 	display: block;
 	position: absolute;
@@ -7124,7 +7124,7 @@ body {
 	/*width: 100%;*/
 	/*display: block;*/
 	/*height: 4px;*/
-	/*background: #556CED;*/
+	/*background: #D8271C;*/
 	/*position: absolute*/
 /*}*/
 
@@ -7152,7 +7152,7 @@ body {
 }
 
 .user_header_box .user_item.active>a {
-	color: #556CED;
+	color: #D8271C;
 	font-weight: 700;
 	position: relative
 }
@@ -7163,7 +7163,7 @@ body {
 }
 
 .user_header_box .user_item.active>a>.iconfont {
-	color: #556CED
+	color: #D8271C
 }
 
 .user_header_box_login {
@@ -7175,8 +7175,8 @@ body {
 	height: 36px;
 	margin-right: 30px;
 	background: #fff;
-	border: 1px solid #556CED;
-	color: #556CED;
+	border: 1px solid #D8271C;
+	color: #D8271C;
 	border-radius: 4px
 }
 
@@ -7189,8 +7189,8 @@ body {
 }
 
 .user_header_box_login .hea_login.active {
-	background: #556CED;
-	border: 1px solid #556CED;
+	background: #D8271C;
+	border: 1px solid #D8271C;
 	color: #fff
 }
 
@@ -14059,7 +14059,7 @@ a:focus, a:hover {
 	height: 5px;
 	margin: 0 auto;
 	border: none;
-	background: #556CED;
+	background: #D8271C;
 	color: inherit;
 	font-size: 0;
 	-webkit-transition: .35s;
@@ -14074,7 +14074,7 @@ a:focus, a:hover {
 	display: block;
 	width: 70%;
 	height: 5px;
-	background: #556CED;
+	background: #D8271C;
 	content: "";
 	-webkit-transition: all .35s;
 	transition: all .35s
@@ -14202,7 +14202,7 @@ body {
 }
 
 .nav_header .nav_item.active>a {
-	color: #556CED;
+	color: #D8271C;
 	letter-spacing: 0
 }
 
@@ -14216,7 +14216,7 @@ body {
 .flow .only_tips {
 	width: 64px;
 	height: 21px;
-	background: #556CED;
+	background: #D8271C;
 	text-align: center;
 	line-height: 21px;
 	font-size: 12px;
@@ -14232,7 +14232,7 @@ body {
 	height: 0;
 	border-top: 10px solid transparent;
 	border-right: 7px solid #fd4040;
-	border-right: 7px solid #556CED;
+	border-right: 7px solid #D8271C;
 	border-bottom: 0 solid transparent;
 	display: block;
 	position: absolute;
@@ -14247,7 +14247,7 @@ body {
 	width: 100%;
 	display: block;
 	height: 5px;
-	background: #556CED;
+	background: #D8271C;
 	position: absolute
 }
 
@@ -14275,7 +14275,7 @@ body {
 }
 
 .user_header_box .user_item.active>a {
-	color: #556CED;
+	color: #D8271C;
 	font-weight: 700;
 	position: relative
 }
@@ -14286,7 +14286,7 @@ body {
 }
 
 .user_header_box .user_item.active>a>.iconfont {
-	color: #556CED
+	color: #D8271C
 }
 
 .user_header_box_login {
@@ -14298,8 +14298,8 @@ body {
 	height: 36px;
 	margin-right: 30px;
 	background: #fff;
-	border: 1px solid #556CED;
-	color: #556CED;
+	border: 1px solid #D8271C;
+	color: #D8271C;
 	border-radius: 4px
 }
 
@@ -14312,8 +14312,8 @@ body {
 }
 
 .user_header_box_login .hea_login.active {
-	background: #556CED;
-	border: 1px solid #556CED;
+	background: #D8271C;
+	border: 1px solid #D8271C;
 	color: #fff
 }
 
@@ -14355,7 +14355,7 @@ body {
 .spinner-box div {
 	width: 0;
 	height: 30px;
-	background: #556CED;
+	background: #D8271C;
 	text-align: center;
 	border-radius: 8px;
 	color: #fff;
@@ -14394,7 +14394,7 @@ body {
 
 .name_left>.iconfont {
 	font-size: 30px;
-	color: #556CED
+	color: #D8271C
 }
 
 .name_right {
@@ -14413,14 +14413,14 @@ body {
 }
 
 .blue_span {
-	color: #556CED
+	color: #D8271C
 }
 
 .score_box .btn {
 	height: 24px;
 	line-height: 20px;
 	color: #fff;
-	background: #556CED;
+	background: #D8271C;
 	float: right;
 	font-size: 10px
 }
@@ -14458,13 +14458,13 @@ body {
 	height: 24px;
 	line-height: 20px;
 	color: #fff;
-	background: #556CED;
+	background: #D8271C;
 	float: right;
 	font-size: 10px
 }
 
 .nav_user_list li.active>a, .nav_user_list li.active>a>.iconfont {
-	color: #556CED
+	color: #D8271C
 }
 
 .nav_user_list {
@@ -14481,7 +14481,7 @@ body {
 .nav_user_list li.active>a::after {
 	content: ' ';
 	display: block;
-	background: #556CED;
+	background: #D8271C;
 	position: absolute;
 	right: 0;
 	width: 4px;
@@ -14558,7 +14558,7 @@ body {
 .spinner p {
 	line-height: 60px;
 	font-size: 18px;
-	color: #556ced
+	color: #D8271C
 }
 
 .spinnerFixed {
@@ -14571,7 +14571,7 @@ body {
 .spinner>div {
 	width: 22px;
 	height: 22px;
-	background-color: #556ced;
+	background-color: #D8271C;
 	border-radius: 100%;
 	display: inline-block;
 	-webkit-animation: bouncedelay 1.4s infinite ease-in-out;
@@ -14704,7 +14704,7 @@ radius
 .spinner-box div {
 	width: 0;
 	height: 30px;
-	background: #556CED;
+	background: #D8271C;
 	text-align: center;
 	border-radius: 8px;
 	color: #fff;
@@ -14743,7 +14743,7 @@ radius
 
 .name_left>.iconfont {
 	font-size: 30px;
-	color: #556CED
+	color: #D8271C
 }
 
 .name_right {
@@ -14762,14 +14762,14 @@ radius
 }
 
 .blue_span {
-	color: #556CED
+	color: #D8271C
 }
 
 .score_box .btn {
 	height: 24px;
 	line-height: 20px;
 	color: #fff;
-	background: #556CED;
+	background: #D8271C;
 	float: right;
 	font-size: 10px
 }
@@ -14807,13 +14807,13 @@ radius
 	height: 24px;
 	line-height: 20px;
 	color: #fff;
-	background: #556CED;
+	background: #D8271C;
 	float: right;
 	font-size: 10px
 }
 
 .nav_user_list li.active>a, .nav_user_list li.active>a>.iconfont {
-	color: #556CED
+	color: #D8271C
 }
 
 .nav_user_list {
@@ -14830,7 +14830,7 @@ radius
 .nav_user_list li.active>a::after {
 	content: ' ';
 	display: block;
-	background: #556CED;
+	background: #D8271C;
 	position: absolute;
 	right: 0;
 	width: 4px;
@@ -14907,7 +14907,7 @@ radius
 .spinner p {
 	line-height: 60px;
 	font-size: 18px;
-	color: #556ced
+	color: #D8271C
 }
 
 .spinnerFixed {
@@ -14920,7 +14920,7 @@ radius
 .spinner>div {
 	width: 22px;
 	height: 22px;
-	background-color: #556ced;
+	background-color: #D8271C;
 	border-radius: 100%;
 	display: inline-block;
 	-webkit-animation: bouncedelay 1.4s infinite ease-in-out;

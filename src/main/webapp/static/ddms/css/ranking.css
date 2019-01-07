@@ -40,7 +40,7 @@
 }
 
 .dd_nav>li.active>a {
-	color: #556CED
+	color: #D8271C
 }
 
 .dd_add_box {
@@ -52,7 +52,7 @@
 	width: 120px;
 	height: 44px;
 	line-height: 44px;
-	background: #556CED;
+	background: #D8271C;
 	color: #fff
 }
 
@@ -67,8 +67,8 @@
 
 .query-td1 {
 	background: #fff;
-	color: #556CED !important;
-	border: 1px solid #556CED
+	color: #D8271C !important;
+	border: 1px solid #D8271C
 }
 
 .delete_td {
@@ -113,16 +113,16 @@
 }
 
 .rankingModal .modal-footer .add_goods_sure {
-	background: #556CED;
-	border: 1px solid #556CED;
+	background: #D8271C;
+	border: 1px solid #D8271C;
 	color: #fff !important;
 	margin-right: 20px
 }
 
 .rankingModal .modal-footer .add_goods_close {
 	background: #fff;
-	border: 1px solid #556CED;
-	color: #556CED !important
+	border: 1px solid #D8271C;
+	color: #D8271C !important
 }
 
 .rankingModal .help-block {
@@ -145,7 +145,7 @@
 }
 
 .rankingModal .label-info {
-	background: #556CED
+	background: #D8271C
 }
 
 .form_wrap {
@@ -188,9 +188,9 @@
 }
 
 .form_wrap .choose_btn.active,.form_wrap .keyword_btn.active {
-	border: 1px solid #556CED;
+	border: 1px solid #D8271C;
 	color: #fff;
-	background: #556CED
+	background: #D8271C
 }
 
 .item_option .activity,.item_option .category {
@@ -198,8 +198,8 @@
 }
 
 .keyword_btn1.active {
-	border: 1px solid #556CED;
-	color: #556CED
+	border: 1px solid #D8271C;
+	color: #D8271C
 }
 
 .keyword_btn1 i {
@@ -215,7 +215,7 @@
 }
 
 .dropdown-menu .overall.active {
-	background: #556CED;
+	background: #D8271C;
 	color: #fff
 }
 
@@ -224,7 +224,7 @@
 }
 
 .modal-footer .btn-primary {
-	background: #556CED
+	background: #D8271C
 }
 
 #queryModal .content_table,#queryModal .time_hea,#ranking_canvas,.canvas_title
@@ -268,7 +268,7 @@
 
 #queryModal .canvas_title {
 	margin-top: 15px;
-	color: #556CED;
+	color: #D8271C;
 	font-size: 15px;
 	font-weight: 700;
 	margin-bottom: 20px
@@ -341,7 +341,7 @@
 	float: right;
 	line-height: 30px;
 	margin-left: 30px;
-	color: #556CED;
+	color: #D8271C;
 	cursor: pointer
 }
 
@@ -378,7 +378,7 @@
 
 .goods_wrap .good_btn1,.goods_wrap .good_btn2 {
 	min-width: 60px;
-	border: 1px solid #556CED !important
+	border: 1px solid #D8271C !important
 }
 
 .user-content-wrapper {
@@ -398,7 +398,7 @@
 }
 
 .item_header .goods_hea_box .control_name.active {
-	background: #556CED;
+	background: #D8271C;
 	color: #fff !important
 }
 
@@ -424,12 +424,12 @@
 
 .goods_wrap .good_btn1 {
 	background: #fff;
-	color: #556CED !important;
+	color: #D8271C !important;
 	margin: 2px
 }
 
 .goods_wrap .good_btn2 {
-	background: #556CED;
+	background: #D8271C;
 	color: #fff !important;
 	margin: 0 2px
 }
@@ -475,12 +475,12 @@ td .glyphicon-arrow-down {
 .mytable .top .left dd.gray{ color:#989A9C}
 .mytable .top .right{ width:60%; float:right;}
 .mytable .top .right { text-align:right; padding-top:5px; padding-right:5px}
-.mytable .top .right a.add{ display:inline-block; width:100px; line-height:40px; text-align:center; background-color:#556CED; color:#fff; border-radius:5px}
-.mytable .top .right a.del{ display:inline-block; width:80px; line-height:40px; text-align:center; background-color:#fff; color:#556CED; border-radius:5px; border:1px solid #556CED}
+.mytable .top .right a.add{ display:inline-block; width:100px; line-height:40px; text-align:center; background-color:#D8271C; color:#fff; border-radius:5px}
+.mytable .top .right a.del{ display:inline-block; width:80px; line-height:40px; text-align:center; background-color:#fff; color:#D8271C; border-radius:5px; border:1px solid #D8271C}
 .mytable table{ width:96%; border-radius:5px; margin:10px auto 0}
 .mytable table th,td{ line-height:35px; text-align:center; border:1px solid #ccc}
 .mytable table th{ background-color:#f5f5f5}
-.mytable table td a{ color:#fff; background-color:#556CED; text-align:center; display:inline-block; width:60px; line-height:25px; font-size:14px; border-radius:6px}
+.mytable table td a{ color:#fff; background-color:#D8271C; text-align:center; display:inline-block; width:60px; line-height:25px; font-size:14px; border-radius:6px}
 .modal-content{ padding-bottom:20px}
 .modal-content h3{ line-height:70px; text-align:center}
 .modal-content form{ width:70%; margin:0 auto}
@@ -492,7 +492,7 @@ td .glyphicon-arrow-down {
 .modal-content dl dt img{ width:100%}
 .modal-content dl dd{ line-height:50px; font-size:16px}
 .modal-content dl dd.gray{ color:#989A9C}
-.modal-content h5{ color:#556CED; padding-left:2%; line-height:40px; font-weight:bold}
+.modal-content h5{ color:#D8271C; padding-left:2%; line-height:40px; font-weight:bold}
 .modal-content .tab{ padding-left:2%}
 .modal-content .tab a{ padding-right:2%; color:#666}
 .modal-content .tabs #main2,#main3,#main5,#main6,#main8,#main9{display:none}

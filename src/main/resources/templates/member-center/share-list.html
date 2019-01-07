@@ -6,7 +6,7 @@
     <meta name="description" content="拼多多查排名平台是拼多多排名查询软件 拼多多排名查询工具,提供拼多多排名查询,拼多多直通车查询,拼多多关键词直通车查询,便于商家优化拼多多排名">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link th:href="@{/static/ddms/img/logo.png}" type="image/x-icon" rel="shortcut icon">
+    <link th:href="@{/static/ddms/img/logomax.ico}" type="image/x-icon" rel="shortcut icon">
     <meta name="csrf-param" content="_csrf-frontend">
     <meta name="csrf-token" content="tvEO2IcIyNlgYl48N16xtjKxeGGSvYp6me_BrS5CjQaAomSe8We8qTVUG1d-DdvpAOUNCMD7wUv1g46UZRTdTA==">
     <link th:href="@{/static/ddms/css/main1.css}" rel="stylesheet">
@@ -25,7 +25,10 @@
             border: 0;
             font-weight: bolder;
         }
-        .buy_share_pages{ padding:4px 15px; border:1px solid #ccc; text-decoration:none; color: white; background-color: #556CED}
+        .buy_share_pages{ padding:4px 15px; border:1px solid #ccc; text-decoration:none; color: white; background-color: #D8271C}
+        .layui-laypage-em{
+            background-color:#D8271C!important;
+        }
     </style>
     <script data-cfhash='f9e31' type="text/javascript">
         function jsCopy(){
@@ -266,10 +269,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="fixed-table-pagination"></div></div><div class="clearfix"></div><div class="clearfix"></div>
+               <!-- <div class="fixed-table-pagination"></div></div><div class="clearfix"></div><div class="clearfix"></div>
             <div class="pagination-box clearfix">
                 <div class="M-box">
-                        <a th:each="info:${session.subordinateTotal }">
+                        <a th:each="info:${#numbers.sequence(1,session.subordinateTotal) }">
                             <a th:if="${info>0}">
                                 <a th:href="@{'subordinate?pn='+${info}}" th:text="${info}" class="buy_share_pages"></a>
                             </a>
@@ -279,7 +282,10 @@
                         </a>
                 </div>
             </div>
-        </div>
+        </div>-->
+                <div class="pagination-box clearfix">
+                    <div id="pager" class="fr"></div>
+                </div>
 
     </div>
 </div>
@@ -291,6 +297,28 @@
 <script th:src="@{/static/ddms/js/bootstrap/bootstrap-table.js}"></script>
 <script th:src="@{/static/ddms/js/cite/jquery.pagination.js}"></script>
 <script th:src="@{/static/ddms/js/user.js}"></script>
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" />
+    <script>
+        layui.use(['laypage'],function(){
+            var laypage = layui.laypage;
+            var $ = layui.jquery;
+
+            laypage.render({
+                elem: 'pager',
+                count: [[${session.subordinateTotal}]],
+                curr: [[${session.subordinatePageNo}]],
+                limit: '10',
+                jump:function(obj,first){
+                    if(!first){
+                        window.location.href = "/api/subordinate?pageNo="+obj.curr;
+                    }
+                }
+            });
+
+        });
+    </script>
 <!-- <script src="../js/share_list.js"></script> -->
-<div class="tool"><div class="backTop"><div class="iconRow"></div><i class="glyphicon glyphicon-arrow-up iconArrow"></i></div><div id="particles-js" style="position: absolute; top: 0px; left: 0px; z-index: -1;"><canvas class="particles-js-canvas-el" width="775" height="388" style="width: 100%; height: 100%;"></canvas></div><div class="alert-title success"><i class="glyphicon glyphicon-ok-circle" style="color: #5cb85c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div><div class="alert-title error"><i class="glyphicon glyphicon glyphicon-remove-circle" style="color: #c9302c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div><div class="alert-title info"><i class="glyphicon glyphicon-info-sign" style="color: #f0ad4e;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div></div></body>
+<div class="tool"><div class="backTop"><div class="iconRow"></div><i class="glyphicon glyphicon-arrow-up iconArrow"></i></div><div id="particles-js" style="position: absolute; top: 0px; left: 0px; z-index: -1;"><canvas class="particles-js-canvas-el" width="775" height="388" style="width: 100%; height: 100%;"></canvas></div><div class="alert-title success"><i class="glyphicon glyphicon-ok-circle" style="color: #5cb85c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div><div class="alert-title error"><i class="glyphicon glyphicon glyphicon-remove-circle" style="color: #c9302c;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div><div class="alert-title info"><i class="glyphicon glyphicon-info-sign" style="color: #f0ad4e;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span></span></div></div>
+</body>
 </html>

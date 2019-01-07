@@ -1,7 +1,7 @@
 .banner {
 	text-align: center;
 	margin: 60px 0 50px;
-	color: #556CED
+	color: #D8271C
 }
 
 .banner>h1 {
@@ -16,7 +16,7 @@
 .nav_header_wrap .nav-tabs {
 	text-align: center;
 	margin-bottom: 15px;
-	border-bottom: 1px solid #556CED
+	border-bottom: 1px solid #D8271C
 }
 
 .dd_header_wrap {
@@ -35,14 +35,14 @@
 	display: inline-block;
 	position: relative;
 	margin-right: 10px;
-	border: 1px solid #556CED;
+	border: 1px solid #D8271C;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px
 }
 
 .nav_header_wrap .nav-tabs>li h2 {
 	font-size: 16px;
-	color: #556CED;
+	color: #D8271C;
 	height: 50px;
 	padding: 0 5px;
 	margin: 0;
@@ -51,7 +51,7 @@
 }
 
 .nav_header_wrap .nav-tabs>li.active h2 {
-	background: #556CED;
+	background: #D8271C;
 	color: #fff
 }
 
@@ -149,7 +149,7 @@
 	height: 50px;
 	font-size: 20px;
 	color: #fff;
-	background: #556CED
+	background: #D8271C
 }
 
 .form_wrap .choose_btn,
@@ -172,14 +172,14 @@
 
 .form_wrap .choose_btn.active,
 .form_wrap .keyword_btn.active {
-	border: 1px solid #556CED;
+	border: 1px solid #D8271C;
 	color: #fff;
-	background: #556CED
+	background: #D8271C
 }
 
 .keyword_btn1.active {
-	border: 1px solid #556CED;
-	color: #556CED
+	border: 1px solid #D8271C;
+	color: #D8271C
 }
 
 .keyword_btn1 i {
@@ -200,7 +200,7 @@
 }
 
 .dropdown-menu .overall.active {
-	background: #556CED;
+	background: #D8271C;
 	color: #fff
 }
 
@@ -224,7 +224,7 @@
 }
 
 .result_wrap .table tr.active>td {
-	background: #556CED!important;
+	background: #D8271C!important;
 	color: #fff;
 	text-align:center
 }
@@ -345,16 +345,16 @@ select.form-control option {
 
 .fix_bottom .fix_bottom_inner .btn_wrap .btn {
 	width: 120px;
-	border: 1px solid #556CED;
+	border: 1px solid #D8271C;
 	height: 36px;
 	margin-right: 30px;
 	background: #fff;
-	color: #556CED;
+	color: #D8271C;
 	border-radius: 4px
 }
 
 .fix_bottom .fix_bottom_inner .btn_wrap .login_btn {
-	background: #556CED;
+	background: #D8271C;
 	color: #fff
 }
 
@@ -385,4 +385,4 @@ select.form-control option {
 /*.results .mytable td dl dd{ width:50%; float:left; text-align:left; margin-top:2%}*/
 .mykind label{ border:1px solid #ccc; display:inline-block; width: 92px; background: #fff; color: #666; margin-right: 5px; text-align:center; border-radius:5px}
 .mykind label input{ display:none}
-.mykind label:first-child{ color:#fff; background-color:#556CED; border-color:#556CED}
+.mykind label:first-child{ color:#fff; background-color:#D8271C; border-color:#D8271C}

@@ -128,7 +128,7 @@ body {
 #feedbackModal .feedback_name .name_block {
     height: 20px;
     width: 10px;
-    background: #556CED;
+    background: #D8271C;
     margin-right: 5px;
     float: left
 }
@@ -136,7 +136,7 @@ body {
 #feedbackModal .feedback_name {
     padding: 12px 0;
     font-size: 15px;
-    color: #556CED
+    color: #D8271C
 }
 
 #feedbackModal .feedback_option .advise_form {
@@ -168,8 +168,8 @@ body {
 }
 
 #feedbackModal .btn.active, #feedbackModal .btn.active.focus, #feedbackModal .btn.active:focus, #feedbackModal .btn.focus, #feedbackModal .btn:active.focus, #feedbackModal .btn:active:focus, #feedbackModal .btn:focus {
-    border: 1px solid #556CED;
-    color: #556CED;
+    border: 1px solid #D8271C;
+    color: #D8271C;
     outline: 0;
     box-shadow: none
 }
@@ -269,7 +269,7 @@ body {
     line-height: 65px;
     font-family: PingFangSC-Semibold;
     font-size: 16px;
-    color: #556CED;
+    color: #D8271C;
     letter-spacing: 0;
     text-align: center;
     padding: 0;
@@ -306,7 +306,7 @@ body {
 }
 
 .jd_menu_wrapper .jd_menu_item.active {
-    color: #556CED;
+    color: #D8271C;
     font-weight: 700
 }
 
@@ -317,7 +317,7 @@ body {
     bottom: 0;
     height: 5px;
     width: 100%;
-    background: #556CED
+    background: #D8271C
 }
 
 .jd_menu_wrapper .jd_menu_item > .icon, .jd_menu_wrapper .jd_menu_item > i {
@@ -355,7 +355,7 @@ body {
     color: #fff;
     float: right;
     margin-top: 60px;
-    background: #556CED
+    background: #D8271C
 }
 
 .jd_menu_remove .jd_remove_item > .iconfont {
@@ -397,7 +397,7 @@ body {
     font-size: 26px;
     margin-right: 35px;
     margin-top: -2px;
-    color: #556CED !important;
+    color: #D8271C !important;
     position: relative
 }
 
@@ -422,7 +422,7 @@ body {
 }
 
 .consult-phone-wrapper h3 {
-    color: #556CED;
+    color: #D8271C;
     margin-bottom: 0
 }
 
@@ -433,7 +433,7 @@ body {
 
 .consult-phone-wrapper .qq-text {
     font-size: 14px;
-    color: #556CED;
+    color: #D8271C;
     padding-bottom: 20px;
     border-bottom: 1px dashed #BFBFBF
 }
@@ -458,7 +458,7 @@ body {
 
 .consult-phone-wrapper .erweima-text1 {
     font-size: 14px;
-    color: #556CED
+    color: #D8271C
 }
 
 .consult-phone-wrapper .consult-phone-btn .btn {
@@ -473,7 +473,7 @@ body {
 
 /*weixinQQ*/
 .consult-phone-wrapper h3 {
-    color: #556CED;
+    color: #D8271C;
     margin-bottom: 0
 }
 
@@ -484,7 +484,7 @@ body {
 
 .consult-phone-wrapper .qq-text {
     font-size: 14px;
-    color: #556CED;
+    color: #D8271C;
     padding-bottom: 20px;
     border-bottom: 1px dashed #BFBFBF
 }
@@ -509,7 +509,7 @@ body {
 
 .consult-phone-wrapper .erweima-text1 {
     font-size: 14px;
-    color: #556CED
+    color: #D8271C
 }
 
 .consult-phone-wrapper .consult-phone-btn .btn {

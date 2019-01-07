@@ -6,7 +6,7 @@
     <meta name="description" content="拼多多查排名平台是拼多多排名查询软件 拼多多排名查询工具,提供拼多多排名查询,拼多多直通车查询,拼多多关键词直通车查询,便于商家优化拼多多排名">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link th:href="@{/static/ddms/img/222.jpg}" type="image/x-icon" rel="shortcut icon" >
+    <link th:href="@{/static/ddms/img/logomax.ico}" type="image/x-icon" rel="shortcut icon" >
     <meta name="csrf-param" content="_csrf-frontend">
     <meta name="csrf-token" content="pcneXCabB__lxm8d6hemTSVcs5NKIvAV-DDVVRCUIJWTmrQaUPRzj7DwKnajRMwSFwjG-hhkuySUXJpsW8Jw3w==">
     <link th:href="@{/static/ddms/css/main1.css}" rel="stylesheet">
@@ -20,7 +20,7 @@
     <script type="text/javascript">
         $(function(){
             $('.mykind label').click(function(){
-                $(this).css({'color':'#fff','background-color':'#556CED','border-color':'#556CED'}).siblings().css({'color':'#666','background-color':'#fff','border-color':'#ccc'});
+                $(this).css({'color':'#fff','background-color':'#D8271C','border-color':'#D8271C'}).siblings().css({'color':'#666','background-color':'#fff','border-color':'#ccc'});
             });
         })
     </script>
@@ -201,106 +201,6 @@
 <script th:src="@{/static/ddms/js/login.js}"></script>
 <script th:src="@{/static/ddms/js/bootstrap/bootstrap-table.js}"></script>
 <script th:src="@{/static/ddms/js/index.js}"></script>
-<script>
-    $(function(){
-
-        /*$.each(json, function (index, data) {});*/
-        $.get('/api/getCats?parentId=0', function(res) {
-            $("#category1").append(res.cats);
-            var id = $("#category1 option:selected").val();
-            $.get('/api/getCats?parentId='+id, function(res) {
-                $("#category2").append(res.cats);
-                var id = $("#category2 option:selected").val();
-                $.get('/api/getCats?parentId='+id, function(res) {
-                    $("#category3").append(res.cats);
-                });
-            });
-        });
-
-    })
-
-    function getMall() {
-        var a = $("#mall_a").val();
-        if(a!=""){
-            $.get('/api/getMall?mallId='+a, function(res) {
-                var a;
-                if(res.mall==null){
-                    a = '<h1>搜索结果</h1><div class="result_title1">查排名功能当前处于测试阶段，查询结果会有偏差，商家可作为参考，更多功能敬请期待</div>';
-                }else{
-                    a = '<table class="mytable"><tr><td>店铺LOGO</td><td>店铺名称</td><td>商品数量</td><td>总销量</td></tr>' +
-                        '<tr><td><dl><dt><img src="'+res.mall.logo+'"></dt></td><td><dd>'+res.mall.name+'</dd></dl></td><td>'+res.mall.size+'</td><td>'
-                        +res.mall.sold+'</td></tr></table>';
-                }
-                $(".only_three").html(a);
-            });
-        }else{
-            alert("请填写店铺ID！");
-        }
-    }
-    
-    function cats1() {
-        var id = $("#category1 option:selected").val();
-        $.get('/api/getCats?parentId='+id, function(res) {
-            $("#category2").empty();
-            $("#category2").append(res.cats);
-            var id = $("#category2 option:selected").val();
-            $.get('/api/getCats?parentId='+id, function(res) {
-                $("#category3").empty();
-                $("#category3").append(res.cats);
-            });
-        });
-    }
-
-    function cats2() {
-        var id = $("#category2 option:selected").val();
-        $.get('/api/getCats?parentId='+id, function(res) {
-            $("#category3").empty();
-            $("#category3").append(res.cats);
-        });
-    }
-
-    function getCats() {
-        var a = $("#category3 option:selected").val();
-        var b = $("#category_b").val();
-        if(b!=""){
-            $.get('/api/getKey?parentId='+a+"&goodsId="+b, function(res) {
-                var a;
-                if(res.goods==null){
-                    a = '<h1>搜索结果</h1><div class="result_title1">查排名功能当前处于测试阶段，查询结果会有偏差，商家可作为参考，更多功能敬请期待</div>';
-                }else{
-                    a = '<table class="mytable"><tr><td>商品信息</td><td>单价</td><td>团购价</td><td>排名</td><td>销量</td></tr>' +
-                        '<tr><td><dl><dt><img src="'+res.goods.img+'"></dt><dd>'+res.goods.name+'</dd></dl></td><td>'+res.goods.normal+'</td><td>'
-                        +res.goods.group+'</td><td>'+res.goods.top+'</td><td>'+res.goods.sold+'</td></tr></table>';
-                }
-                $(".only_two").html(a);
-            });
-        }else{
-            alert("请填写商品ID！");
-        }
-    }
-
-    function getKey(){
-        var a = $("#keyword_a").val();
-        var b = $("#keyword_b").val();
-        var c = $("input[name='sort']:checked").val();
-        if(a!=""&&b!=""){
-            $.get('/api/getKey?keyword='+a+"&goodsId="+b+"&sort="+c, function(res) {
-                var a;
-                if(res.goods==null){
-                    a = '<h1>搜索结果</h1><div class="result_title1">查排名功能当前处于测试阶段，查询结果会有偏差，商家可作为参考，更多功能敬请期待</div>';
-                }else{
-                    a = '<table class="mytable"><tr><td>商品信息</td><td>单价</td><td>团购价</td><td>排名</td><td>销量</td></tr>' +
-                        '<tr><td><dl><dt><img src="'+res.goods.img+'"></dt><dd>'+res.goods.name+'</dd></dl></td><td>'+res.goods.normal+'</td><td>'
-                        +res.goods.group+'</td><td>'+res.goods.top+'</td><td>'+res.goods.sold+'</td></tr></table>';
-                }
-                $(".only_one").html(a);
-            });
-        }else{
-            alert("请填写关键词/商品ID！");
-        }
-    }
-
-    
-</script>
+<script th:src="@{/static/ddms/js/indexJS.js}"></script>
 </body>
 </html>

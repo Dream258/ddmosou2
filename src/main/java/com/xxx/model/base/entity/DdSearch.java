@@ -11,7 +11,7 @@ public class DdSearch {
 	private Integer min_normal_price;
 	private Integer rank;
 	private Integer isConcern;
-	
+
 	public String getGoods_image_url() {
 		return goods_image_url;
 	}

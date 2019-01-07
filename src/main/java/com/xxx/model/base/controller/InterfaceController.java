@@ -77,6 +77,12 @@ public class InterfaceController {
     //排名监控
     @RequestMapping("ranking")
     public String ranking(){ return "ranking"; }
+    //海报（完美领域）
+    @RequestMapping("poster")
+    public String poster(){ return "poster"; }
+    //销量监控
+    @RequestMapping("xiaoliang")
+    public String xiaoliang(){ return "xiaoliangjiankong"; }
 
     //登录
     @ResponseBody
@@ -133,8 +139,8 @@ public class InterfaceController {
      * @return
      */
     @RequestMapping(value = { "/subordinate" })
-    public String subordinate(HttpSession session, Page<DdMember> page, @RequestParam(value="pn",required=false,defaultValue="1") int pn) {
-        page.setCurrent(pn);
+    public String subordinate(HttpSession session, Page<DdMember> page, @RequestParam(value="pageNo",required=false,defaultValue="1") int pageNo) {
+        page.setCurrent(pageNo);
         page.setSize(10);
         DdMember user = (DdMember)session.getAttribute("user_login");//获取登录用户信息
         Integer spnc = 0;//查询已邀请人充值的人数
@@ -172,7 +178,8 @@ public class InterfaceController {
             session.setAttribute("spnc", spnc);
             session.setAttribute("spn", spn);
             session.setAttribute("sum", sum);
-            session.setAttribute("subordinateTotal", page.getPages());
+            session.setAttribute("subordinateTotal", page.getTotal());
+            session.setAttribute("subordinatePageNo", pageNo);
         }
         return "redirect:/api/share_list";
     }
@@ -182,18 +189,18 @@ public class InterfaceController {
      * 前台查询个人订单
      */
     @RequestMapping(value = { "/selectOrders" })
-    public String selectOrders(HttpSession session, Page<DdOrders> page, @RequestParam(value = "pn",defaultValue = "1") int pageNum) {
-        page.setCurrent(pageNum);
+    public String selectOrders(HttpSession session, Page<DdOrders> page, @RequestParam(value = "pageNo",defaultValue = "1") int pageNo) {
+        page.setCurrent(pageNo);
         page.setSize(10);
         DdMember user = (DdMember) session.getAttribute("user_login");
         String telephone = user.getUserTelephone();
         Map map = new HashMap();
         map.put("telephone", telephone);
         page = ddOrdersService.getOrdersByTelephoneForPage(page,map);
-        session.setAttribute("orderno", pageNum);
+        session.setAttribute("pageNo", pageNo);
         session.setAttribute("listOrders", page.getRecords());
         session.setAttribute("orderpage", page);
-        session.setAttribute("totalPage",page.getPages());
+        session.setAttribute("total",page.getTotal());
         return "redirect:/api/buylist";
     }
 
