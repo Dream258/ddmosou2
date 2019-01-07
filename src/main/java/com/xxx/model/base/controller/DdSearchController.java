@@ -3,16 +3,18 @@ package com.xxx.model.base.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.graphbuilder.struc.LinkedList;
 import com.xxx.common.interfaces.NotLogin;
 import com.xxx.common.util.PDDUtils;
 import com.xxx.model.base.entity.DdConcern;
+import com.xxx.model.base.entity.DdMember;
 import com.xxx.model.base.entity.DdSearch;
 import com.xxx.model.base.service.DdSearchService;
 
@@ -26,21 +28,18 @@ public class DdSearchController {
 
 	@RequestMapping("search")
 	@ResponseBody
-	public List<DdSearch> Search(String keys) {
+	public List<DdSearch> Search(HttpServletRequest httpServletRequest, String keys) {
 
-		List<DdSearch> list = ddSearchService.search(keys);
-		List<String> goodIds = new ArrayList<>();
-		list.forEach(l -> {
-			goodIds.add(l.getGoods_id());
-		});
-
-		return ddSearchService.search(keys);
+		DdMember ddMember = (DdMember) httpServletRequest.getSession().getAttribute("user_login");
+		return ddSearchService.search(keys, ddMember.getId());
 	}
 
 	@RequestMapping("list")
 	@ResponseBody
-	public List<DdSearch> list(Integer user_id) {
-		List<DdConcern> list = ddSearchService.list(user_id);
+	public List<DdSearch> list(HttpServletRequest httpServletRequest) {
+
+		DdMember ddMember = (DdMember) httpServletRequest.getSession().getAttribute("user_login");
+		List<DdConcern> list = ddSearchService.list(ddMember.getId());
 		List<DdSearch> ddSearchs = new ArrayList<>();
 		list.forEach(l -> {
 			JSONObject jsonObject = PDDUtils.getGoodsInfo(l.getGoodsId().toString());
@@ -61,15 +60,9 @@ public class DdSearchController {
 
 	@RequestMapping("concern")
 	@ResponseBody
-	public Boolean concern(DdConcern ddConcern) {
+	public Boolean concern(HttpServletRequest httpServletRequest, DdConcern ddConcern) {
+		DdMember ddMember = (DdMember) httpServletRequest.getSession().getAttribute("user_login");
+		ddConcern.setUserId(ddMember.getId());
 		return ddSearchService.concern(ddConcern) > 0 ? true : false;
 	}
-
-	@RequestMapping("noConcern")
-	@ResponseBody
-	public Boolean noConcern(DdConcern ddConcern) {
-
-		return ddSearchService.noConcern(ddConcern) > 0 ? true : false;
-	}
-
 }
