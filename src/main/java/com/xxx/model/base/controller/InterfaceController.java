@@ -440,7 +440,10 @@ public class InterfaceController {
     @RequestMapping(value = "checkLogin")
     public Integer checkLogin(HttpSession session){
         DdMember ddMember = (DdMember)session.getAttribute("user_login");
-        Integer usertype = ddMember.getUserType();
+        Integer usertype = 1;
+        if(ddMember!=null){
+            usertype = ddMember.getUserType();
+        }
         if(ddMember==null){
             return 0;
         }else if(usertype==2){
