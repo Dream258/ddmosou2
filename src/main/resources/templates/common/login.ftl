@@ -10,8 +10,8 @@
 
 <body class="login">
 
-<div class="login_m">
-	<div class="login_logo"><img src="/static/ddms/img/logo.png" width="160" height="120"></div>
+<div class="login_m" style="margin-top: 0px;">
+	<div class="login_logo" style="margin-bottom: -20px;"><img src="/static/ddms/img/logo.png" width="60%" height="60%"></div>
 	<div class="login_boder">
 		<form action="${springMacroRequestContext.contextPath}/login" method="post">
 			<div class="login_padding">
@@ -36,7 +36,6 @@
 <br />
 <br />
 
-<p align="center"> More Templates <a href="javascript:;" target="_blank">极光客管理</a> - Collect from <a href="javascript:;" title="网页模板" target="_blank">www.qljr.com</a></p>
 <script type="text/javascript" src="${springMacroRequestContext.contextPath}/static/layui/layui.js"></script>
 <script>
 	layui.use(['layer'],function(){

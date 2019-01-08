@@ -157,7 +157,9 @@ function addGood() {
         },
         type: "GET",
         dataType : "json",
-        success:function(data){
+        beforeSend: function(){
+            $("#onlylalala").show();
+        },success:function(data){
             if(data["success"]=="000") {
                 alert("添加成功");
                 window.location.href="/api/ranking";
@@ -166,6 +168,8 @@ function addGood() {
             }else{
                 alertError("监控数已满10个");
             }
+        },complete: function () {
+            $("#onlylalala").hide();
         },
         error:function(){
             alertError('系统错误');
@@ -186,7 +190,9 @@ function addCat() {
         },
         type: "GET",
         dataType : "json",
-        success:function(data){
+        beforeSend: function(){
+            $("#onlylalala").show();
+        },success:function(data){
             if(data["success"]=="000") {
                 alert("添加成功");
                 window.location.href="/api/ranking";
@@ -195,6 +201,8 @@ function addCat() {
             }else{
                 alertError("监控数已满10个");
             }
+        },complete: function () {
+            $("#onlylalala").hide();
         },
         error:function(){
             alertError('系统错误');
@@ -212,7 +220,9 @@ function addMall() {
         },
         type: "GET",
         dataType : "json",
-        success:function(data){
+        beforeSend: function(){
+            $("#onlylalala").show();
+        },success:function(data){
             if(data["success"]=="000") {
                 alert("添加成功");
                 window.location.href="/api/ranking";
@@ -221,6 +231,8 @@ function addMall() {
             }else{
                 alertError("监控数已满10个");
             }
+        },complete: function () {
+            $("#onlylalala").hide();
         },
         error:function(){
             alertError('系统错误');

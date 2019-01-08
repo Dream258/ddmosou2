@@ -18,15 +18,12 @@
 		<script type="text/javascript" th:src="@{/static/ddms/jquery/jquery-1.4.4.min.js}"></script>
 		<script type="text/javascript" th:src="@{/static/ddms/js/myForm.js}"></script>
 		<script type="text/javascript" th:src="@{/static/ddms/js/include.js}"></script>
-		<script th:src="@{https://hm.baidu.com/hm.js?696697aa5ab99eca019ba08eb7038b52}"></script>
-		<script th:src="@{/static/ddms/js/main.js?t=0914}"></script>
-		<script th:src="@{/static/ddms/js/login.js?t=?t=0727}"></script>
-		<script th:src="@{/static/ddms/js/bootstrap/bootstrap-table.js}"></script>
-		<script th:src="@{/static/ddms/js/cite/jquery.pagination.js}"></script>
-		<script th:src="@{/static/ddms/js/user.js}"></script>
-		<link th:href="@{/static/ddms/css/main1.css?t=0921 16}" rel="stylesheet">
 		<link th:href="@{/static/ddms/css/xiaolaingjiankong.css}" rel="stylesheet">
 		<script th:src="@{/static/ddms/js/jquery-2.1.1.min.js}" ></script>
+		<script th:src="@{/static/ddms/js/index.js}"></script>
+		<script th:src="@{/static/ddms/js/main.js?t=0914}"></script>
+		<script th:src="@{/static/ddms/js/login.js}"></script>
+		<script th:src="@{/static/ddms/js/bootstrap/bootstrap-table.js}"></script>
 		<script>
 			$(function(){
 				$('.main span').click(function(){
@@ -39,6 +36,12 @@
 				});
 				$('.main .two').click(function(){
 					$(this).toggle().siblings().toggle();
+				});
+				$('.main .tab span:first-child').click(function(){
+					$('.main .tabs .list form').show();
+				});
+				$('.main .tab span:last-child').click(function(){
+					$('.main .tabs .list form').hide();
 				})
 
 			});
@@ -48,33 +51,86 @@
 					url : '/ddSearch/search?keys='+sea,
 					type: "GET",
 					dataType : "json",
+					beforeSend: function(){
+						$(".spinners").show();
+					},
 					success:function(res){
-						alert("123");
+
+						$("#table1").html("<tr><td>关键词排名</td><td>主图</td><td>店铺名称</td><td>商品名称</td>" +
+								"<td>总销量</td><td>价格</td><td>操作</td></tr>");
 						$.each(res, function (index, data) {
-							$("#table1").append("<tr><td>"+(index+1)+"</td><td><span style='width:60%; margin:4% auto'><img src='"+data.goods_image_url+"' style='width:100%'></span></td><td class='shangpin'>"
+							var i = "heart";
+							if(data.isConcern==1){
+								i = "heart1";
+							}
+								$("#table1").append("<tr><td><input type='hidden' value="+data.isConcern+" id='isConcern_"+data.goods_id+"'"+"> "+(index+1)+"</td>" +
+										"<td style='width:10%'><span style='width:100%; display:block; margin:0 auto; overflow:hidden; height:50px; position:relative'><img src='"+data.goods_image_url+"'  style='width:100%; position:absolute; top:15%; left:0'></span></td><td class='shangpin'>"
 									+data.mall_name+"</td><td class='shangpin'>"+data.goods_name+"</td><td>"+data.sold_quantity+"</td><td>" +
-									data.min_group_price+"~"+data.min_normal_price+"</td><td>"+"<a href='#'><img src='../static/ddms/img/heart.png' width='20' height='20' class='one'>" +
-									"<img src='../static/ddms/img/heart1.png' width='20' height='20' class='two'></a></td></tr>");
+									change(data.min_group_price)+"~"+change(data.min_normal_price)+"</td><td>"+"<a href='javascript:concern("+data.goods_id+")'>" +
+										"<img src='../static/ddms/img/"+i+".png' width='20' height='20' id='img_"+data.goods_id+"'></a></td></tr>");
 						});
+					},
+					complete: function () {
+						$(".spinners").hide();
 					},
 					error:function(){
 						alertError('系统错误');
 					}
 				});
 			}
-			function concern() {
+			function list1() {
 				$.ajax({
-					url : '/ddSearch/search',
+					url : '/ddSearch/list',
 					type: "GET",
 					dataType : "json",
+					beforeSend: function(){
+						$(".spinners").show();
+					},
 					success:function(res){
-						alert("123");
+						$("#table2").html("<tr><td>关键词排名</td><td>主图</td><td>店铺名称</td><td>商品名称</td>" +
+								"<td>总销量</td><td>价格</td><td>操作</td></tr>");
 						$.each(res, function (index, data) {
-							$("#table1").append("<tr><td>"+(index+1)+"</td><td><img src='"+data.goods_image_url+"' width='60' height='60' style='margin:5% auto'></td><td class='shangpin'>"
+							$("#table2").append("<tr><td><input type='hidden' value="+data.isConcern+" id='isConcern_"+data.goods_id+"'"+">"+(index+1)+"</td>" +
+									"<td style='width:10%'><span style='width:100%; display:block; margin:0 auto; overflow:hidden; height:50px; position:relative'><img src='"+data.goods_image_url+"'  style='width:100%; position:absolute; top:15%; left:0'></span></td><td class='shangpin'>"
 									+data.mall_name+"</td><td class='shangpin'>"+data.goods_name+"</td><td>"+data.sold_quantity+"</td><td>" +
-									data.min_group_price+"~"+data.min_normal_price+"</td><td>"+"<a href='#'><img src='../static/ddms/img/heart.png' width='20' height='20' class='one'>" +
-									"<img src='../static/ddms/img/heart1.png' width='20' height='20' class='two'></a></td></tr>");
+									change(data.min_group_price)+"~"+change(data.min_normal_price)+"</td><td><a href='javascript:concern("+data.goods_id+")'>" +
+									"<img src='../static/ddms/img/heart1.png' width='20' height='20' id='img_"+data.goods_id+"'></a></td></tr>");
 						});
+					},
+					complete: function () {
+						$(".spinners").hide();
+					},
+					error:function(){
+						alertError('系统错误');
+					}
+				});
+			}
+			function concern(goods_id) {
+				var status=1;
+				var isConcern = $("#isConcern_"+goods_id).val();
+				if(isConcern==1){
+					status=0;
+				}
+				$.ajax({
+					url : '/ddSearch/concern',
+					data :  {
+						status : status,
+						goodsId : goods_id
+					},
+					type: "post",
+					dataType : "json",
+					success:function(res){
+						if(res){
+							$("#isConcern_"+goods_id).val(status);
+							if(status==1){
+								$("#img_"+goods_id).attr("src", "/static/ddms/img/heart1.png");
+
+							}else {
+								$("#img_"+goods_id).attr("src", "/static/ddms/img/heart.png");
+							}
+						}else{
+							alertError("操作失败");
+						}
 					},
 					error:function(){
 						alertError('系统错误');
@@ -82,6 +138,10 @@
 				});
 			}
 
+			function change(fen){
+				var yuan=fen/100.0;
+				return yuan.toFixed(2);
+			}
 		</script>
 		<style>
 			.main .list .two{ display:none}
@@ -89,6 +149,11 @@
 	</head>
 	<body>
 	<header th:include="include :: header"></header>
+	<div class="spinners" style="display: none;">
+		<div class="bounce1"></div>
+		<div class="bounce2"></div>
+		<div class="bounce3"></div>
+	</div>
 	<div class="jd_menu_remove">
 		<div class="jd_remove_item">
 			<i class="iconfont icon-kefu icon"></i><br>
@@ -124,7 +189,7 @@
 	</div>
 		<div class='dd_content_wrap dd_container dd_other main'>
 			<div class='tab'>
-				<span>全部</span><span onclick="concern();">已关注</span>
+				<span>全部</span><span onclick="list1();">已关注</span>
 			</div><!--/tab-->
 			<div class='tabs'>
 				<div class='list'>
@@ -165,30 +230,6 @@
 							<td>总销量</td>
 							<td>价格</td>
 							<td>操作</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td><img src='img/character.jpg' width='60' height='60' style='margin:5% auto'></td>
-							<td class='shangpin'>店铺名称店铺名称</td>
-							<td class='shangpin'>商品名称商品名称商品名称品名称商品名称</td>
-							<!--<td>23</td>
-							<td>23</td>
-							<td>23</td>-->
-							<td>23</td>
-							<td>23</td>
-							<td><a href='#'><img src='../static/ddms/img/heart.png' width='20' height='20' class='one'><img src='../static/ddms/img/heart1.png' width='20' height='20' class='two'></a></td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td><img src='img/character.jpg' width='60' height='60' style='margin:5% auto'></td>
-							<td class='shangpin'>店铺名称店铺名称</td>
-							<td class='shangpin'>商品名称商品名称商品名称品名称商品名称</td>
-							<!--<td>23</td>
-							<td>23</td>
-							<td>23</td>-->
-							<td>23</td>
-							<td>23</td>
-							<td><a href='#'><img src='../static/ddms/img/heart.png' width='20' height='20' class='one'><img src='../static/ddms/img/heart1.png' width='20' height='20' class='two'></a></td>
 						</tr>
 					</table>
 				</div><!--/list-->

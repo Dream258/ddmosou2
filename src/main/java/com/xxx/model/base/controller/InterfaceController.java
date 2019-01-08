@@ -103,11 +103,19 @@ public class InterfaceController {
                 }
                 session.setAttribute("days", days);
             }else {
-                if(ddMember.getUserType()==1) {
+                days = ddViptimeService.selectDays(telephone);
+                System.out.println(days);
+                if(days==null){
+                    days = 0;
+                }
+                if(ddMember.getUserType()==1 && days > 0) {
                     ddMemberService.updateUserType(telephone,2);
                     ddMember1 = ddMemberService.sysrLogin(mphone, password);
+                }else if(days==0 && ddMember.getUserType()==2){
+                    ddMemberService.updateUserType(telephone,1);
+                    ddMember1 = ddMemberService.sysrLogin(mphone, password);
                 }
-                days = ddViptimeService.selectDays(telephone);
+
                 session.setAttribute("days", days);
                 session.setAttribute("listOrder", lo);
             }
@@ -135,7 +143,7 @@ public class InterfaceController {
      * 查询下级
      * @param session
      * @param page
-     * @param pn
+     * @param pageNo
      * @return
      */
     @RequestMapping(value = { "/subordinate" })
@@ -432,8 +440,11 @@ public class InterfaceController {
     @RequestMapping(value = "checkLogin")
     public Integer checkLogin(HttpSession session){
         DdMember ddMember = (DdMember)session.getAttribute("user_login");
+        Integer usertype = ddMember.getUserType();
         if(ddMember==null){
             return 0;
+        }else if(usertype==2){
+            return 2;
         }else {
             return 1;
         }

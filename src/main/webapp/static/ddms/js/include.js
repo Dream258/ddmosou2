@@ -5,9 +5,31 @@ function checklogin() {
         url:'/api/checkLogin',
         dataType:'json',
         success:function(data){
-            if(data==1) {
+            if(data==2) {
                 window.location.href="/api/ranking";
-            }else{
+            }else if(data==1){
+                alertError("该功能仅限会员用户");
+            }else {
+                alertError('请登录');
+            }
+        },
+        error:function(){
+            alertError('系统错误');
+        }
+    });
+}
+//检查登录
+function checklogin2() {
+    $.ajax({
+        type:'POST',
+        url:'/api/checkLogin',
+        dataType:'json',
+        success:function(data){
+            if(data==2) {
+                window.location.href="/api/xiaoliang";
+            }else if(data==1){
+                alertError("该功能仅限会员用户");
+            }else {
                 alertError('请登录');
             }
         },
